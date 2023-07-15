@@ -11,19 +11,21 @@ class MfColorScheme {
     required this.onSecondary,
     required this.error,
     required this.onError,
+    required this.transParent,
   });
 
   MfColorScheme.light()
       : this._(
           primary: _nero,
           background: _whiteSmoke,
-          onBackground: _black,
+          onBackground: _white,
           surface: _whisper,
           onPrimary: _white,
-          secondary: _sealBrown,
+          secondary: _white,
           onSecondary: _white,
           error: _persianRed,
           onError: _white,
+          transParent: Colors.transparent,
         );
 
   final Color primary;
@@ -35,6 +37,7 @@ class MfColorScheme {
   final Color onSecondary;
   final Color error;
   final Color onError;
+  final Color transParent;
 }
 
 /// 色名参考: https://www.htmlcsscolor.com/

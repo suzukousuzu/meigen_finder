@@ -3,37 +3,37 @@ import 'package:flutter/material.dart';
 class MfTextTheme {
   const MfTextTheme();
 
-  /// 24px / height 1.5 / weight 700
+  /// 32px / height 1.5 / weight 900
   final TextStyle h1 = const TextStyle(
-    fontSize: 24,
+    fontSize: 32,
     height: 1.5,
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeight.w900,
   );
 
-  /// 22px / height 1.5 / weight 700
+  /// 28px / height 1.5 / weight 700
   final TextStyle h2 = const TextStyle(
-    fontSize: 22,
+    fontSize: 28,
     height: 1.5,
     fontWeight: FontWeight.w700,
   );
 
-  /// 18px / height 1.56 / weight 700
+  /// 20px / height 1.56 / weight 700
   final TextStyle h3 = const TextStyle(
-    fontSize: 18,
+    fontSize: 20,
     height: 1.56,
     fontWeight: FontWeight.w700,
   );
 
   /// 16px / height 1.5 / weight 400
   final TextStyle textBody = const TextStyle(
-    fontSize: 16,
+    fontSize: 18,
     height: 1.5,
     fontWeight: FontWeight.w400,
   );
 
   /// 16px / height 1.5 / weight 700
   final TextStyle textBold = const TextStyle(
-    fontSize: 16,
+    fontSize: 18,
     height: 1.5,
     fontWeight: FontWeight.w700,
   );

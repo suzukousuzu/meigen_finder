@@ -9,8 +9,23 @@
 
 import 'package:flutter/widgets.dart';
 
+class $AssetsImagesGen {
+  const $AssetsImagesGen();
+
+  /// File path: assets/images/sakura.png
+  AssetGenImage get sakura => const AssetGenImage('assets/images/sakura.png');
+
+  /// File path: assets/images/space.png
+  AssetGenImage get space => const AssetGenImage('assets/images/space.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [sakura, space];
+}
+
 class Assets {
   Assets._();
+
+  static const $AssetsImagesGen images = $AssetsImagesGen();
 }
 
 class AssetGenImage {
