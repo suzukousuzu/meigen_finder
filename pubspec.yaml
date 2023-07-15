@@ -38,10 +38,15 @@ dependencies:
   hooks_riverpod: ^2.3.6  # riverpod + hooks
   flutter_hooks: ^0.18.6 # flutter + hooks
   riverpod_annotation: ^2.1.1
+  go_router: ^9.0.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  build_runner:
+  flutter_gen_runner:
+  flutter_gen:
+  go_router_builder:
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
