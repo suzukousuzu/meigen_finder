@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_swiper_plus/flutter_swiper_plus.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:meigen_finder/presentation/components/background/background_image.dart';
+import 'package:meigen_finder/presentation/routing/router.dart';
 import 'package:meigen_finder/presentation/theme/mf_theme.dart';
 
 import '../../../gen/assets.gen.dart';
+
+const meigenList = ['aaaaaaaaaaa', 'bbbbbbbbbbbbb'];
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -18,9 +22,7 @@ class HomePage extends StatelessWidget {
         backgroundColor: colorScheme.transParent,
         actions: [
           IconButton(
-            onPressed: () {
-              // TODO:カテゴリ選択画面に遷移
-            },
+            onPressed: () => const CategoryRoute().go(context),
             icon: Icon(
               FontAwesomeIcons.barsStaggered,
               size: 28,
@@ -39,23 +41,36 @@ class HomePage extends StatelessWidget {
           )
         ],
       ),
-      body: BackgroundImage(
-        image: Assets.images.space.image().image,
-        child: const Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            _MeigenText(),
-            _ShareAndLike(),
-          ],
-        ),
-      ),
+      body: Swiper(
+          loop: true,
+          indicatorLayout: PageIndicatorLayout.COLOR,
+          // TODO:後でリストの数を入れる
+          itemCount: meigenList.length,
+          itemBuilder: (context, index) {
+            return BackgroundImage(
+              image: Assets.images.space.image().image,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  _MeigenText(
+                    text: meigenList[index],
+                  ),
+                  const _ShareAndLike(),
+                ],
+              ),
+            );
+          }),
     );
   }
 }
 
 class _MeigenText extends StatelessWidget {
-  const _MeigenText({Key? key}) : super(key: key);
+  const _MeigenText({
+    Key? key,
+    required this.text,
+  }) : super(key: key);
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +82,7 @@ class _MeigenText extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            '辞めたいと思う時には、なぜ始めたのかを考えてみてください',
+            text,
             textAlign: TextAlign.center,
             style: textTheme.h1.copyWith(
               color: colorScheme.secondary,
