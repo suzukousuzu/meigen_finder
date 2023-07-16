@@ -1,24 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_plus/flutter_swiper_plus.dart';
 
+typedef ItemBuilder = Widget Function(BuildContext, int);
+
 class SwipeContainer extends StatelessWidget {
   const SwipeContainer({
     Key? key,
-    required this.child,
+    required this.itemBuilder,
     required this.itemCount,
-    required this.onChanged,
   }) : super(key: key);
-  final ValueChanged<int> onChanged;
+  final ItemBuilder itemBuilder;
   final int itemCount;
-  final Widget child;
 
   @override
   Widget build(BuildContext context) {
     return Swiper(
-      itemBuilder: (BuildContext context, int index) {
-        onChanged(index);
-        return child;
-      },
+      itemBuilder: itemBuilder,
+      loop: true,
       indicatorLayout: PageIndicatorLayout.COLOR,
       itemCount: itemCount,
     );

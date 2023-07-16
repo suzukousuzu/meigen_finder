@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper_plus/flutter_swiper_plus.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:meigen_finder/presentation/components/background/background_image.dart';
 import 'package:meigen_finder/presentation/routing/router.dart';
 import 'package:meigen_finder/presentation/theme/mf_theme.dart';
 
 import '../../../gen/assets.gen.dart';
+import '../swipe/swipe_container.dart';
 
 const meigenList = ['aaaaaaaaaaa', 'bbbbbbbbbbbbb'];
 
@@ -41,9 +41,7 @@ class HomePage extends StatelessWidget {
           )
         ],
       ),
-      body: Swiper(
-          loop: true,
-          indicatorLayout: PageIndicatorLayout.COLOR,
+      body: SwipeContainer(
           // TODO:後でリストの数を入れる
           itemCount: meigenList.length,
           itemBuilder: (context, index) {
