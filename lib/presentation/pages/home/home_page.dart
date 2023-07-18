@@ -7,6 +7,7 @@ import 'package:meigen_finder/presentation/theme/mf_theme.dart';
 import '../../../gen/assets.gen.dart';
 import '../swipe/swipe_container.dart';
 
+// TODO:後で消す
 const meigenList = ['aaaaaaaaaaa', 'bbbbbbbbbbbbb'];
 
 class HomePage extends StatelessWidget {

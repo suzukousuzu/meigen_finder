@@ -4,6 +4,7 @@ class MfColorScheme {
   const MfColorScheme._({
     required this.primary,
     required this.background,
+    required this.onBackgroundBottomSheet,
     required this.onBackground,
     required this.surface,
     required this.onPrimary,
@@ -18,6 +19,7 @@ class MfColorScheme {
       : this._(
           primary: _nero,
           background: _whiteSmoke,
+          onBackgroundBottomSheet: _black,
           onBackground: _white,
           surface: _whisper,
           onPrimary: _white,
@@ -31,6 +33,7 @@ class MfColorScheme {
   final Color primary;
   final Color background;
   final Color onBackground;
+  final Color onBackgroundBottomSheet;
   final Color surface;
   final Color onPrimary;
   final Color secondary;
@@ -47,4 +50,3 @@ const _black = Color(0XFF0F0E0E);
 const _whiteSmoke = Color(0XFFF5F5F5);
 const _whisper = Color(0XFFE7E5E5);
 const _persianRed = Color(0XFFD32F2F);
-const _sealBrown = Color(0XFF290101);
