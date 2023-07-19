@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../theme/mf_theme.dart';
 
 const _appBarPersistentHeight = 63.0;
-const _titleFadeDuration = Duration(milliseconds: 150);
+const _fadeDuration = Duration(milliseconds: 150);
 const _showLargeTitleThreshold = 10.0;
 const _titlePadding = EdgeInsetsDirectional.only(
   start: 20,
@@ -17,6 +18,7 @@ class MfSliverAppBar extends StatelessWidget {
   final Widget? leading;
   final Widget? trailing;
   final Color? backgroundColor;
+  final bool showTrailingWhenLargeTitle;
 
   const MfSliverAppBar({
     super.key,
@@ -24,6 +26,7 @@ class MfSliverAppBar extends StatelessWidget {
     this.leading,
     this.trailing,
     this.backgroundColor,
+    this.showTrailingWhenLargeTitle = true,
   });
 
   @override
@@ -48,6 +51,7 @@ class MfSliverAppBar extends StatelessWidget {
           backgroundColor: backgroundColor,
           persistentHeight: _appBarPersistentHeight + mediaQuery.padding.top,
           screenWidth: mediaQuery.size.width,
+          showTrailingWhenLargeTitle: showTrailingWhenLargeTitle,
         ),
       ),
     );
@@ -60,6 +64,7 @@ class _AppBarDelegate extends SliverPersistentHeaderDelegate {
     this.backgroundColor,
     required this.persistentHeight,
     required this.screenWidth,
+    required this.showTrailingWhenLargeTitle,
   }) : _textHeight = _getTextHeight(
           components.title,
           screenWidth,
@@ -70,6 +75,7 @@ class _AppBarDelegate extends SliverPersistentHeaderDelegate {
   final Color? backgroundColor;
   final double persistentHeight;
   final double screenWidth;
+  final bool showTrailingWhenLargeTitle;
 
   final double _textHeight;
 
@@ -77,9 +83,8 @@ class _AppBarDelegate extends SliverPersistentHeaderDelegate {
   double get minExtent => persistentHeight;
 
   @override
-  double get maxExtent => _textHeight == 0
-      ? minExtent
-      : persistentHeight + _textHeight + _titlePadding.vertical;
+  double get maxExtent =>
+      persistentHeight + _textHeight + _titlePadding.vertical;
 
   static double _getTextHeight(
     Text text,
@@ -118,6 +123,7 @@ class _AppBarDelegate extends SliverPersistentHeaderDelegate {
                 ? color.withOpacity(0)
                 : mfTheme.colorScheme.background,
             titleVisible: !showLargeTitle,
+            showTrailingWhenLargeTitle: showTrailingWhenLargeTitle,
           ),
         ),
         Positioned(
@@ -133,7 +139,7 @@ class _AppBarDelegate extends SliverPersistentHeaderDelegate {
               padding: _titlePadding,
               child: AnimatedOpacity(
                   opacity: showLargeTitle ? 1 : 0,
-                  duration: _titleFadeDuration,
+                  duration: _fadeDuration,
                   child: components.largeTitle),
             ),
           ),
@@ -157,24 +163,31 @@ class _PersistentAppBar extends StatelessWidget {
     required this.components,
     required this.backgroundColor,
     required this.titleVisible,
+    required this.showTrailingWhenLargeTitle,
   }) : super(key: key);
 
   final _AppBarStaticComponents components;
   final Color backgroundColor;
   final bool titleVisible;
+  final bool showTrailingWhenLargeTitle;
 
   @override
   Widget build(BuildContext context) {
-    final trailing = components.trailing;
+    final trailing =
+        showTrailingWhenLargeTitle || titleVisible ? components.trailing : null;
+
     return AppBar(
       backgroundColor: backgroundColor,
       toolbarHeight: _appBarPersistentHeight,
       leading: components.leading,
-      automaticallyImplyLeading: false,
+      automaticallyImplyLeading: true,
       title: AnimatedOpacity(
         opacity: titleVisible ? 1 : 0,
-        duration: _titleFadeDuration,
-        child: components.title,
+        duration: _fadeDuration,
+        child: AnimatedOpacity(
+            opacity: titleVisible ? 1 : 0,
+            duration: _fadeDuration,
+            child: components.title),
       ),
       actions: trailing != null ? [trailing] : null,
     );
@@ -190,11 +203,7 @@ class _AppBarStaticComponents {
     required String userTitle,
     required String userLargeTitle,
     required MfTheme mfTheme,
-  })  : trailing = _createTrailing(
-          userTrailing: userTrailing,
-          route: route,
-          mfTheme: mfTheme,
-        ),
+  })  : trailing = userTrailing,
         title = _createTitle(
           userTitle: userTitle,
           mfTheme: mfTheme,
@@ -203,38 +212,38 @@ class _AppBarStaticComponents {
           userLargeTitle: userLargeTitle,
           mfTheme: mfTheme,
         ),
-        leading = userLeading;
+        leading = _createLeading(
+          userLeading: userLeading,
+          route: route,
+          mfTheme: mfTheme,
+        );
 
   final Widget? leading;
   final Text title;
   final Text largeTitle;
   final Widget? trailing;
 
-  static Widget? _createTrailing({
-    required Widget? userTrailing,
+  static Widget? _createLeading({
+    required Widget? userLeading,
     required ModalRoute<dynamic>? route,
     required MfTheme mfTheme,
   }) {
-    Widget? trailingWidget;
+    Widget? leadingWidget;
 
-    if (userTrailing != null) {
-      trailingWidget = userTrailing;
+    if (userLeading != null) {
+      leadingWidget = userLeading;
     } else if (route != null && route.canPop) {
-      trailingWidget = TextButton(
+      leadingWidget = IconButton(
         onPressed: route.navigator!.maybePop,
-        child: Text(
-          'キャンセル',
-          style: mfTheme.textTheme.textBold.copyWith(
-            color: mfTheme.colorScheme.onBackgroundBottomSheet,
-          ),
+        icon: Icon(
+          FontAwesomeIcons.xmark,
+          size: 24,
+          color: mfTheme.colorScheme.onBackgroundBottomSheet,
         ),
       );
     }
 
-    return trailingWidget != null
-        ? Padding(
-            padding: const EdgeInsets.only(right: 20), child: trailingWidget)
-        : null;
+    return leadingWidget;
   }
 
   static Text _createTitle({
