@@ -13,6 +13,7 @@ class MfColorScheme {
     required this.error,
     required this.onError,
     required this.transParent,
+    required this.border,
   });
 
   MfColorScheme.light()
@@ -28,6 +29,7 @@ class MfColorScheme {
           error: _persianRed,
           onError: _white,
           transParent: Colors.transparent,
+          border: _laserLemon,
         );
 
   final Color primary;
@@ -41,6 +43,7 @@ class MfColorScheme {
   final Color error;
   final Color onError;
   final Color transParent;
+  final Color border;
 }
 
 /// 色名参考: https://www.htmlcsscolor.com/
@@ -50,3 +53,4 @@ const _black = Color(0XFF0F0E0E);
 const _whiteSmoke = Color(0XFFF5F5F5);
 const _whisper = Color(0XFFE7E5E5);
 const _persianRed = Color(0XFFD32F2F);
+const _laserLemon = Color(0XFFF6F660);

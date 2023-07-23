@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:meigen_finder/presentation/theme/mf_theme.dart';
 
-class PrimaryButton extends StatelessWidget {
-  const PrimaryButton({
+class NormalButton extends StatelessWidget {
+  const NormalButton({
     Key? key,
     required this.label,
     this.height = 52,
     this.onPressed,
+    this.icon,
   }) : super(key: key);
 
   final String label;
   final double height;
   final VoidCallback? onPressed;
+  final Icon? icon;
 
   @override
   Widget build(BuildContext context) {
@@ -24,37 +26,28 @@ class PrimaryButton extends StatelessWidget {
         height: height,
         width: double.infinity,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          color: colorScheme.primary,
-          boxShadow: const [
-            BoxShadow(
-              color: Color.fromRGBO(0, 0, 0, 0.24),
-              blurRadius: 30,
-              offset: Offset(0, 10),
-            ),
-          ],
+          border: Border.all(
+            color: colorScheme.surface,
+          ),
+          borderRadius: BorderRadius.circular(5),
+          color: Colors.white,
         ),
         child: TextButton(
           style: TextButton.styleFrom(
-            foregroundColor: colorScheme.onPrimary,
+            foregroundColor: colorScheme.onBackgroundBottomSheet,
             textStyle: textTheme.h3.copyWith(
-              color: colorScheme.onPrimary,
+              color: colorScheme.onBackgroundBottomSheet,
             ),
-            minimumSize: const Size.fromHeight(36),
+            minimumSize: const Size.fromHeight(48),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(5),
+              borderRadius: BorderRadius.circular(8),
             ),
           ).copyWith(
             foregroundColor: MaterialStateProperty.all(
-              colorScheme.onPrimary,
+              colorScheme.onBackgroundBottomSheet,
             ),
           ),
-          onPressed: onPressed != null
-              ? () {
-                  FocusManager.instance.primaryFocus?.unfocus();
-                  onPressed?.call();
-                }
-              : null,
+          onPressed: onPressed,
           child: Text(label),
         ),
       ),

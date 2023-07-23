@@ -1,0 +1,20 @@
+enum CategoryType {
+  like,
+  original,
+  life,
+  work,
+  love,
+  relationship,
+  effort,
+  dream,
+  healing,
+  marriage,
+  time,
+  funny,
+  entrepreneur,
+  beYourself,
+  motivation,
+  training,
+  anime,
+  loneliness
+}

@@ -9,6 +9,9 @@ import '../pages/home/home_page.dart';
 
 part 'router.g.dart';
 
+final GlobalKey<NavigatorState> _shellNavigatorKey =
+    GlobalKey<NavigatorState>();
+
 /// 画面遷移定義プロバイダー
 final routerProvider = Provider((ref) {
   return GoRouter(

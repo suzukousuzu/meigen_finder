@@ -8,7 +8,7 @@ import '../../../gen/assets.gen.dart';
 import '../swipe/swipe_container.dart';
 
 // TODO:後で消す
-const meigenList = ['aaaaaaaaaaa', 'bbbbbbbbbbbbb'];
+const meigenList = ['aaaaaaaaaaagggggggggggggggggghhhhhhhh', 'bbbbbbbbbbbbb'];
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -17,49 +17,36 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = MfTheme.of(context);
     final colorScheme = theme.colorScheme;
+    final textTheme = theme.textTheme;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: colorScheme.transParent,
-        actions: [
-          IconButton(
-            onPressed: () => const CategoryRoute().go(context),
-            icon: Icon(
-              FontAwesomeIcons.barsStaggered,
-              size: 28,
-              color: colorScheme.onBackground,
-            ),
-          ),
-          IconButton(
-            onPressed: () {
-              // TODO:設定画面に遷移
-            },
-            icon: Icon(
-              FontAwesomeIcons.gear,
-              size: 28,
-              color: colorScheme.onBackground,
-            ),
-          )
+      ),
+      body: Stack(
+        children: [
+          SwipeContainer(
+              // TODO:後でリストの数を入れる
+              itemCount: meigenList.length,
+              itemBuilder: (context, index) {
+                return BackgroundImage(
+                  // TODO:カテゴリによって、背景画像を切り替える
+                  image: Assets.images.space.image().image,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      _MeigenText(
+                        text: meigenList[index],
+                      ),
+                      const _ShareAndLike(),
+                    ],
+                  ),
+                );
+              }),
+          const _BottomButtons(),
         ],
       ),
-      body: SwipeContainer(
-          // TODO:後でリストの数を入れる
-          itemCount: meigenList.length,
-          itemBuilder: (context, index) {
-            return BackgroundImage(
-              image: Assets.images.space.image().image,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  _MeigenText(
-                    text: meigenList[index],
-                  ),
-                  const _ShareAndLike(),
-                ],
-              ),
-            );
-          }),
     );
   }
 }
@@ -139,6 +126,68 @@ class _ShareAndLike extends StatelessWidget {
             ),
           )
         ],
+      ),
+    );
+  }
+}
+
+class _BottomButtons extends StatelessWidget {
+  const _BottomButtons({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = MfTheme.of(context);
+    final colorScheme = theme.colorScheme;
+    final bottomPadding = MediaQuery.of(context).padding.bottom;
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(32, 0, 32, bottomPadding),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                IconButton(
+                  onPressed: () => const CategoryRoute().go(context),
+                  icon: Icon(
+                    FontAwesomeIcons.barsStaggered,
+                    size: 28,
+                    color: colorScheme.onBackground,
+                  ),
+                ),
+                Text(
+                  'カテゴリ',
+                  style: theme.textTheme.subtext.copyWith(
+                    color: colorScheme.onBackground,
+                  ),
+                ),
+              ],
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                IconButton(
+                  onPressed: () {
+                    // TODO:設定画面に遷移
+                  },
+                  icon: Icon(
+                    FontAwesomeIcons.gear,
+                    size: 28,
+                    color: colorScheme.onBackground,
+                  ),
+                ),
+                Text(
+                  '設定',
+                  style: theme.textTheme.subtext.copyWith(
+                    color: colorScheme.onBackground,
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
