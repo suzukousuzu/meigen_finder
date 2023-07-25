@@ -3,7 +3,7 @@ import 'package:meigen_finder/presentation/components/app_bar/mf_sliver_app_bar.
 import 'package:meigen_finder/presentation/components/button/normal_button.dart';
 import 'package:meigen_finder/presentation/components/button/primary_button.dart';
 
-import '../../../domain/types/category_type.dart';
+import '../../../domain/state/category_type.dart';
 import '../../components/tile/category_tile.dart';
 
 class CategoryPage extends StatelessWidget {
@@ -44,7 +44,7 @@ class _CreateMeigenButton extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
       sliver: SliverToBoxAdapter(
         child: NormalButton(
-          label: '作成する',
+          label: '作成',
           onPressed: () {},
         ),
       ),
@@ -61,7 +61,7 @@ class _SearchMeigenButton extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
       sliver: SliverToBoxAdapter(
         child: PrimaryButton(
-          label: '検索する',
+          label: '検索',
           onPressed: () {},
         ),
       ),

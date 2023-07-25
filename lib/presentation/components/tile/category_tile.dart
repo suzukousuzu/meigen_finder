@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:meigen_finder/domain/types/category_type.dart';
+import 'package:meigen_finder/domain/state/category_type.dart';
 import 'package:meigen_finder/presentation/theme/mf_theme.dart';
 
 class CategoryTile extends StatelessWidget {
