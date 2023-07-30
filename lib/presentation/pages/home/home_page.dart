@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:meigen_finder/application/controller/quote_controller.dart';
 import 'package:meigen_finder/presentation/components/background/background_image.dart';
 import 'package:meigen_finder/presentation/routing/router.dart';
 import 'package:meigen_finder/presentation/theme/mf_theme.dart';
 
+import '../../../application/controller/quotes_controller.dart';
 import '../../../gen/assets.gen.dart';
 import '../../components/swipe/swipe_container.dart';
 
@@ -17,7 +17,7 @@ class HomePage extends ConsumerWidget {
     final theme = MfTheme.of(context);
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
-    final quotesAsyncValue = ref.watch(quoteControllerProvider);
+    final quotesAsyncValue = ref.watch(quotesControllerProvider);
 
     return Scaffold(
       extendBodyBehindAppBar: true,

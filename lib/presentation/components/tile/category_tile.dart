@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:meigen_finder/domain/state/category_type.dart';
 import 'package:meigen_finder/presentation/theme/mf_theme.dart';
 
-class CategoryTile extends StatelessWidget {
+class CategoryTile extends HookWidget {
   const CategoryTile({
     Key? key,
     required this.type,
-    this.isSelected = false,
-    this.onTap,
+    required this.selectedTypes,
+    required this.onChanged,
   }) : super(key: key);
   final CategoryType type;
-  final bool isSelected;
-  final VoidCallback? onTap;
+  final List<CategoryType> selectedTypes;
+  final ValueChanged<CategoryType> onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +40,12 @@ class CategoryTile extends StatelessWidget {
       CategoryType.anime => 'アニメ',
       CategoryType.loneliness => '孤独',
     };
+
+    final isSelected = selectedTypes.contains(type);
     return InkWell(
-      onTap: onTap,
+      onTap: () {
+        onChanged(type);
+      },
       child: Container(
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
