@@ -1,23 +1,19 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:isar/isar.dart';
 
-part 'quote.freezed.dart';
+import 'category_type.dart';
+
 part 'quote.g.dart';
 
-@freezed
-class Quote with _$Quote {
-  const factory Quote({
-    /// ID
-    required String id,
+@Collection()
+class Quote {
+  late Id id;
 
-    /// 著者
-    String? author,
+  @Enumerated(EnumType.ordinal)
+  late CategoryType categoryType;
 
-    /// 名言
-    required String quote,
+  /// 著者
+  String? author;
 
-    /// カテゴリ
-    required String category,
-  }) = _Quote;
-
-  factory Quote.fromJson(Map<String, dynamic> json) => _$QuoteFromJson(json);
+  /// 名言
+  late String quote;
 }

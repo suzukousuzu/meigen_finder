@@ -1,52 +1,59 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:meigen_finder/application/controller/quote_controller.dart';
 import 'package:meigen_finder/presentation/components/background/background_image.dart';
 import 'package:meigen_finder/presentation/routing/router.dart';
 import 'package:meigen_finder/presentation/theme/mf_theme.dart';
 
 import '../../../gen/assets.gen.dart';
-import '../swipe/swipe_container.dart';
+import '../../components/swipe/swipe_container.dart';
 
-// TODO:後で消す
-const meigenList = ['aaaaaaaaaaagggggggggggggggggghhhhhhhh', 'bbbbbbbbbbbbb'];
-
-class HomePage extends StatelessWidget {
+class HomePage extends ConsumerWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = MfTheme.of(context);
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
+    final quotesAsyncValue = ref.watch(quoteControllerProvider);
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: colorScheme.transParent,
       ),
-      body: Stack(
-        children: [
-          SwipeContainer(
-              // TODO:後でリストの数を入れる
-              itemCount: meigenList.length,
-              itemBuilder: (context, index) {
-                return BackgroundImage(
-                  // TODO:カテゴリによって、背景画像を切り替える
-                  image: Assets.images.space.image().image,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      _MeigenText(
-                        text: meigenList[index],
-                      ),
-                      const _ShareAndLike(),
-                    ],
-                  ),
-                );
-              }),
-          const _BottomButtons(),
-        ],
-      ),
+      body: quotesAsyncValue.maybeWhen(orElse: () {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      }, data: (quotes) {
+        return Stack(
+          children: [
+            SwipeContainer(
+                // TODO:後でリストの数を入れる
+                itemCount: quotes.length,
+                itemBuilder: (context, index) {
+                  return BackgroundImage(
+                    // TODO:カテゴリによって、背景画像を切り替える
+                    image: Assets.images.space.image().image,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        _MeigenText(
+                            text: quotes[index].quote,
+                            author: quotes[index].author ?? ''),
+                        const _ShareAndLike(),
+                      ],
+                    ),
+                  );
+                }),
+            const _BottomButtons(),
+          ],
+        );
+      }),
     );
   }
 }
@@ -55,8 +62,10 @@ class _MeigenText extends StatelessWidget {
   const _MeigenText({
     Key? key,
     required this.text,
+    required this.author,
   }) : super(key: key);
   final String text;
+  final String author;
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +87,7 @@ class _MeigenText extends StatelessWidget {
             height: 8,
           ),
           Text(
-            '-オプラ・ウィンフリー',
+            '-$author',
             textAlign: TextAlign.center,
             style: textTheme.textBody.copyWith(
               color: colorScheme.secondary,

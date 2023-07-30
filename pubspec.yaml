@@ -45,6 +45,9 @@ dependencies:
   modal_bottom_sheet: ^3.0.0-pre
   flutter_swiper_plus: ^2.0.4
   json_annotation: ^4.8.1
+  isar: ^3.1.0+1
+  isar_flutter_libs: ^3.1.0+1
+  path_provider: ^2.0.15
 
 dev_dependencies:
   flutter_test:
@@ -52,7 +55,9 @@ dev_dependencies:
   build_runner: ^2.4.6
   flutter_gen_runner:
   flutter_gen:
+  riverpod_generator:
   go_router_builder:
+  isar_generator: ^3.1.0+1
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -77,6 +82,7 @@ flutter:
   assets:
     - assets/fonts/
     - assets/images/
+    - assets/master_data/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
