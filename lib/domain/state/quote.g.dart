@@ -28,8 +28,13 @@ const QuoteSchema = CollectionSchema(
       type: IsarType.byte,
       enumMap: _QuotecategoryTypeEnumValueMap,
     ),
-    r'quote': PropertySchema(
+    r'isFavorite': PropertySchema(
       id: 2,
+      name: r'isFavorite',
+      type: IsarType.bool,
+    ),
+    r'quote': PropertySchema(
+      id: 3,
       name: r'quote',
       type: IsarType.string,
     )
@@ -72,7 +77,8 @@ void _quoteSerialize(
 ) {
   writer.writeString(offsets[0], object.author);
   writer.writeByte(offsets[1], object.categoryType.index);
-  writer.writeString(offsets[2], object.quote);
+  writer.writeBool(offsets[2], object.isFavorite);
+  writer.writeString(offsets[3], object.quote);
 }
 
 Quote _quoteDeserialize(
@@ -87,7 +93,8 @@ Quote _quoteDeserialize(
       _QuotecategoryTypeValueEnumMap[reader.readByteOrNull(offsets[1])] ??
           CategoryType.like;
   object.id = id;
-  object.quote = reader.readString(offsets[2]);
+  object.isFavorite = reader.readBool(offsets[2]);
+  object.quote = reader.readString(offsets[3]);
   return object;
 }
 
@@ -104,6 +111,8 @@ P _quoteDeserializeProp<P>(
       return (_QuotecategoryTypeValueEnumMap[reader.readByteOrNull(offset)] ??
           CategoryType.like) as P;
     case 2:
+      return (reader.readBool(offset)) as P;
+    case 3:
       return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -489,6 +498,16 @@ extension QuoteQueryFilter on QueryBuilder<Quote, Quote, QFilterCondition> {
     });
   }
 
+  QueryBuilder<Quote, Quote, QAfterFilterCondition> isFavoriteEqualTo(
+      bool value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'isFavorite',
+        value: value,
+      ));
+    });
+  }
+
   QueryBuilder<Quote, Quote, QAfterFilterCondition> quoteEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -647,6 +666,18 @@ extension QuoteQuerySortBy on QueryBuilder<Quote, Quote, QSortBy> {
     });
   }
 
+  QueryBuilder<Quote, Quote, QAfterSortBy> sortByIsFavorite() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isFavorite', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Quote, Quote, QAfterSortBy> sortByIsFavoriteDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isFavorite', Sort.desc);
+    });
+  }
+
   QueryBuilder<Quote, Quote, QAfterSortBy> sortByQuote() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'quote', Sort.asc);
@@ -697,6 +728,18 @@ extension QuoteQuerySortThenBy on QueryBuilder<Quote, Quote, QSortThenBy> {
     });
   }
 
+  QueryBuilder<Quote, Quote, QAfterSortBy> thenByIsFavorite() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isFavorite', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Quote, Quote, QAfterSortBy> thenByIsFavoriteDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isFavorite', Sort.desc);
+    });
+  }
+
   QueryBuilder<Quote, Quote, QAfterSortBy> thenByQuote() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'quote', Sort.asc);
@@ -724,6 +767,12 @@ extension QuoteQueryWhereDistinct on QueryBuilder<Quote, Quote, QDistinct> {
     });
   }
 
+  QueryBuilder<Quote, Quote, QDistinct> distinctByIsFavorite() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'isFavorite');
+    });
+  }
+
   QueryBuilder<Quote, Quote, QDistinct> distinctByQuote(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -748,6 +797,12 @@ extension QuoteQueryProperty on QueryBuilder<Quote, Quote, QQueryProperty> {
   QueryBuilder<Quote, CategoryType, QQueryOperations> categoryTypeProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'categoryType');
+    });
+  }
+
+  QueryBuilder<Quote, bool, QQueryOperations> isFavoriteProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'isFavorite');
     });
   }
 

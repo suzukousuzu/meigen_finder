@@ -48,6 +48,18 @@ class QuoteRepository {
     return quotes;
   }
 
-  // TODO:名言のお気に入り機能をかく
+  // お気に入りの名言を返す
+  Future<List<Quote>> fetchFavoriteQuote() async {
+    final query = _isar.quotes.where().filter().isFavoriteEqualTo(true).build();
+    final results = await query.findAll();
+    return results;
+  }
+
+  Future<void> like(Quote quote) async {
+    await _isar.writeTxn(() async {
+      await _isar.quotes.put(quote);
+    });
+  }
+
   // TODO:名言の追加機能を書く
 }

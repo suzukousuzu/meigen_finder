@@ -29,7 +29,7 @@ class MfColorScheme {
           error: _persianRed,
           onError: _white,
           transParent: Colors.transparent,
-          border: _laserLemon,
+          border: _dodgerBlue,
         );
 
   final Color primary;
@@ -53,4 +53,4 @@ const _black = Color(0XFF0F0E0E);
 const _whiteSmoke = Color(0XFFF5F5F5);
 const _whisper = Color(0XFFE7E5E5);
 const _persianRed = Color(0XFFD32F2F);
-const _laserLemon = Color(0XFFF6F660);
+const _dodgerBlue = Color(0XFF007BFF);

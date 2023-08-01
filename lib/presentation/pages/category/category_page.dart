@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:meigen_finder/application/controller/category_type_list_controller.dart';
+import 'package:meigen_finder/application/controller/quotes_controller.dart';
 import 'package:meigen_finder/presentation/components/app_bar/mf_sliver_app_bar.dart';
 import 'package:meigen_finder/presentation/components/button/normal_button.dart';
 import 'package:meigen_finder/presentation/components/button/primary_button.dart';
@@ -18,7 +20,9 @@ class CategoryPage extends ConsumerWidget {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          const _AppBar(),
+          _AppBar(
+            selectedCategoryTypes: categoryTypes,
+          ),
           const _SearchMeigenButton(),
           const _CreateMeigenButton(),
           _CategoryTiles(
@@ -30,21 +34,30 @@ class CategoryPage extends ConsumerWidget {
   }
 }
 
-class _AppBar extends StatelessWidget {
-  const _AppBar({Key? key}) : super(key: key);
+class _AppBar extends ConsumerWidget {
+  const _AppBar({
+    Key? key,
+    required this.selectedCategoryTypes,
+  }) : super(key: key);
+  final List<CategoryType> selectedCategoryTypes;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = MfTheme.of(context);
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
     return MfSliverAppBar(
       title: 'カテゴリ',
       trailing: TextButton(
-          onPressed: () {},
+          onPressed: () {
+            ref
+                .read(quotesControllerProvider.notifier)
+                .sortCategory(selectedCategoryTypes);
+            context.pop();
+          },
           child: Text(
             '保存',
-            style: textTheme.textBody.copyWith(
+            style: textTheme.textBold.copyWith(
               color: colorScheme.onBackgroundBottomSheet,
             ),
           )),

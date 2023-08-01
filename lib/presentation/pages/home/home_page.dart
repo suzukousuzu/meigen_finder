@@ -6,6 +6,7 @@ import 'package:meigen_finder/presentation/routing/router.dart';
 import 'package:meigen_finder/presentation/theme/mf_theme.dart';
 
 import '../../../application/controller/quotes_controller.dart';
+import '../../../domain/state/quote.dart';
 import '../../../gen/assets.gen.dart';
 import '../../components/swipe/swipe_container.dart';
 
@@ -45,7 +46,9 @@ class HomePage extends ConsumerWidget {
                         _MeigenText(
                             text: quotes[index].quote,
                             author: quotes[index].author ?? ''),
-                        const _ShareAndLike(),
+                        _ShareAndLike(
+                          quote: quotes[index],
+                        ),
                       ],
                     ),
                   );
@@ -99,11 +102,12 @@ class _MeigenText extends StatelessWidget {
   }
 }
 
-class _ShareAndLike extends StatelessWidget {
-  const _ShareAndLike({Key? key}) : super(key: key);
+class _ShareAndLike extends ConsumerWidget {
+  const _ShareAndLike({Key? key, required this.quote}) : super(key: key);
+  final Quote quote;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = MfTheme.of(context);
     final colorScheme = theme.colorScheme;
     return Padding(
@@ -127,9 +131,12 @@ class _ShareAndLike extends StatelessWidget {
           IconButton(
             onPressed: () {
               // TODO:お気に入り機能
+              ref.read(quotesControllerProvider.notifier).like(quote);
             },
             icon: Icon(
-              FontAwesomeIcons.heart,
+              quote.isFavorite
+                  ? FontAwesomeIcons.solidHeart
+                  : FontAwesomeIcons.heart,
               size: 32,
               color: colorScheme.onBackground,
             ),

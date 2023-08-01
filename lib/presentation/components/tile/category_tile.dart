@@ -51,7 +51,12 @@ class CategoryTile extends HookWidget {
         decoration: BoxDecoration(
           color: colorScheme.surface,
           borderRadius: BorderRadius.circular(8),
-          border: isSelected ? Border.all(color: colorScheme.border) : null,
+          border: isSelected
+              ? Border.all(
+                  color: colorScheme.border,
+                  width: 2,
+                )
+              : null,
         ),
         child: Center(
           child: Text(

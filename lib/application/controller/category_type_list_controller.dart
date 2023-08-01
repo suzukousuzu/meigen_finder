@@ -4,7 +4,7 @@ import '../../domain/state/category_type.dart';
 
 part 'category_type_list_controller.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class CategoryTypeListController extends _$CategoryTypeListController {
   @override
   List<CategoryType> build() => [CategoryType.life];

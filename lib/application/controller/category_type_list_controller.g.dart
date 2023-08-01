@@ -7,12 +7,12 @@ part of 'category_type_list_controller.dart';
 // **************************************************************************
 
 String _$categoryTypeListControllerHash() =>
-    r'7a72f4b8739775f34b912f37e030abecac39a1a8';
+    r'3af881540019c6eb8b780f5d1f1ed9d2e53e2a61';
 
 /// See also [CategoryTypeListController].
 @ProviderFor(CategoryTypeListController)
-final categoryTypeListControllerProvider = AutoDisposeNotifierProvider<
-    CategoryTypeListController, List<CategoryType>>.internal(
+final categoryTypeListControllerProvider =
+    NotifierProvider<CategoryTypeListController, List<CategoryType>>.internal(
   CategoryTypeListController.new,
   name: r'categoryTypeListControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -22,6 +22,6 @@ final categoryTypeListControllerProvider = AutoDisposeNotifierProvider<
   allTransitiveDependencies: null,
 );
 
-typedef _$CategoryTypeListController = AutoDisposeNotifier<List<CategoryType>>;
+typedef _$CategoryTypeListController = Notifier<List<CategoryType>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
