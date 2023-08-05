@@ -21,12 +21,12 @@ class CategoryPage extends ConsumerWidget {
       body: CustomScrollView(
         slivers: [
           _AppBar(
-            selectedCategoryTypes: categoryTypes,
+            selectedCategoryTypes: categoryTypes.value!,
           ),
           const _SearchMeigenButton(),
           const _CreateMeigenButton(),
           _CategoryTiles(
-            selectedTypes: categoryTypes,
+            selectedTypes: categoryTypes.value!,
           ),
         ],
       ),

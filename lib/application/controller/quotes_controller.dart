@@ -36,7 +36,11 @@ class QuotesController extends _$QuotesController {
 
   void sortCategory(List<CategoryType> selectedCategoryTypes) {
     final sortedQuotes = state.value?.where((quote) {
-      return selectedCategoryTypes.contains(quote.categoryType);
+      if (quote.isFavorite) {
+        return state.value!.contains(quote);
+      } else {
+        return selectedCategoryTypes.contains(quote.categoryType);
+      }
     }).toList();
     state = AsyncData(sortedQuotes ?? []);
   }
