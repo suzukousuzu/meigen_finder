@@ -22,10 +22,21 @@ class $AssetsImagesGen {
   List<AssetGenImage> get values => [sakura, space];
 }
 
+class $AssetsMasterDataGen {
+  const $AssetsMasterDataGen();
+
+  /// File path: assets/master_data/quotes.json
+  String get quotes => 'assets/master_data/quotes.json';
+
+  /// List of all assets
+  List<String> get values => [quotes];
+}
+
 class Assets {
   Assets._();
 
   static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const $AssetsMasterDataGen masterData = $AssetsMasterDataGen();
 }
 
 class AssetGenImage {

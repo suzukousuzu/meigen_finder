@@ -1,26 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'quote_controller.dart';
+part of 'quotes_controller.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$quoteControllerHash() => r'01f7db2e98a02c4f1d0a731c6753785e00c47267';
+String _$quotesControllerHash() => r'd2349e894756247b71a602b637caaec8eea4322a';
 
-/// See also [QuoteController].
-@ProviderFor(QuoteController)
-final quoteControllerProvider =
-    AutoDisposeAsyncNotifierProvider<QuoteController, List<Quote>>.internal(
-  QuoteController.new,
-  name: r'quoteControllerProvider',
+/// See also [QuotesController].
+@ProviderFor(QuotesController)
+final quotesControllerProvider =
+    AutoDisposeAsyncNotifierProvider<QuotesController, List<Quote>>.internal(
+  QuotesController.new,
+  name: r'quotesControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$quoteControllerHash,
+      : _$quotesControllerHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$QuoteController = AutoDisposeAsyncNotifier<List<Quote>>;
+typedef _$QuotesController = AutoDisposeAsyncNotifier<List<Quote>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member

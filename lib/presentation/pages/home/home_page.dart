@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:meigen_finder/application/controller/quote_controller.dart';
+import 'package:meigen_finder/application/controller/category_type_list_controller.dart';
+import 'package:meigen_finder/domain/state/category_type.dart';
 import 'package:meigen_finder/presentation/components/background/background_image.dart';
 import 'package:meigen_finder/presentation/routing/router.dart';
 import 'package:meigen_finder/presentation/theme/mf_theme.dart';
+import 'package:meigen_finder/util/extension/category_type_extension.dart';
 
+import '../../../application/controller/quotes_controller.dart';
+import '../../../domain/state/quote.dart';
 import '../../../gen/assets.gen.dart';
 import '../../components/swipe/swipe_container.dart';
 
@@ -16,8 +20,8 @@ class HomePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = MfTheme.of(context);
     final colorScheme = theme.colorScheme;
-    final textTheme = theme.textTheme;
-    final quotesAsyncValue = ref.watch(quoteControllerProvider);
+
+    final quotesAsyncValue = ref.watch(quotesControllerProvider);
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -32,7 +36,6 @@ class HomePage extends ConsumerWidget {
         return Stack(
           children: [
             SwipeContainer(
-                // TODO:後でリストの数を入れる
                 itemCount: quotes.length,
                 itemBuilder: (context, index) {
                   return BackgroundImage(
@@ -45,12 +48,14 @@ class HomePage extends ConsumerWidget {
                         _MeigenText(
                             text: quotes[index].quote,
                             author: quotes[index].author ?? ''),
-                        const _ShareAndLike(),
+                        _ShareAndLike(
+                          quote: quotes[index],
+                        ),
                       ],
                     ),
                   );
                 }),
-            const _BottomButtons(),
+            _BottomButtons(),
           ],
         );
       }),
@@ -99,11 +104,12 @@ class _MeigenText extends StatelessWidget {
   }
 }
 
-class _ShareAndLike extends StatelessWidget {
-  const _ShareAndLike({Key? key}) : super(key: key);
+class _ShareAndLike extends ConsumerWidget {
+  const _ShareAndLike({Key? key, required this.quote}) : super(key: key);
+  final Quote quote;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = MfTheme.of(context);
     final colorScheme = theme.colorScheme;
     return Padding(
@@ -127,9 +133,12 @@ class _ShareAndLike extends StatelessWidget {
           IconButton(
             onPressed: () {
               // TODO:お気に入り機能
+              ref.read(quotesControllerProvider.notifier).like(quote);
             },
             icon: Icon(
-              FontAwesomeIcons.heart,
+              quote.isFavorite
+                  ? FontAwesomeIcons.solidHeart
+                  : FontAwesomeIcons.heart,
               size: 32,
               color: colorScheme.onBackground,
             ),
@@ -140,14 +149,16 @@ class _ShareAndLike extends StatelessWidget {
   }
 }
 
-class _BottomButtons extends StatelessWidget {
+class _BottomButtons extends ConsumerWidget {
   const _BottomButtons({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final categoryTypeList = ref.watch(categoryTypeListControllerProvider);
     final theme = MfTheme.of(context);
     final colorScheme = theme.colorScheme;
     final bottomPadding = MediaQuery.of(context).padding.bottom;
+    final categoryList = categoryTypeList.value ?? [CategoryType.life];
     return Align(
       alignment: Alignment.bottomCenter,
       child: Padding(
@@ -167,7 +178,9 @@ class _BottomButtons extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'カテゴリ',
+                  categoryList.length >= 2
+                      ? 'ミックス'
+                      : categoryList[0].categoryText,
                   style: theme.textTheme.subtext.copyWith(
                     color: colorScheme.onBackground,
                   ),
