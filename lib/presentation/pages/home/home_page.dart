@@ -79,26 +79,41 @@ class _MeigenText extends StatelessWidget {
     final textTheme = theme.textTheme;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 32),
-      child: Column(
-        children: [
-          Text(
-            text,
-            textAlign: TextAlign.center,
-            style: textTheme.h1.copyWith(
-              color: colorScheme.secondary,
+      child: Container(
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: colorScheme.transParent,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+              color: colorScheme.secondary.withOpacity(0.5),
+              spreadRadius: 1,
+              blurRadius: 4,
+              offset: const Offset(0, 8),
             ),
-          ),
-          const SizedBox(
-            height: 8,
-          ),
-          Text(
-            '-$author',
-            textAlign: TextAlign.center,
-            style: textTheme.textBody.copyWith(
-              color: colorScheme.secondary,
+          ],
+        ),
+        child: Column(
+          children: [
+            Text(
+              text,
+              textAlign: TextAlign.center,
+              style: textTheme.h1.copyWith(
+                color: colorScheme.primary,
+              ),
             ),
-          ),
-        ],
+            const SizedBox(
+              height: 8,
+            ),
+            Text(
+              '-$author',
+              textAlign: TextAlign.center,
+              style: textTheme.textBody.copyWith(
+                color: colorScheme.primary,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
