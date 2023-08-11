@@ -7,6 +7,7 @@ import 'package:meigen_finder/presentation/components/background/background_imag
 import 'package:meigen_finder/presentation/routing/router.dart';
 import 'package:meigen_finder/presentation/theme/mf_theme.dart';
 import 'package:meigen_finder/util/extension/category_type_extension.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../application/controller/quotes_controller.dart';
 import '../../../domain/state/quote.dart';
@@ -39,15 +40,14 @@ class HomePage extends ConsumerWidget {
                 itemCount: quotes.length,
                 itemBuilder: (context, index) {
                   return BackgroundImage(
-                    // TODO:カテゴリによって、背景画像を切り替える
                     image: Assets.images.space.image().image,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         _MeigenText(
-                            text: quotes[index].quote,
-                            author: quotes[index].author ?? ''),
+                          quote: quotes[index],
+                        ),
                         _ShareAndLike(
                           quote: quotes[index],
                         ),
@@ -66,11 +66,9 @@ class HomePage extends ConsumerWidget {
 class _MeigenText extends StatelessWidget {
   const _MeigenText({
     Key? key,
-    required this.text,
-    required this.author,
+    required this.quote,
   }) : super(key: key);
-  final String text;
-  final String author;
+  final Quote quote;
 
   @override
   Widget build(BuildContext context) {
@@ -79,40 +77,43 @@ class _MeigenText extends StatelessWidget {
     final textTheme = theme.textTheme;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 32),
-      child: Container(
-        padding: const EdgeInsets.all(20),
-        decoration: BoxDecoration(
-          color: colorScheme.transParent,
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: [
-            BoxShadow(
-              color: colorScheme.secondary.withOpacity(0.5),
-              spreadRadius: 1,
-              blurRadius: 4,
-              offset: const Offset(0, 8),
-            ),
-          ],
-        ),
-        child: Column(
-          children: [
-            Text(
-              text,
-              textAlign: TextAlign.center,
-              style: textTheme.h1.copyWith(
-                color: colorScheme.primary,
+      child: InkWell(
+        onTap: () => QuoteDetailRoute(quote).go(context),
+        child: Container(
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: colorScheme.transParent,
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: [
+              BoxShadow(
+                color: colorScheme.secondary.withOpacity(0.5),
+                spreadRadius: 1,
+                blurRadius: 4,
+                offset: const Offset(0, 8),
               ),
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            Text(
-              '-$author',
-              textAlign: TextAlign.center,
-              style: textTheme.textBody.copyWith(
-                color: colorScheme.primary,
+            ],
+          ),
+          child: Column(
+            children: [
+              Text(
+                quote.quote,
+                textAlign: TextAlign.center,
+                style: textTheme.h1.copyWith(
+                  color: colorScheme.primary,
+                ),
               ),
-            ),
-          ],
+              const SizedBox(
+                height: 8,
+              ),
+              Text(
+                '-${quote.author}',
+                textAlign: TextAlign.center,
+                style: textTheme.textBody.copyWith(
+                  color: colorScheme.primary,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -134,7 +135,7 @@ class _ShareAndLike extends ConsumerWidget {
         children: [
           IconButton(
             onPressed: () {
-              // TODO:名言をシェアする
+              Share.share(quote.quote);
             },
             icon: Icon(
               FontAwesomeIcons.arrowUpFromBracket,
@@ -147,7 +148,6 @@ class _ShareAndLike extends ConsumerWidget {
           ),
           IconButton(
             onPressed: () {
-              // TODO:お気に入り機能
               ref.read(quotesControllerProvider.notifier).like(quote);
             },
             icon: Icon(

@@ -6,7 +6,7 @@ part of 'quotes_service_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$getCompleteQuotesHash() => r'39a5c121fc933091450bb70b727e0238668523c4';
+String _$getCompleteQuotesHash() => r'6e62da6a604e1b251bea8c43deea6b33c217bc16';
 
 /// See also [getCompleteQuotes].
 @ProviderFor(getCompleteQuotes)
@@ -21,7 +21,7 @@ final getCompleteQuotesProvider = AutoDisposeProvider<List<Quote>>.internal(
 );
 
 typedef GetCompleteQuotesRef = AutoDisposeProviderRef<List<Quote>>;
-String _$initialQuoteHash() => r'765afb0aacb2f6e7ffbeadfbe37dfb90f3606f00';
+String _$initialQuoteHash() => r'321a116008b33413be1cb79ef290f52c7544ae1c';
 
 /// See also [initialQuote].
 @ProviderFor(initialQuote)

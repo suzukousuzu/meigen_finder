@@ -6,7 +6,7 @@ part of 'quotes_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$quotesControllerHash() => r'7aa097660030d73d54ac2016d3dda06004a8bfa1';
+String _$quotesControllerHash() => r'fd7c24ce6f28e2d8f9263d9787aa7bd79bbc7839';
 
 /// See also [QuotesController].
 @ProviderFor(QuotesController)
