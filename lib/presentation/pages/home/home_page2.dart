@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meigen_finder/presentation/components/button/primary_button.dart';
 import 'package:meigen_finder/presentation/components/selector/emotional_selector.dart';
 
 import '../../theme/mf_theme.dart';
@@ -15,6 +16,7 @@ class HomePage2 extends StatelessWidget {
         children: [
           _PromptText(),
           _EmotionalSelector(),
+          _Button(),
         ],
       ),
     ));
@@ -30,7 +32,7 @@ class _PromptText extends StatelessWidget {
     final textTheme = theme.textTheme;
     final colorScheme = theme.colorScheme;
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 48, 20, 16),
+      padding: const EdgeInsets.fromLTRB(20, 64, 20, 16),
       child: Center(
         child: Text('今日はどんな1日でしたか？',
             style: textTheme.h3.copyWith(color: colorScheme.onBackground)),
@@ -45,7 +47,22 @@ class _EmotionalSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.fromLTRB(32, 20, 32, 0),
-        child: Center(child: EmotionalSelector(onChanged: (ff) {})));
+      padding: const EdgeInsets.fromLTRB(32, 12, 32, 0),
+      child: Center(
+        child: EmotionalSelector(onChanged: (emotionalType) {}),
+      ),
+    );
+  }
+}
+
+class _Button extends StatelessWidget {
+  const _Button({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(32, 32, 32, 0),
+      child: PrimaryButton(label: '今日の名言', onPressed: () {}),
+    );
   }
 }
