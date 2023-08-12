@@ -15,6 +15,12 @@ class MfColorScheme {
     required this.transParent,
     required this.border,
     required this.selectedColor,
+    required this.superHappy,
+    required this.someWhatHappy,
+    required this.normal,
+    required this.someWhatSad,
+    required this.superSad,
+    required this.notSelected,
   });
 
   MfColorScheme.light()
@@ -22,7 +28,7 @@ class MfColorScheme {
           primary: _nero,
           background: _whiteSmoke,
           onBackgroundBottomSheet: _black,
-          onBackground: _white,
+          onBackground: _nero,
           surface: _whisper,
           onPrimary: _white,
           secondary: _white,
@@ -32,6 +38,12 @@ class MfColorScheme {
           transParent: Colors.transparent,
           border: _orangePeel,
           selectedColor: _caramel,
+          superHappy: _orangePeel,
+          someWhatHappy: _tangerine,
+          normal: _mangoTango,
+          someWhatSad: _tenne,
+          superSad: _goldenBrown,
+          notSelected: _gray,
         );
 
   final Color primary;
@@ -47,6 +59,13 @@ class MfColorScheme {
   final Color transParent;
   final Color border;
   final Color selectedColor;
+
+  final Color superHappy;
+  final Color someWhatHappy;
+  final Color normal;
+  final Color someWhatSad;
+  final Color superSad;
+  final Color notSelected;
 }
 
 /// 色名参考: https://www.htmlcsscolor.com/
@@ -58,3 +77,9 @@ const _whisper = Color(0XFFE7E5E5);
 const _persianRed = Color(0XFFD32F2F);
 const _caramel = Color(0XFFFDD394);
 const _orangePeel = Color(0XFFFF9900);
+
+const _tangerine = Color(0XFFE88800);
+const _gray = Color(0XFF808080);
+const _mangoTango = Color(0XFFD17700);
+const _tenne = Color(0XFFBA6600);
+const _goldenBrown = Color(0XFFA25500);

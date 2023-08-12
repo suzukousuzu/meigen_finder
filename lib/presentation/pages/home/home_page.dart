@@ -14,6 +14,7 @@ import '../../../domain/state/quote.dart';
 import '../../../gen/assets.gen.dart';
 import '../../components/swipe/swipe_container.dart';
 
+// TODO:名言詳細画面になる予定
 class HomePage extends ConsumerWidget {
   const HomePage({Key? key}) : super(key: key);
 

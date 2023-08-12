@@ -7,7 +7,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import '../../domain/state/quote.dart';
 import '../components/modal_bottom_sheet/modal_bottom_sheet_container_builder.dart';
 import '../pages/category/category_page.dart';
-import '../pages/home/home_page.dart';
+import '../pages/home/home_page2.dart';
 
 part 'router.g.dart';
 
@@ -33,7 +33,7 @@ class HomeRoute extends GoRouteData {
   const HomeRoute();
 
   @override
-  Widget build(BuildContext context, GoRouterState state) => const HomePage();
+  Widget build(BuildContext context, GoRouterState state) => const HomePage2();
 }
 
 class QuoteDetailRoute extends GoRouteData {
