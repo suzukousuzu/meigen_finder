@@ -1,7 +1,7 @@
 import 'dart:math';
 
+import 'package:meigen_finder/application/service_provider/quotes_service_provider.dart';
 import 'package:meigen_finder/domain/state/category_type.dart';
-import 'package:meigen_finder/infra/providers/quote_repository_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../domain/state/quote.dart';
@@ -12,29 +12,23 @@ part 'quotes_controller.g.dart';
 class QuotesController extends _$QuotesController {
   @override
   Future<List<Quote>> build() {
-    final quotes = _init();
+    final quotes = _fetchQuote();
 
     return quotes;
   }
 
-  Future<List<Quote>> _init() async {
-    final repository = await ref.read(quoteRepositoryProvider.future);
-    final allQuotes = await repository.getMasterData();
-    final favoriteQuotes = await repository.fetchFavoriteQuote();
-    final quotes = allQuotes.map((e) {
-      final isFavorite = favoriteQuotes.any((element) {
-        return element.id == e.id;
-      });
-      return e.copyWith(isFavorite: isFavorite);
-    }).toList();
+  Future<List<Quote>> _fetchQuote() async {
+    final initialQuote = await ref.read(initialQuoteProvider.future);
 
     final random = Random();
-    quotes.shuffle(random);
+    initialQuote.shuffle(random);
 
-    return quotes;
+    return initialQuote;
   }
 
-  void sortCategory(List<CategoryType> selectedCategoryTypes) {
+  Future<void> sortCategory(List<CategoryType> selectedCategoryTypes) async {
+    final completeQuotes = ref.read(getCompleteQuotesProvider);
+    state = AsyncData(completeQuotes);
     final sortedQuotes = state.value?.where((quote) {
       if (quote.isFavorite) {
         return state.value!.contains(quote);
@@ -42,6 +36,9 @@ class QuotesController extends _$QuotesController {
         return selectedCategoryTypes.contains(quote.categoryType);
       }
     }).toList();
+    final random = Random();
+    sortedQuotes?.shuffle(random);
+
     state = AsyncData(sortedQuotes ?? []);
   }
 
@@ -52,8 +49,7 @@ class QuotesController extends _$QuotesController {
     final updatedQuote = quote.copyWith(isFavorite: !quote.isFavorite);
 
     state = await AsyncValue.guard(() async {
-      final repository = await ref.read(quoteRepositoryProvider.future);
-      await repository.like(updatedQuote);
+      ref.read(likeProvider(quote));
       return state.value!.map((quote) {
         if (quote.id == displayQuote?.id) {
           return updatedQuote;
