@@ -16,7 +16,9 @@ class HomePageController extends _$HomePageController {
   HomePageViewState build() => HomePageViewState(emotionalType: null);
 
   Future<void> fetchLikeQuotes() async {
-    // TODO:お気に入りの名言を取得
+    final repository = await ref.read(quoteRepositoryProvider.future);
+    final likeQuotes = await repository.fetchLikeQuotes();
+    state = state.copyWith(likedQuotes: likeQuotes);
   }
 
   Future<void> updateEmotionalType(EmotionalType emotionalType) async {
@@ -28,10 +30,16 @@ class HomePageController extends _$HomePageController {
           .where((data) => data.emotionalType == emotionalType)
           .toList();
 
-      // TODO:お気に入りに登録してない物の中から選ぶ
+      final likedQuotes = state.likedQuotes ?? [];
+
+      // お気に入りに登録してない物の中から選ぶ
+      final unlikedMatchingData =
+          matchingData.where((data) => !likedQuotes.contains(data)).toList();
+
       // 一致するデータの中からランダムに1つ選択
       final random = Random();
-      final selectedData = matchingData[random.nextInt(matchingData.length)];
+      final selectedData =
+          unlikedMatchingData[random.nextInt(unlikedMatchingData.length)];
       final todaysQuote = TodaysQuote()
         ..id = selectedData.id
         ..emotionalType = emotionalType

@@ -91,5 +91,11 @@ class QuoteRepository {
     });
   }
 
+  Future<List<Quote>> fetchLikeQuotes() async {
+    final query = _isar.likeQuotes.where().build();
+    final results = await query.findAll();
+    return results.map((e) => e.likeQuotes).toList();
+  }
+
   // TODO:名言の追加機能を書く
 }

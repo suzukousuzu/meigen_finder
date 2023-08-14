@@ -1,8 +1,8 @@
 [
   {
     "id": 0,
-    "text": "自分の笑顔が、他人の幸せを生むこともある。",
-    "author": "ヘレン・ケラー",
+    "text": "追いかけ続ける勇気さえあれば、夢は必ず叶います",
+    "author": "ウォルト・ディズニー",
     "category": "superHappy"
   },
   {
@@ -13,42 +13,477 @@
   },
   {
     "id": 2,
-    "text": "笑顔は、言葉を超えた言語である。",
-    "author": "ヨガンダ",
-    "category": "superHappy"
+    "text": "果報は寝て待て。",
+    "author": "孔子",
+    "category": "normal"
   },
-
   {
     "id": 3,
-    "text": "幸福は、気持ちの持ちようである。",
-    "author": "エイブラハム・リンカーン",
-    "category": "somewhatHappy"
+    "text": "過去は夢、未来は幻だ。生きるのは今この瞬間だけである。",
+    "author": "オショウ",
+    "category": "somewhatSad"
   },
   {
     "id": 4,
-    "text": "小さな喜びを見つける能力が、真の幸福をもたらす。",
-    "author": "シャルロット・ブロンテ",
-    "category": "somewhatHappy"
+    "text": "我々は自分たちの問題を解決するのに必要な知識を持っているが、それを実行する決意がない。",
+    "author": "トーマス・エジソン",
+    "category": "superSad"
   },
-
   {
     "id": 5,
-    "text": "平凡な日常こそ、最も価値のあるもの。",
-    "author": "バン・ゴッホ",
-    "category": "normal"
+    "text": "知は力なり。",
+    "author": "フランシス・ベーコン",
+    "category": "superHappy"
   },
-
   {
     "id": 6,
-    "text": "涙は、言葉にならない感情の声である。",
-    "author": "ポール・エリュアール",
-    "category": "somewhatSad"
+    "text": "成功は最良の復讐である。",
+    "author": "フランク・シナトラ",
+    "category": "superHappy"
   },
-
   {
     "id": 7,
-    "text": "最も暗い時間にこそ、星を見ることができる。",
-    "author": "ルル",
+    "text": "考えることは難しいことではない、考えないことが難しい。",
+    "author": "アルバート・アインシュタイン",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 8,
+    "text": "人生において最も重要なことは、生まれることではない、再生することだ。",
+    "author": "ニコライ・レーニン",
+    "category": "normal"
+  },
+  {
+    "id": 9,
+    "text": "最も暗いのは、夜明け前である。",
+    "author": "ヴィクター・ユーゴー",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 10,
+    "text": "過ちを恐れる者は何も成しえない。",
+    "author": "ヴィンセント・ヴァン・ゴッホ",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 11,
+    "text": "人生は夢だ。",
+    "author": "カルデロン",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 12,
+    "text": "吾輩は猫である。",
+    "author": "夏目漱石",
+    "category": "normal"
+  },
+  {
+    "id": 13,
+    "text": "時は金なり。",
+    "author": "ベンジャミン・フランクリン",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 14,
+    "text": "存在することは、何かを知ることよりも先行する。",
+    "author": "ルネ・デカルト",
+    "category": "normal"
+  },
+  {
+    "id": 15,
+    "text": "未来に生きることはできない。私たちは今、この瞬間にしか生きられない。",
+    "author": "マハトマ・ガンジー",
+    "category": "superHappy"
+  },
+  {
+    "id": 16,
+    "text": "人生は選択の連続だ。",
+    "author": "ウディ・アレン",
+    "category": "normal"
+  },
+  {
+    "id": 17,
+    "text": "一人の死は悲劇だが、百万人の死は統計に過ぎない。",
+    "author": "ヨシフ・スターリン",
     "category": "superSad"
+  },
+  {
+    "id": 18,
+    "text": "人生は舞台のようなものだ。人々は出て行き、役を演じる。",
+    "author": "ウィリアム・シェイクスピア",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 19,
+    "text": "失敗は成功のもと。",
+    "author": "日本のことわざ",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 20,
+    "text": "君たちが読むべきものを、僕は書く。",
+    "author": "オスカー・ワイルド",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 21,
+    "text": "自分を信じること。それが成功の秘訣である。",
+    "author": "マリリン・モンロー",
+    "category": "superHappy"
+  },
+  {
+    "id": 22,
+    "text": "夢を見ることをやめてしまったら、それは老いるということだ。",
+    "author": "山本周五郎",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 23,
+    "text": "唯一の真実は経験である。",
+    "author": "アルバート・アインシュタイン",
+    "category": "normal"
+  },
+  {
+    "id": 24,
+    "text": "やらないで後悔するより、やって後悔する方がマシだ。",
+    "author": "ソクラテス",
+    "category": "superHappy"
+  },
+  {
+    "id": 25,
+    "text": "我々の最大の栄光は、決して倒れないことではなく、倒れるたびに立ち上がることにある。",
+    "author": "孔子",
+    "category": "superHappy"
+  },
+  {
+    "id": 26,
+    "text": "人は人を愛することで、初めて人としての完全な生を実現する。",
+    "author": "フョードル・ドストエフスキー",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 27,
+    "text": "生きることは常に選び取ることである。",
+    "author": "ジャン＝ポール・サルトル",
+    "category": "normal"
+  },
+  {
+    "id": 28,
+    "text": "美しいものを愛する心は、いつも若々しい。",
+    "author": "ウィリアム・ワーズワース",
+    "category": "superHappy"
+  },
+  {
+    "id": 29,
+    "text": "人生は70年、もし高く見積もっても80年。その最良の年月も、苦労と悲しみばかり。あっという間に過ぎていく、そして我々は飛んでいく。",
+    "author": "詩篇 90:10",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 30,
+    "text": "我々は自由の人間であるために生まれてきたのではない。全ての人が自由であるために生まれてきたのだ。",
+    "author": "ネルソン・マンデラ",
+    "category": "superHappy"
+  },
+  {
+    "id": 31,
+    "text": "できるだけ多くの本を読むこと。それが知的な成長の鍵である。",
+    "author": "大江健三郎",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 32,
+    "text": "人を動かす最も確かな方法は、ペンよりも話し声である。",
+    "author": "ウィンストン・チャーチル",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 33,
+    "text": "知識とは、それを使用しないと腐ってしまうものだ。",
+    "author": "ドロシー・パーカー",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 34,
+    "text": "運命とは、選んだものだ。",
+    "author": "アンナ・フランク",
+    "category": "normal"
+  },
+  {
+    "id": 35,
+    "text": "勇気とは、怖れを感じても前進することだ。",
+    "author": "ジョン・F・ケネディ",
+    "category": "superHappy"
+  },
+  {
+    "id": 36,
+    "text": "成功は最良の復讐である。",
+    "author": "フランク・シナトラ",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 37,
+    "text": "私たちの最大の敵は疑念である。自分を信じることが、人生の始まりである。",
+    "author": "マザー・テレサ",
+    "category": "superHappy"
+  },
+  {
+    "id": 38,
+    "text": "目に見えるものを信じる者は、小さなことしか信じられない。",
+    "author": "カール・ユング",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 39,
+    "text": "人は愛されるために生まれ、愛するために生きる。",
+    "author": "レオ・トルストイ",
+    "category": "superHappy"
+  },
+  {
+    "id": 40,
+    "text": "誤解は、知識の不足に起因する。",
+    "author": "レオナルド・ダ・ヴィンチ",
+    "category": "normal"
+  },
+  {
+    "id": 41,
+    "text": "心の中に道を見つけることができれば、その道は必ず実現する。",
+    "author": "宮崎駿",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 42,
+    "text": "人生は選択の連続だ。",
+    "author": "遠藤周作",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 43,
+    "text": "人間は考える葦である。",
+    "author": "ブレーズ・パスカル",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 44,
+    "text": "時間は我々が何をしたのかを示すものではなく、我々が何をするかを示すものである。",
+    "author": "アルバート・アインシュタイン",
+    "category": "superHappy"
+  },
+  {
+    "id": 45,
+    "text": "愛とは、他者の完全な自由を願うことだ。",
+    "author": "ジャン＝ポール・サルトル",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 46,
+    "text": "美しさとは、内面から湧き出る光である。",
+    "author": "オードリー・ヘップバーン",
+    "category": "superHappy"
+  },
+  {
+    "id": 47,
+    "text": "我々は歴史を学ぶが、それを理解することはできない。",
+    "author": "ジョージ・サンタヤナ",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 48,
+    "text": "真実とは、理解を超えて存在するものだ。",
+    "author": "フリードリヒ・ニーチェ",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 49,
+    "text": "人間の本質は、彼の行動によって定義される。",
+    "author": "ジャン＝ポール・サルトル",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 50,
+    "text": "自由とは、必要性を認識し選択する能力である。",
+    "author": "アルベルト・カミュ",
+    "category": "superHappy"
+  },
+  {
+    "id": 51,
+    "text": "人は人のために生きるものだ。",
+    "author": "フョードル・ドストエフスキー",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 52,
+    "text": "過去を思い出すのではなく、未来を築くために過去を利用すべきだ。",
+    "author": "ウィンストン・チャーチル",
+    "category": "superHappy"
+  },
+  {
+    "id": 53,
+    "text": "行動なき知識は無意味である。",
+    "author": "荻原朔太郎",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 54,
+    "text": "どれだけ学んでも自分自身で考えないなら、学んだことは何も意味がない。",
+    "author": "ソクラテス",
+    "category": "normal"
+  },
+  {
+    "id": 55,
+    "text": "人生の質は、生き方の質によって決まる。",
+    "author": "アンドレ・マルロー",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 56,
+    "text": "芸術は自然よりも深い。",
+    "author": "パブロ・ピカソ",
+    "category": "superSad"
+  },
+  {
+    "id": 57,
+    "text": "人間の真の価値は、彼が得たものではなく、彼が築いたものにある。",
+    "author": "アルベルト・アインシュタイン",
+    "category": "superHappy"
+  },
+  {
+    "id": 58,
+    "text": "夢見ることを学び、学ぶことを夢見よ。",
+    "author": "ヴィクトル・ユーゴー",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 59,
+    "text": "人生は自分のものではない。他人のためのものである。",
+    "author": "レオ・トルストイ",
+    "category": "normal"
+  },
+  {
+    "id": 60,
+    "text": "最も明るい瞬間も、最も暗い瞬間も、それはすべて人生だ。",
+    "author": "タゴール",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 61,
+    "text": "死んだら全てが終わりなんてことはない。宇宙は私たちの存在を続けさせてくれる。",
+    "author": "アイザック・ニュートン",
+    "category": "superSad"
+  },
+  {
+    "id": 62,
+    "text": "あなたの時間は限られている。他人の人生を生きることで時間を無駄にしてはならない。",
+    "author": "スティーブ・ジョブズ",
+    "category": "superHappy"
+  },
+  {
+    "id": 63,
+    "text": "私たちの最大の栄光は、決して落ちずにいることではなく、落ちる度に立ち上がることにある。",
+    "author": "孔子",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 64,
+    "text": "誰もが天才である。しかし魚に木に登ることを評価するなら、その魚は一生自分が馬鹿だと信じるだろう。",
+    "author": "アルベルト・アインシュタイン",
+    "category": "normal"
+  },
+  {
+    "id": 65,
+    "text": "過去は変えられない。しかし、未来はどうなるかは自分で決めることができる。",
+    "author": "マリー・キュリー",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 66,
+    "text": "大切なのは、何が起こるかではなく、それにどう対応するかである。",
+    "author": "エピクテトス",
+    "category": "superSad"
+  },
+  {
+    "id": 67,
+    "text": "可能性を信じることで、人は可能性を引き出す。",
+    "author": "ダライ・ラマ",
+    "category": "superHappy"
+  },
+  {
+    "id": 68,
+    "text": "失敗は成功のもと。",
+    "author": "日本のことわざ",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 69,
+    "text": "無知の知、それが最も価値のある知識だ。",
+    "author": "ソクラテス",
+    "category": "normal"
+  },
+  {
+    "id": 70,
+    "text": "どんなに困難な状況でも、行動を起こすことで変えることができる。",
+    "author": "ネルソン・マンデラ",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 71,
+    "text": "不可能とは、私はできないと自分に言い聞かせる言葉だ。",
+    "author": "ムハンマド・アリ",
+    "category": "superSad"
+  },
+  {
+    "id": 72,
+    "text": "平和を愛し、夢を追い求めよ。",
+    "author": "ジョン・レノン",
+    "category": "superHappy"
+  },
+  {
+    "id": 73,
+    "text": "考えることは難しい、それがなぜ多くの人が判断するのか。",
+    "author": "ヘンリー・フォード",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 74,
+    "text": "君が人として正しいことをしていれば、それが最良のPRだ。",
+    "author": "ウォルト・ディズニー",
+    "category": "normal"
+  },
+  {
+    "id": 75,
+    "text": "あなたの行動や言葉が他者に与える影響は、あなたが考える以上に深いものがある。",
+    "author": "マザー・テレサ",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 76,
+    "text": "一番のリスクは、リスクをとらないことだ。",
+    "author": "マーク・ザッカーバーグ",
+    "category": "superSad"
+  },
+  {
+    "id": 77,
+    "text": "成功するためには、愛情深くやること。何事も情熱をもってやること。",
+    "author": "マリア・カラス",
+    "category": "superHappy"
+  },
+  {
+    "id": 78,
+    "text": "人生は夢、死は目を覚ますこと。",
+    "author": "サムエル・ジョンソン",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 79,
+    "text": "真実は時として痛みを伴うが、その痛みを乗り越えることで真の自由を手に入れることができる。",
+    "author": "フリードリヒ・ニーチェ",
+    "category": "normal"
+  },
+  {
+    "id": 80,
+    "text": "自分の中に答えがある。静かな瞬間を持ち、答えを聞く勇気が必要だ。",
+    "author": "オプラ・ウィンフリー",
+    "category": "somewhatSad"
   }
 ]
+

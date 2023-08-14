@@ -1,11 +1,11 @@
 import 'package:meigen_finder/domain/collection/todays_quote.dart';
 
-class QuoteDetailViewState {
+class QuoteDetailPageViewState {
   final TodaysQuote todaysQuote;
   final bool isLiked;
 
 //<editor-fold desc="Data Methods">
-  const QuoteDetailViewState({
+  const QuoteDetailPageViewState({
     required this.todaysQuote,
     required this.isLiked,
   });
@@ -13,7 +13,7 @@ class QuoteDetailViewState {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is QuoteDetailViewState &&
+      (other is QuoteDetailPageViewState &&
           runtimeType == other.runtimeType &&
           todaysQuote == other.todaysQuote &&
           isLiked == other.isLiked);
@@ -26,11 +26,11 @@ class QuoteDetailViewState {
     return 'QuoteDetailViewState{ todaysQuote: $todaysQuote, isLiked: $isLiked,}';
   }
 
-  QuoteDetailViewState copyWith({
+  QuoteDetailPageViewState copyWith({
     TodaysQuote? todaysQuote,
     bool? isLiked,
   }) {
-    return QuoteDetailViewState(
+    return QuoteDetailPageViewState(
       todaysQuote: todaysQuote ?? this.todaysQuote,
       isLiked: isLiked ?? this.isLiked,
     );
@@ -43,8 +43,8 @@ class QuoteDetailViewState {
     };
   }
 
-  factory QuoteDetailViewState.fromMap(Map<String, dynamic> map) {
-    return QuoteDetailViewState(
+  factory QuoteDetailPageViewState.fromMap(Map<String, dynamic> map) {
+    return QuoteDetailPageViewState(
       todaysQuote: map['todaysQuote'] as TodaysQuote,
       isLiked: map['isLiked'] as bool,
     );

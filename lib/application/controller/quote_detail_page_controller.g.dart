@@ -7,7 +7,7 @@ part of 'quote_detail_page_controller.dart';
 // **************************************************************************
 
 String _$quoteDetailControllerHash() =>
-    r'58097b79fce6f2535a07af109aed27cfe463d6c2';
+    r'ba55f965188a796956e2cf088fc4da75cea88f81';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -31,10 +31,10 @@ class _SystemHash {
 }
 
 abstract class _$QuoteDetailController
-    extends BuildlessAutoDisposeNotifier<QuoteDetailViewState> {
+    extends BuildlessAutoDisposeNotifier<QuoteDetailPageViewState> {
   late final QuoteDetailArgument quoteDetailArgument;
 
-  QuoteDetailViewState build(
+  QuoteDetailPageViewState build(
     QuoteDetailArgument quoteDetailArgument,
   );
 }
@@ -44,7 +44,7 @@ abstract class _$QuoteDetailController
 const quoteDetailControllerProvider = QuoteDetailControllerFamily();
 
 /// See also [QuoteDetailController].
-class QuoteDetailControllerFamily extends Family<QuoteDetailViewState> {
+class QuoteDetailControllerFamily extends Family<QuoteDetailPageViewState> {
   /// See also [QuoteDetailController].
   const QuoteDetailControllerFamily();
 
@@ -83,7 +83,7 @@ class QuoteDetailControllerFamily extends Family<QuoteDetailViewState> {
 
 /// See also [QuoteDetailController].
 class QuoteDetailControllerProvider extends AutoDisposeNotifierProviderImpl<
-    QuoteDetailController, QuoteDetailViewState> {
+    QuoteDetailController, QuoteDetailPageViewState> {
   /// See also [QuoteDetailController].
   QuoteDetailControllerProvider(
     this.quoteDetailArgument,
@@ -118,7 +118,7 @@ class QuoteDetailControllerProvider extends AutoDisposeNotifierProviderImpl<
   }
 
   @override
-  QuoteDetailViewState runNotifierBuild(
+  QuoteDetailPageViewState runNotifierBuild(
     covariant QuoteDetailController notifier,
   ) {
     return notifier.build(

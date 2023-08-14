@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:meigen_finder/application/controller/home_page_controller.dart';
 import 'package:meigen_finder/application/controller/quote_detail_page_controller.dart';
@@ -9,11 +10,15 @@ import 'package:meigen_finder/presentation/routing/router.dart';
 
 import '../../theme/mf_theme.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends HookConsumerWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    useEffect(() {
+      ref.read(homePageControllerProvider.notifier).fetchLikeQuotes();
+      return;
+    }, const []);
     return const Scaffold(
         body: SafeArea(
       child: Column(
@@ -76,8 +81,8 @@ class _Button extends ConsumerWidget {
       child: PrimaryButton(
         label: '今日の名言',
         onPressed: viewState.isButtonEnable
-            ? () => QuoteDetailRoute(
-                    QuoteDetailArgument(viewState.todaysQuote!, false))
+            ? () => QuoteDetailRoute(QuoteDetailArgument(
+                    viewState.todaysQuote!, viewState.isLikedQuoted))
                 .go(context)
             : null,
       ),
