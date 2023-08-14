@@ -25,8 +25,8 @@ RouteBase get $myShellRouteData => ShellRouteData.$route(
           ],
         ),
         GoRouteData.$route(
-          path: '/category',
-          factory: $CategoryRouteExtension._fromState,
+          path: '/favorite_quote',
+          factory: $FavoriteQuoteRouteExtension._fromState,
         ),
       ],
     );
@@ -74,11 +74,12 @@ extension $QuoteDetailRouteExtension on QuoteDetailRoute {
       context.replace(location, extra: $extra);
 }
 
-extension $CategoryRouteExtension on CategoryRoute {
-  static CategoryRoute _fromState(GoRouterState state) => const CategoryRoute();
+extension $FavoriteQuoteRouteExtension on FavoriteQuoteRoute {
+  static FavoriteQuoteRoute _fromState(GoRouterState state) =>
+      FavoriteQuoteRoute();
 
   String get location => GoRouteData.$location(
-        '/category',
+        '/favorite_quote',
       );
 
   void go(BuildContext context) => context.go(location);

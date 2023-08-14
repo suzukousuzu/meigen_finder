@@ -5,8 +5,6 @@ import 'package:meigen_finder/domain/collection/todays_quote.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../domain/collection/category.dart';
-
 part 'isar_provider.g.dart';
 
 @Riverpod(keepAlive: true)
@@ -19,7 +17,6 @@ Future<Isar> isar(IsarRef isarRef) async {
 
   final isar = await Isar.open(
     [
-      CategorySchema,
       LikeQuoteSchema,
       TodaysQuoteSchema,
     ],

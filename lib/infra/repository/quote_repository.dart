@@ -5,8 +5,6 @@ import 'package:isar/isar.dart';
 import 'package:meigen_finder/domain/collection/like_quote.dart';
 import 'package:meigen_finder/domain/collection/todays_quote.dart';
 
-import '../../domain/collection/category.dart';
-import '../../domain/collection/category_type.dart';
 import '../../domain/collection/emotional_type.dart';
 import '../../domain/collection/quote.dart';
 
@@ -64,27 +62,27 @@ class QuoteRepository {
     });
   }
 
-  // カテゴリのリストを保存する機能
-  Future<void> saveCategoryList(List<CategoryType> categoryList) async {
-    final categories = categoryList.map((e) {
-      return Category()
-        ..id = e.index
-        ..categoryType = e;
-    }).toList();
-    await _isar.writeTxn(() async {
-      final ids = await _isar.categorys.where().idProperty().findAll();
-      if (ids.isNotEmpty) {
-        await _isar.categorys.deleteAll(ids);
-      }
-      await _isar.categorys.putAll(categories);
-    });
-  }
+  // // カテゴリのリストを保存する機能
+  // Future<void> saveCategoryList(List<CategoryType> categoryList) async {
+  //   // final categories = categoryList.map((e) {
+  //   //   return Category()
+  //   //     ..id = e.index
+  //   //     ..categoryType = e;
+  //   // }).toList();
+  //   // await _isar.writeTxn(() async {
+  //   //   final ids = await _isar.categorys.where().idProperty().findAll();
+  //   //   if (ids.isNotEmpty) {
+  //   //     await _isar.categorys.deleteAll(ids);
+  //   //   }
+  //   //   await _isar.categorys.putAll(categories);
+  //   // });
+  // }
 
-  Future<List<CategoryType>> fetchCategoryList() async {
-    final query = _isar.categorys.where().build();
-    final results = await query.findAll();
-    return results.map((e) => e.categoryType).toList();
-  }
+  // Future<List<CategoryType>> fetchCategoryList() async {
+  //   final query = _isar.categorys.where().build();
+  //   final results = await query.findAll();
+  //   return results.map((e) => e.categoryType).toList();
+  // }
 
   Future<void> onUpdateTodayQuote(
       TodaysQuote todaysQuote, EmotionalType emotionalType) async {

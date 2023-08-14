@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:meigen_finder/domain/collection/todays_quote.dart';
+import 'package:meigen_finder/presentation/pages/favorite_quote/favorite_quote_page.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import '../../application/controller/quote_detail_page_controller.dart';
 import '../components/modal_bottom_sheet/modal_bottom_sheet_container_builder.dart';
-import '../pages/category/category_page.dart';
 import '../pages/home/home_page.dart';
 import '../pages/home/quote_detail_page.dart';
 
@@ -31,8 +30,8 @@ final routerProvider = Provider((ref) {
         path: 'quote_detail',
       ),
     ]),
-    TypedGoRoute<CategoryRoute>(
-      path: '/category',
+    TypedGoRoute<FavoriteQuoteRoute>(
+      path: '/favorite_quote',
     ),
   ],
 )
@@ -62,7 +61,7 @@ class MyShellRouteScreen extends StatelessWidget {
 
   int getCurrentIndex(BuildContext context) {
     final String location = GoRouterState.of(context).uri.toString();
-    if (location.startsWith('/category')) {
+    if (location.startsWith('/favorite_quote')) {
       return 1;
     }
     return 0;
@@ -80,7 +79,7 @@ class MyShellRouteScreen extends StatelessWidget {
           if (index == 0) {
             GoRouter.of(context).go('/');
           } else {
-            GoRouter.of(context).go('/category');
+            GoRouter.of(context).go('/favorite_quote');
           }
         },
         items: const [
@@ -89,8 +88,8 @@ class MyShellRouteScreen extends StatelessWidget {
             label: 'ホーム',
           ),
           BottomNavigationBarItem(
-            icon: Icon(FontAwesomeIcons.solidCalendar),
-            label: 'カテゴリー',
+            icon: Icon(FontAwesomeIcons.solidHeart),
+            label: 'お気に入り',
           ),
         ],
       ),
@@ -114,14 +113,20 @@ class QuoteDetailRoute extends GoRouteData {
       );
 }
 
-class CategoryRoute extends GoRouteData {
-  const CategoryRoute();
+class FavoriteQuoteRoute extends GoRouteData {
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) =>
-      const ModalBottomSheetPage(
-        child: CategoryPage(),
-      );
+      const NoTransitionPage(child: FavoriteQuotePage());
 }
+
+// class CategoryRoute extends GoRouteData {
+//   const CategoryRoute();
+//   @override
+//   Page<void> buildPage(BuildContext context, GoRouterState state) =>
+//       const ModalBottomSheetPage(
+//         child: CategoryPage(),
+//       );
+// }
 
 class ModalBottomSheetPage<T> extends Page<T> {
   final Widget child;
@@ -138,4 +143,27 @@ class ModalBottomSheetPage<T> extends Page<T> {
         settings: this,
         builder: (context) => child,
       );
+}
+
+/// Custom transition page with no transition.
+class NoTransitionPage<T> extends CustomTransitionPage<T> {
+  /// Constructor for a page with no transition functionality.
+  const NoTransitionPage({
+    required super.child,
+    super.name,
+    super.arguments,
+    super.restorationId,
+    super.key,
+  }) : super(
+          transitionsBuilder: _transitionsBuilder,
+          transitionDuration: Duration.zero,
+          reverseTransitionDuration: Duration.zero,
+        );
+
+  static Widget _transitionsBuilder(
+          BuildContext context,
+          Animation<double> animation,
+          Animation<double> secondaryAnimation,
+          Widget child) =>
+      child;
 }
