@@ -1,6 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../domain/state/category_type.dart';
+import '../../domain/collection/category_type.dart';
 import '../../infra/providers/quote_repository_provider.dart';
 
 part 'category_type_list_controller.g.dart';

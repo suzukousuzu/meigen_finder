@@ -7,7 +7,7 @@ import 'package:meigen_finder/presentation/components/app_bar/mf_sliver_app_bar.
 import 'package:meigen_finder/presentation/components/button/normal_button.dart';
 import 'package:meigen_finder/presentation/components/button/primary_button.dart';
 
-import '../../../domain/state/category_type.dart';
+import '../../../domain/collection/category_type.dart';
 import '../../components/tile/category_tile.dart';
 import '../../theme/mf_theme.dart';
 

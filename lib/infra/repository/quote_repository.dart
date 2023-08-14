@@ -2,9 +2,13 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 import 'package:isar/isar.dart';
-import 'package:meigen_finder/domain/state/category.dart';
-import 'package:meigen_finder/domain/state/category_type.dart';
-import 'package:meigen_finder/domain/state/quote.dart';
+import 'package:meigen_finder/domain/collection/like_quote.dart';
+import 'package:meigen_finder/domain/collection/todays_quote.dart';
+
+import '../../domain/collection/category.dart';
+import '../../domain/collection/category_type.dart';
+import '../../domain/collection/emotional_type.dart';
+import '../../domain/collection/quote.dart';
 
 class QuoteRepository {
   QuoteRepository(this._isar);
@@ -32,27 +36,31 @@ class QuoteRepository {
     final jsonStr = const Utf8Decoder().convert(bytes.buffer.asUint8List());
     final json = jsonDecode(jsonStr) as List;
     final quotes = json.map((e) {
-      final category = CategoryType.values.byName(e['category']);
+      final category = EmotionalType.values.byName(e['category']);
       return Quote()
         ..id = e['id']
         ..author = e['author']
-        ..categoryType = category
-        ..quote = e['text'];
+        ..emotionalType = category
+        ..text = e['text'];
     }).toList();
     return quotes;
   }
 
   // お気に入りの名言を返す
   Future<List<Quote>> fetchFavoriteQuote() async {
-    final query = _isar.quotes.where().filter().isFavoriteEqualTo(true).build();
-    final results = await query.findAll();
-    return results;
+    return [];
+    // final query = _isar.quotes.where().filter().isFavoriteEqualTo(true).build();
+    // final results = await query.findAll();
+    // return results;
   }
 
   // 名言のお気に入り
   Future<void> like(Quote quote) async {
     await _isar.writeTxn(() async {
-      await _isar.quotes.put(quote);
+      final likeQuote = LikeQuote()
+        ..id = quote.id
+        ..likeQuotes = quote;
+      await _isar.likeQuotes.put(likeQuote);
     });
   }
 
@@ -76,6 +84,13 @@ class QuoteRepository {
     final query = _isar.categorys.where().build();
     final results = await query.findAll();
     return results.map((e) => e.categoryType).toList();
+  }
+
+  Future<void> onUpdateTodayQuote(
+      TodaysQuote todaysQuote, EmotionalType emotionalType) async {
+    await _isar.writeTxn(() async {
+      await _isar.todaysQuotes.put(todaysQuote);
+    });
   }
 
   // TODO:名言の追加機能を書く

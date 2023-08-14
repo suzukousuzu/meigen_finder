@@ -21,7 +21,7 @@ final getCompleteQuotesProvider = AutoDisposeProvider<List<Quote>>.internal(
 );
 
 typedef GetCompleteQuotesRef = AutoDisposeProviderRef<List<Quote>>;
-String _$initialQuoteHash() => r'321a116008b33413be1cb79ef290f52c7544ae1c';
+String _$initialQuoteHash() => r'ace72427d9bb44f10d687e1e421a2ff826f73e0b';
 
 /// See also [initialQuote].
 @ProviderFor(initialQuote)
@@ -35,7 +35,7 @@ final initialQuoteProvider = AutoDisposeFutureProvider<List<Quote>>.internal(
 );
 
 typedef InitialQuoteRef = AutoDisposeFutureProviderRef<List<Quote>>;
-String _$likeHash() => r'559248e54679a114960ced2b8bf6dede6c0b13f1';
+String _$likeHash() => r'4049cc491f3b1738d16a1f0057b6e8d96390ee26';
 
 /// Copied from Dart SDK
 class _SystemHash {

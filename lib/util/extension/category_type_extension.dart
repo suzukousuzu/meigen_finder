@@ -1,4 +1,4 @@
-import '../../domain/state/category_type.dart';
+import '../../domain/collection/category_type.dart';
 
 extension CategoryTypeExtension on CategoryType {
   String get categoryText {

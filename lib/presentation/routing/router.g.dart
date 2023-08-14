@@ -17,6 +17,12 @@ RouteBase get $myShellRouteData => ShellRouteData.$route(
         GoRouteData.$route(
           path: '/',
           factory: $HomeRouteExtension._fromState,
+          routes: [
+            GoRouteData.$route(
+              path: 'quote_detail',
+              factory: $QuoteDetailRouteExtension._fromState,
+            ),
+          ],
         ),
         GoRouteData.$route(
           path: '/category',
@@ -45,6 +51,27 @@ extension $HomeRouteExtension on HomeRoute {
       context.pushReplacement(location);
 
   void replace(BuildContext context) => context.replace(location);
+}
+
+extension $QuoteDetailRouteExtension on QuoteDetailRoute {
+  static QuoteDetailRoute _fromState(GoRouterState state) => QuoteDetailRoute(
+        state.extra as QuoteDetailArgument,
+      );
+
+  String get location => GoRouteData.$location(
+        '/quote_detail',
+      );
+
+  void go(BuildContext context) => context.go(location, extra: $extra);
+
+  Future<T?> push<T>(BuildContext context) =>
+      context.push<T>(location, extra: $extra);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location, extra: $extra);
+
+  void replace(BuildContext context) =>
+      context.replace(location, extra: $extra);
 }
 
 extension $CategoryRouteExtension on CategoryRoute {

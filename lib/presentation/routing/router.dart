@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:meigen_finder/presentation/pages/quote_detail/quote_detail_page.dart';
+import 'package:meigen_finder/domain/collection/todays_quote.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-import '../../domain/state/quote.dart';
+import '../../application/controller/quote_detail_page_controller.dart';
 import '../components/modal_bottom_sheet/modal_bottom_sheet_container_builder.dart';
 import '../pages/category/category_page.dart';
-import '../pages/home/home_page2.dart';
+import '../pages/home/home_page.dart';
+import '../pages/home/quote_detail_page.dart';
 
 part 'router.g.dart';
 
@@ -25,7 +26,11 @@ final routerProvider = Provider((ref) {
 
 @TypedShellRoute<MyShellRouteData>(
   routes: <TypedRoute<RouteData>>[
-    TypedGoRoute<HomeRoute>(path: '/'),
+    TypedGoRoute<HomeRoute>(path: '/', routes: [
+      TypedGoRoute<QuoteDetailRoute>(
+        path: 'quote_detail',
+      ),
+    ]),
     TypedGoRoute<CategoryRoute>(
       path: '/category',
     ),
@@ -97,18 +102,15 @@ class HomeRoute extends GoRouteData {
   const HomeRoute();
 
   @override
-  Widget build(BuildContext context, GoRouterState state) => const HomePage2();
+  Widget build(BuildContext context, GoRouterState state) => const HomePage();
 }
 
 class QuoteDetailRoute extends GoRouteData {
-  const QuoteDetailRoute(this.$extra);
-  final Quote $extra;
+  final QuoteDetailArgument $extra;
+  QuoteDetailRoute(this.$extra);
   @override
-  Page<void> buildPage(BuildContext context, GoRouterState state) =>
-      ModalBottomSheetPage(
-        child: QuoteDetailPage(
-          quote: $extra,
-        ),
+  Widget build(BuildContext context, GoRouterState state) => QuoteDetailPage(
+        quoteDetailArgument: $extra,
       );
 }
 

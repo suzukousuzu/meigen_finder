@@ -1,10 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:isar/isar.dart';
-import 'package:meigen_finder/domain/state/category.dart';
+import 'package:meigen_finder/domain/collection/like_quote.dart';
+import 'package:meigen_finder/domain/collection/todays_quote.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../domain/state/quote.dart';
+import '../../domain/collection/category.dart';
 
 part 'isar_provider.g.dart';
 
@@ -19,7 +20,8 @@ Future<Isar> isar(IsarRef isarRef) async {
   final isar = await Isar.open(
     [
       CategorySchema,
-      QuoteSchema,
+      LikeQuoteSchema,
+      TodaysQuoteSchema,
     ],
     directory: path,
   );

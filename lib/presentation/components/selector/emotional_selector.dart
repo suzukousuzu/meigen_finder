@@ -3,15 +3,9 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:meigen_finder/presentation/theme/mf_theme.dart';
 
-const _iconSize = 36.0;
+import '../../../domain/collection/emotional_type.dart';
 
-enum EmotionalType {
-  superHappy,
-  somewhatHappy,
-  normal,
-  somewhatSad,
-  superSad,
-}
+const _iconSize = 36.0;
 
 class EmotionalSelector extends HookWidget {
   const EmotionalSelector({

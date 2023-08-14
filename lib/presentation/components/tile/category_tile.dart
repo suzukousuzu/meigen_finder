@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:meigen_finder/domain/state/category_type.dart';
 import 'package:meigen_finder/presentation/theme/mf_theme.dart';
 import 'package:meigen_finder/util/extension/category_type_extension.dart';
+
+import '../../../domain/collection/category_type.dart';
 
 class CategoryTile extends HookWidget {
   const CategoryTile({
