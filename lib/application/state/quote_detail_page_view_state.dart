@@ -1,12 +1,12 @@
-import 'package:meigen_finder/domain/collection/todays_quote.dart';
+import '../../domain/collection/quote.dart';
 
 class QuoteDetailPageViewState {
-  final TodaysQuote todaysQuote;
+  final Quote quote;
   final bool isLiked;
 
 //<editor-fold desc="Data Methods">
   const QuoteDetailPageViewState({
-    required this.todaysQuote,
+    required this.quote,
     required this.isLiked,
   });
 
@@ -15,37 +15,40 @@ class QuoteDetailPageViewState {
       identical(this, other) ||
       (other is QuoteDetailPageViewState &&
           runtimeType == other.runtimeType &&
-          todaysQuote == other.todaysQuote &&
+          quote == other.quote &&
           isLiked == other.isLiked);
 
   @override
-  int get hashCode => todaysQuote.hashCode ^ isLiked.hashCode;
+  int get hashCode => quote.hashCode ^ isLiked.hashCode;
 
   @override
   String toString() {
-    return 'QuoteDetailViewState{ todaysQuote: $todaysQuote, isLiked: $isLiked,}';
+    return 'QuoteDetailPageViewState{' +
+        ' quote: $quote,' +
+        ' isLiked: $isLiked,' +
+        '}';
   }
 
   QuoteDetailPageViewState copyWith({
-    TodaysQuote? todaysQuote,
+    Quote? quote,
     bool? isLiked,
   }) {
     return QuoteDetailPageViewState(
-      todaysQuote: todaysQuote ?? this.todaysQuote,
+      quote: quote ?? this.quote,
       isLiked: isLiked ?? this.isLiked,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'todaysQuote': todaysQuote,
-      'isLiked': isLiked,
+      'quote': this.quote,
+      'isLiked': this.isLiked,
     };
   }
 
   factory QuoteDetailPageViewState.fromMap(Map<String, dynamic> map) {
     return QuoteDetailPageViewState(
-      todaysQuote: map['todaysQuote'] as TodaysQuote,
+      quote: map['quote'] as Quote,
       isLiked: map['isLiked'] as bool,
     );
   }

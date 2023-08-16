@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:meigen_finder/domain/collection/todays_quote.dart';
 import 'package:meigen_finder/presentation/theme/mf_theme.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../application/controller/quote_detail_page_controller.dart';
+import '../../../domain/collection/quote.dart';
 
 class QuoteDetailPage extends ConsumerWidget {
   const QuoteDetailPage({
@@ -19,14 +19,13 @@ class QuoteDetailPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = MfTheme.of(context);
     final colorScheme = theme.colorScheme;
-    print('通ったよ2');
 
     final viewState =
         ref.watch(quoteDetailControllerProvider(quoteDetailArgument));
     final controller =
         ref.watch(quoteDetailControllerProvider(quoteDetailArgument).notifier);
 
-    final todayQuote = viewState.todaysQuote;
+    final quote = viewState.quote;
     final isLiked = viewState.isLiked;
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -38,10 +37,10 @@ class QuoteDetailPage extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           _MeigenText(
-            quote: todayQuote,
+            quote: quote,
           ),
           _ShareAndLike(
-            todaysQuote: todayQuote,
+            quote: quote,
             isLiked: isLiked,
             controller: controller,
           ),
@@ -56,14 +55,14 @@ class _MeigenText extends StatelessWidget {
     Key? key,
     required this.quote,
   }) : super(key: key);
-  final TodaysQuote quote;
+  final Quote quote;
 
   @override
   Widget build(BuildContext context) {
     final theme = MfTheme.of(context);
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
-    final quote = this.quote.quote;
+    final quote = this.quote;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 32),
       child: Container(
@@ -109,11 +108,11 @@ class _MeigenText extends StatelessWidget {
 class _ShareAndLike extends StatelessWidget {
   const _ShareAndLike({
     Key? key,
-    required this.todaysQuote,
+    required this.quote,
     required this.isLiked,
     required this.controller,
   }) : super(key: key);
-  final TodaysQuote todaysQuote;
+  final Quote quote;
   final bool isLiked;
   final QuoteDetailController controller;
 
@@ -122,7 +121,7 @@ class _ShareAndLike extends StatelessWidget {
     final theme = MfTheme.of(context);
     final colorScheme = theme.colorScheme;
 
-    final quote = todaysQuote.quote;
+    final quote = this.quote;
     final isLiked = this.isLiked;
     return Padding(
       padding: const EdgeInsets.only(top: 40),

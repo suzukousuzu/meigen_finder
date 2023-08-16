@@ -7,7 +7,7 @@ part of 'quote_detail_page_controller.dart';
 // **************************************************************************
 
 String _$quoteDetailControllerHash() =>
-    r'ba55f965188a796956e2cf088fc4da75cea88f81';
+    r'6318c5156cb4a09f42974301dcb617eaf20b1f90';
 
 /// Copied from Dart SDK
 class _SystemHash {

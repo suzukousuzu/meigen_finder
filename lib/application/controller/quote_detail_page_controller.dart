@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:meigen_finder/domain/collection/quote.dart';
-import 'package:meigen_finder/domain/collection/todays_quote.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../infra/providers/quote_repository_provider.dart';
@@ -10,10 +9,10 @@ part 'quote_detail_page_controller.g.dart';
 
 @immutable
 class QuoteDetailArgument {
-  final TodaysQuote todaysQuote;
+  final Quote quote;
   final bool isLiked;
 
-  const QuoteDetailArgument(this.todaysQuote, this.isLiked);
+  const QuoteDetailArgument(this.quote, this.isLiked);
 }
 
 @riverpod
@@ -21,7 +20,7 @@ class QuoteDetailController extends _$QuoteDetailController {
   @override
   QuoteDetailPageViewState build(QuoteDetailArgument quoteDetailArgument) =>
       QuoteDetailPageViewState(
-          todaysQuote: quoteDetailArgument.todaysQuote,
+          quote: quoteDetailArgument.quote,
           isLiked: quoteDetailArgument.isLiked);
 
   Future<void> like(Quote quote, bool isLiked) async {

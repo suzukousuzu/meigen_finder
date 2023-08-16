@@ -82,7 +82,7 @@ class _Button extends ConsumerWidget {
         label: '今日の名言',
         onPressed: viewState.isButtonEnable
             ? () => QuoteDetailRoute(QuoteDetailArgument(
-                    viewState.todaysQuote!, viewState.isLikedQuoted))
+                    viewState.todaysQuote!.quote, viewState.isLikedQuoted))
                 .go(context)
             : null,
       ),
