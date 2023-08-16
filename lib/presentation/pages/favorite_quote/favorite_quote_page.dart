@@ -6,6 +6,7 @@ import 'package:meigen_finder/presentation/routing/router.dart';
 import 'package:meigen_finder/presentation/theme/mf_theme.dart';
 
 import '../../../application/controller/favorite_quote_page_controller.dart';
+import '../../components/field/search_text_field.dart';
 import '../../components/tile/favorite_quote_tile.dart';
 
 class FavoriteQuotePage extends HookConsumerWidget {
@@ -28,31 +29,37 @@ class FavoriteQuotePage extends HookConsumerWidget {
     return Scaffold(
       body: favoriteQuotes.isNotEmpty
           ? SafeArea(
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    // TODO:検索機能をつける
-                    ...favoriteQuotes.map((quote) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 8),
-                        child: FavoriteQuoteTile(
-                          text: quote.text,
-                          author: quote.author ?? '',
-                          onTap: () => QuoteDetailRoute(
-                                  QuoteDetailArgument(quote, isLiked))
-                              .push(context),
-                        ),
-                      );
-                    }),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                  ],
+              child: CustomScrollView(
+              slivers: [
+                SliverAppBar(
+                  backgroundColor: colorScheme.background,
+                  title: SearchTextField(),
+                  pinned: true,
+                  bottom: PreferredSize(
+                    preferredSize: Size.fromHeight(16.0), // 追加の高さを指定
+                    child: Container(), // 空のウィジェット
+                  ),
                 ),
-              ),
-            )
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) {
+                      final quote = favoriteQuotes[index];
+                      return Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 8),
+                          child: FavoriteQuoteTile(
+                            text: quote.text,
+                            author: quote.author ?? '',
+                            onTap: () => QuoteDetailRoute(
+                                    QuoteDetailArgument(quote, isLiked))
+                                .push(context),
+                          ));
+                    },
+                    childCount: favoriteQuotes.length,
+                  ),
+                ),
+              ],
+            ))
           : Center(
               child: Text(
                 'お気に入りの名言はありません',
