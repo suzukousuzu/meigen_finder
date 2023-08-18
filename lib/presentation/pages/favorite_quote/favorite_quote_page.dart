@@ -15,10 +15,11 @@ class FavoriteQuotePage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final viewState = ref.watch(favoriteQuotePageControllerProvider);
+    final controller = ref.watch(favoriteQuotePageControllerProvider.notifier);
     final favoriteQuotes = viewState.likedQuotes ?? [];
 
     useEffect(() {
-      ref.read(favoriteQuotePageControllerProvider.notifier).fetchLikeQuotes();
+      controller.fetchLikeQuotes();
       return;
     }, const []);
 
@@ -33,7 +34,9 @@ class FavoriteQuotePage extends HookConsumerWidget {
               slivers: [
                 SliverAppBar(
                   backgroundColor: colorScheme.background,
-                  title: SearchTextField(),
+                  title: SearchTextField(
+                      onFieldSubmitted: controller.searchFavoriteQuote,
+                      onClear: () => controller.onClear()),
                   pinned: true,
                   bottom: PreferredSize(
                     preferredSize: Size.fromHeight(16.0), // 追加の高さを指定

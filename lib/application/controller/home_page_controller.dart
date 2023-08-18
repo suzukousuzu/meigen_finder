@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:meigen_finder/application/state/home_page_view_state.dart';
 import 'package:meigen_finder/domain/collection/emotional_type.dart';
+import 'package:meigen_finder/infra/providers/like_quote_repository_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../domain/collection/todays_quote.dart';
@@ -16,7 +17,7 @@ class HomePageController extends _$HomePageController {
   HomePageViewState build() => HomePageViewState(emotionalType: null);
 
   Future<void> fetchLikeQuotes() async {
-    final repository = await ref.read(quoteRepositoryProvider.future);
+    final repository = await ref.read(likeQuoteRepositoryProvider.future);
     final likeQuotes = await repository.fetchLikeQuotes();
     state = state.copyWith(likedQuotes: likeQuotes);
   }

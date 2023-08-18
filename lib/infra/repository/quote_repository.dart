@@ -2,16 +2,17 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 import 'package:isar/isar.dart';
-import 'package:meigen_finder/domain/collection/like_quote.dart';
 import 'package:meigen_finder/domain/collection/todays_quote.dart';
 
 import '../../domain/collection/emotional_type.dart';
 import '../../domain/collection/quote.dart';
+import '../data_holder/cache.dart';
 
 class QuoteRepository {
   QuoteRepository(this._isar);
 
   final Isar _isar;
+  final Cache<List<Quote>> _quoteCache = Cache<List<Quote>>();
 
   // 全ての名言を返す(変更があれば通知される)
   // Stream<List<Quote>> watchAll() async* {
@@ -52,16 +53,6 @@ class QuoteRepository {
     // return results;
   }
 
-  // 名言のお気に入り
-  Future<void> like(Quote quote) async {
-    await _isar.writeTxn(() async {
-      final likeQuote = LikeQuote()
-        ..id = quote.id
-        ..likeQuotes = quote;
-      await _isar.likeQuotes.put(likeQuote);
-    });
-  }
-
   // // カテゴリのリストを保存する機能
   // Future<void> saveCategoryList(List<CategoryType> categoryList) async {
   //   // final categories = categoryList.map((e) {
@@ -89,12 +80,6 @@ class QuoteRepository {
     await _isar.writeTxn(() async {
       await _isar.todaysQuotes.put(todaysQuote);
     });
-  }
-
-  Future<List<Quote>> fetchLikeQuotes() async {
-    final query = _isar.likeQuotes.where().build();
-    final results = await query.findAll();
-    return results.map((e) => e.likeQuotes).toList();
   }
 
   // TODO:名言の追加機能を書く
