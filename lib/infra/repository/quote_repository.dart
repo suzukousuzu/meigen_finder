@@ -3,10 +3,10 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:isar/isar.dart';
 import 'package:meigen_finder/domain/collection/todays_quote.dart';
-import 'package:meigen_finder/infra/preference/shared_preference.dart';
 
 import '../../domain/collection/emotional_type.dart';
 import '../../domain/collection/quote.dart';
+import '../preference/preference_manager.dart';
 
 class QuoteRepository {
   QuoteRepository(this._isar, this._preferenceManager);

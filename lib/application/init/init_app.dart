@@ -1,6 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../infra/preference/shared_preference.dart';
+import '../../infra/preference/preference_manager.dart';
 
 final initAppProvider = Provider<InitApp>(
   (ref) => InitApp(

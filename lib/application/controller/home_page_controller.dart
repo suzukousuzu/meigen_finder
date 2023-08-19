@@ -7,7 +7,7 @@ import 'package:meigen_finder/infra/providers/like_quote_repository_provider.dar
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../domain/collection/todays_quote.dart';
-import '../../infra/preference/shared_preference.dart';
+import '../../infra/preference/preference_manager.dart';
 import '../../infra/providers/quote_repository_provider.dart';
 
 part 'home_page_controller.g.dart';
