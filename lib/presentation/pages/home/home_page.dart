@@ -15,17 +15,20 @@ class HomePage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final controller = ref.watch(homePageControllerProvider.notifier);
     useEffect(() {
-      ref.read(homePageControllerProvider.notifier).fetchLikeQuotes();
+      controller.fetch();
       return;
     }, const []);
-    return const Scaffold(
+    return Scaffold(
         body: SafeArea(
       child: Column(
         children: [
-          _PromptText(),
-          _EmotionalSelector(),
-          _Button(),
+          const _PromptText(),
+          const _EmotionalSelector(),
+          _Button(
+            controller: controller,
+          ),
         ],
       ),
     ));
@@ -71,19 +74,28 @@ class _EmotionalSelector extends ConsumerWidget {
 }
 
 class _Button extends ConsumerWidget {
-  const _Button({Key? key}) : super(key: key);
+  const _Button({Key? key, required this.controller}) : super(key: key);
+  final HomePageController controller;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final viewState = ref.watch(homePageControllerProvider);
+    ref.listen(homePageControllerProvider.select((value) => value.todaysQuote),
+        (previous, next) {
+      if (previous == null && next != null) {
+        QuoteDetailRoute(
+                QuoteDetailArgument(next.quote, viewState.isLikedQuoted))
+            .go(context);
+      }
+    });
     return Padding(
       padding: const EdgeInsets.fromLTRB(32, 32, 32, 0),
       child: PrimaryButton(
         label: '今日の名言',
         onPressed: viewState.isButtonEnable
-            ? () => QuoteDetailRoute(QuoteDetailArgument(
-                    viewState.todaysQuote!.quote, viewState.isLikedQuoted))
-                .go(context)
+            ? () {
+                controller.onUpdateTodayQuote();
+              }
             : null,
       ),
     );

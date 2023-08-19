@@ -7,12 +7,14 @@ class HomePageViewState {
   EmotionalType? emotionalType;
   TodaysQuote? todaysQuote;
   List<Quote>? likedQuotes;
+  DateTime? lastDateUpdatedTodayQuote;
 
 //<editor-fold desc="Data Methods">
   HomePageViewState({
     this.emotionalType,
     this.todaysQuote,
     this.likedQuotes,
+    this.lastDateUpdatedTodayQuote,
   });
 
   @override
@@ -22,11 +24,15 @@ class HomePageViewState {
           runtimeType == other.runtimeType &&
           emotionalType == other.emotionalType &&
           todaysQuote == other.todaysQuote &&
-          likedQuotes == other.likedQuotes);
+          likedQuotes == other.likedQuotes &&
+          lastDateUpdatedTodayQuote == other.lastDateUpdatedTodayQuote);
 
   @override
   int get hashCode =>
-      emotionalType.hashCode ^ todaysQuote.hashCode ^ likedQuotes.hashCode;
+      emotionalType.hashCode ^
+      todaysQuote.hashCode ^
+      likedQuotes.hashCode ^
+      lastDateUpdatedTodayQuote.hashCode;
 
   @override
   String toString() {
@@ -34,6 +40,7 @@ class HomePageViewState {
         ' emotionalType: $emotionalType,' +
         ' todaysQuote: $todaysQuote,' +
         ' likedQuotes: $likedQuotes,' +
+        ' lastDateUpdatedTodayQuote: $lastDateUpdatedTodayQuote,' +
         '}';
   }
 
@@ -41,11 +48,15 @@ class HomePageViewState {
     EmotionalType? emotionalType,
     TodaysQuote? todaysQuote,
     List<Quote>? likedQuotes,
+    DateTime? lastDateUpdatedTodayQuote,
+    bool? isUpdatedTodayQuoteSuccessfully,
   }) {
     return HomePageViewState(
       emotionalType: emotionalType ?? this.emotionalType,
       todaysQuote: todaysQuote ?? this.todaysQuote,
       likedQuotes: likedQuotes ?? this.likedQuotes,
+      lastDateUpdatedTodayQuote:
+          lastDateUpdatedTodayQuote ?? this.lastDateUpdatedTodayQuote,
     );
   }
 
@@ -54,6 +65,7 @@ class HomePageViewState {
       'emotionalType': this.emotionalType,
       'todaysQuote': this.todaysQuote,
       'likedQuotes': this.likedQuotes,
+      'lastDateUpdatedTodayQuote': this.lastDateUpdatedTodayQuote,
     };
   }
 
@@ -62,6 +74,7 @@ class HomePageViewState {
       emotionalType: map['emotionalType'] as EmotionalType,
       todaysQuote: map['todaysQuote'] as TodaysQuote,
       likedQuotes: map['likedQuotes'] as List<Quote>,
+      lastDateUpdatedTodayQuote: map['lastDateUpdatedTodayQuote'] as DateTime,
     );
   }
 
@@ -69,6 +82,6 @@ class HomePageViewState {
 }
 
 extension Computed on HomePageViewState {
-  bool get isButtonEnable => emotionalType != null && todaysQuote != null;
+  bool get isButtonEnable => emotionalType != null;
   bool get isLikedQuoted => likedQuotes?.contains(todaysQuote?.quote) ?? false;
 }

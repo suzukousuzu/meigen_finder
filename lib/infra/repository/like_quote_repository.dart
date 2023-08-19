@@ -39,6 +39,4 @@ class LikeQuoteRepository {
     likeQuoteHolder.update(quotes);
     return quotes;
   }
-
-// TODO:名言の追加機能を書く
 }

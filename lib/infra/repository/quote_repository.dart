@@ -3,16 +3,16 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:isar/isar.dart';
 import 'package:meigen_finder/domain/collection/todays_quote.dart';
+import 'package:meigen_finder/infra/preference/shared_preference.dart';
 
 import '../../domain/collection/emotional_type.dart';
 import '../../domain/collection/quote.dart';
-import '../data_holder/cache.dart';
 
 class QuoteRepository {
-  QuoteRepository(this._isar);
+  QuoteRepository(this._isar, this._preferenceManager);
 
   final Isar _isar;
-  final Cache<List<Quote>> _quoteCache = Cache<List<Quote>>();
+  final PreferenceManager _preferenceManager;
 
   // 全ての名言を返す(変更があれば通知される)
   // Stream<List<Quote>> watchAll() async* {
@@ -79,6 +79,9 @@ class QuoteRepository {
       TodaysQuote todaysQuote, EmotionalType emotionalType) async {
     await _isar.writeTxn(() async {
       await _isar.todaysQuotes.put(todaysQuote);
+      final now = DateTime.now();
+      _preferenceManager.setValue(
+          PreferenceKey.todayQuotes, now.toIso8601String());
     });
   }
 
