@@ -1,4 +1,4 @@
-import 'package:meigen_finder/infra/providers/like_quote_repository_provider.dart';
+import 'package:meigen_finder/infra/data_holder/like_quote_data_holder.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../domain/collection/quote.dart';
@@ -9,16 +9,16 @@ part 'favorite_quote_page_controller.g.dart';
 @riverpod
 class FavoriteQuotePageController extends _$FavoriteQuotePageController {
   @override
-  FavoriteQuotePageViewState build() => const FavoriteQuotePageViewState();
+  FavoriteQuotePageViewState build() {
+    final likeQuotesDataHolder = ref.watch(likeQuotesHolderProvider);
+    likeQuotesDataHolder.stream.listen((event) {
+      _completeQuotes = event ?? [];
+      state = state.copyWith(likedQuotes: event);
+    });
+    return const FavoriteQuotePageViewState();
+  }
 
   List<Quote> _completeQuotes = [];
-
-  Future<void> fetchLikeQuotes() async {
-    final repository = await ref.read(likeQuoteRepositoryProvider.future);
-    final likeQuotes = await repository.fetchLikeQuotes();
-    _completeQuotes = likeQuotes;
-    state = state.copyWith(likedQuotes: likeQuotes);
-  }
 
   void searchFavoriteQuote(String value) {
     onClear();

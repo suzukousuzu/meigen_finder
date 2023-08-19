@@ -1,12 +1,12 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:meigen_finder/domain/collection/like_quote.dart';
 
+import '../../domain/collection/quote.dart';
 import 'data_holder.dart';
 
-final quoteHolderProvider = Provider((ref) {
-  final quoteHolder = QuoteHolder();
-  ref.onDispose(quoteHolder.dispose);
-  return quoteHolder;
+final likeQuotesHolderProvider = Provider((ref) {
+  final likeQuotesHolder = LikeQuotesHolder();
+  ref.onDispose(likeQuotesHolder.dispose);
+  return likeQuotesHolder;
 });
 
-class QuoteHolder with DataHolder<LikeQuote> {}
+class LikeQuotesHolder with DataHolder<List<Quote>> {}

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:meigen_finder/application/controller/quote_detail_page_controller.dart';
 import 'package:meigen_finder/presentation/routing/router.dart';
@@ -17,11 +16,6 @@ class FavoriteQuotePage extends HookConsumerWidget {
     final viewState = ref.watch(favoriteQuotePageControllerProvider);
     final controller = ref.watch(favoriteQuotePageControllerProvider.notifier);
     final favoriteQuotes = viewState.likedQuotes ?? [];
-
-    useEffect(() {
-      controller.fetchLikeQuotes();
-      return;
-    }, const []);
 
     final theme = MfTheme.of(context);
     final colorScheme = theme.colorScheme;
