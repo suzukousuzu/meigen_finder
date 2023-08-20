@@ -7,7 +7,7 @@ part of 'favorite_quote_page_controller.dart';
 // **************************************************************************
 
 String _$favoriteQuotePageControllerHash() =>
-    r'8f5202e944749ecc99840fb0cb61df0fbbaa04eb';
+    r'eb9d39e051131d9410ebc8088d78d04503f55896';
 
 /// See also [FavoriteQuotePageController].
 @ProviderFor(FavoriteQuotePageController)
