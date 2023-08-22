@@ -21,6 +21,7 @@ class MfColorScheme {
     required this.someWhatSad,
     required this.superSad,
     required this.notSelected,
+    required this.calenderSelectedDay,
   });
 
   MfColorScheme.light()
@@ -44,6 +45,7 @@ class MfColorScheme {
           someWhatSad: _tenne,
           superSad: _goldenBrown,
           notSelected: _gray,
+          calenderSelectedDay: _orangePeel,
         );
 
   final Color primary;
@@ -66,6 +68,8 @@ class MfColorScheme {
   final Color someWhatSad;
   final Color superSad;
   final Color notSelected;
+
+  final Color calenderSelectedDay;
 }
 
 /// 色名参考: https://www.htmlcsscolor.com/

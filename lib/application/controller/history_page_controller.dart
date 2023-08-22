@@ -6,5 +6,10 @@ part 'history_page_controller.g.dart';
 @riverpod
 class HistoryPageController extends _$HistoryPageController {
   @override
-  HistoryPageViewState build() => const HistoryPageViewState();
+  HistoryPageViewState build() =>
+      HistoryPageViewState(focusedDay: DateTime.now());
+
+  void onDaySelected(DateTime selectedDay, DateTime focusedDay) {
+    state = state.copyWith(selectedDate: selectedDay, focusedDay: focusedDay);
+  }
 }
