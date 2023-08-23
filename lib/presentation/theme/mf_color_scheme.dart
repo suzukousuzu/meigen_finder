@@ -87,3 +87,4 @@ const _gray = Color(0XFF808080);
 const _mangoTango = Color(0XFFD17700);
 const _tenne = Color(0XFFBA6600);
 const _goldenBrown = Color(0XFFA25500);
+const _gainsboro = Color(0XFFDDDDDD);

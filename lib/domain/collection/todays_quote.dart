@@ -13,3 +13,5 @@ class TodaysQuote {
   @Index()
   late DateTime createdAt;
 }
+
+extension Computed on List<TodaysQuote> {}

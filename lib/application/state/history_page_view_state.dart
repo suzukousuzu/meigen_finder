@@ -1,13 +1,13 @@
 import '../../domain/collection/todays_quote.dart';
 
 class HistoryPageViewState {
-  final DateTime? selectedDate;
+  final DateTime selectedDate;
   final DateTime focusedDay;
   final List<TodaysQuote>? quotes;
 
 //<editor-fold desc="Data Methods">
   const HistoryPageViewState({
-    this.selectedDate,
+    required this.selectedDate,
     required this.focusedDay,
     this.quotes,
   });
@@ -59,4 +59,23 @@ class HistoryPageViewState {
   }
 
 //</editor-fold>
+}
+
+extension Computed on HistoryPageViewState {
+  Map<DateTime, List<dynamic>>? get events {
+    final quotes = this.quotes;
+    if (quotes == null) return null;
+    final map = <DateTime, List<dynamic>>{};
+    for (final quote in quotes) {
+      final createdAt = quote.createdAt;
+      final date = DateTime(createdAt.year, createdAt.month, createdAt.day);
+      print('extensionDate: $date');
+      if (map.containsKey(date)) {
+        map[date]!.add(quote);
+      } else {
+        map[date] = [quote];
+      }
+    }
+    return map;
+  }
 }

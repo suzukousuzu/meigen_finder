@@ -1,15 +1,28 @@
+import 'package:flutter/cupertino.dart';
 import 'package:meigen_finder/application/state/history_page_view_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+import '../../infra/providers/quote_repository_provider.dart';
 
 part 'history_page_controller.g.dart';
 
 @riverpod
 class HistoryPageController extends _$HistoryPageController {
   @override
-  HistoryPageViewState build() =>
-      HistoryPageViewState(focusedDay: DateTime.now());
+  HistoryPageViewState build() => HistoryPageViewState(
+      focusedDay: DateTime.now(), selectedDate: DateTime.now());
 
   void onDaySelected(DateTime selectedDay, DateTime focusedDay) {
     state = state.copyWith(selectedDate: selectedDay, focusedDay: focusedDay);
+  }
+
+  Future<void> fetchHistory() async {
+    try {
+      final repository = await ref.read(quoteRepositoryProvider.future);
+      final quotes = await repository.fetchHistory();
+      state = state.copyWith(quotes: quotes);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
   }
 }
