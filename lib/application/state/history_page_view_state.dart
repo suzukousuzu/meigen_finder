@@ -44,9 +44,9 @@ class HistoryPageViewState {
 
   Map<String, dynamic> toMap() {
     return {
-      'selectedDate': this.selectedDate,
-      'focusedDay': this.focusedDay,
-      'quotes': this.quotes,
+      'selectedDate': selectedDate,
+      'focusedDay': focusedDay,
+      'quotes': quotes,
     };
   }
 
@@ -69,7 +69,6 @@ extension Computed on HistoryPageViewState {
     for (final quote in quotes) {
       final createdAt = quote.createdAt;
       final date = DateTime(createdAt.year, createdAt.month, createdAt.day);
-      print('extensionDate: $date');
       if (map.containsKey(date)) {
         map[date]!.add(quote);
       } else {

@@ -9,7 +9,14 @@ import 'package:meigen_finder/presentation/theme/mf_theme.dart';
 import 'package:meigen_finder/util/emotional_type_extension.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+import '../../theme/mf_color_scheme.dart';
+import '../../theme/mf_text_theme.dart';
+
 const _iconSize = 36.0;
+
+typedef CalenderBuilder = Widget? Function(BuildContext, DateTime, DateTime)?;
+typedef MarkerBuilder = Widget? Function(
+    BuildContext, DateTime, List<dynamic>)?;
 
 class HistoryPage extends HookConsumerWidget {
   const HistoryPage({Key? key}) : super(key: key);
@@ -25,44 +32,30 @@ class HistoryPage extends HookConsumerWidget {
 
     useEffect(() {
       controller.fetchHistory();
-      return;
+      return null;
     }, const []);
 
     final events = viewState.events;
-    print('length${events?.length}');
 
     return Scaffold(
       body: SafeArea(
         child: TableCalendar(
-          enabledDayPredicate: (day) {
-            return viewState.selectedDate.month == day.month;
-          },
+          enabledDayPredicate: (day) =>
+              viewState.selectedDate.month == day.month,
           rowHeight: 80,
           locale: 'ja_JP',
           focusedDay: viewState.focusedDay,
-          eventLoader: (day) {
-            final date = DateTime(day.year, day.month, day.day);
-            return events?[date] ?? [];
-          },
+          eventLoader: (day) =>
+              events?[DateTime(day.year, day.month, day.day)] ?? [],
           headerStyle: HeaderStyle(
             titleCentered: true,
             formatButtonVisible: false,
             titleTextStyle: textTheme.h2,
-            leftChevronIcon: Icon(
-              FontAwesomeIcons.chevronLeft,
-              color: colorScheme.onBackground,
-            ),
-            rightChevronIcon: Icon(
-              FontAwesomeIcons.chevronRight,
-              color: colorScheme.onBackground,
-            ),
+            leftChevronIcon: _buildIcon(colorScheme.onBackground),
+            rightChevronIcon: _buildIcon(colorScheme.onBackground),
           ),
-          selectedDayPredicate: (day) {
-            return isSameDay(viewState.selectedDate, day);
-          },
-          onDaySelected: (selectedDay, focusedDay) {
-            controller.onDaySelected(selectedDay, focusedDay);
-          },
+          selectedDayPredicate: (day) => isSameDay(viewState.selectedDate, day),
+          onDaySelected: controller.onDaySelected,
           availableCalendarFormats: const {
             CalendarFormat.month: '月',
           },
@@ -70,109 +63,118 @@ class HistoryPage extends HookConsumerWidget {
           firstDay: DateTime(1994, 6, 12),
           lastDay: DateTime(2100, 1, 1),
           calendarBuilders: CalendarBuilders(
-            defaultBuilder: (context, date, events) {
-              return Padding(
-                padding: const EdgeInsets.only(top: 8),
-                child: Align(
-                  alignment: Alignment.topCenter,
-                  child: Text(
-                    date.day.toString(),
-                    style: textTheme.subtextBold,
-                  ),
-                ),
-              );
-            },
-            outsideBuilder:
-                (BuildContext context, DateTime day, DateTime focusedDay) {
-              if (viewState.selectedDate.month != day.month) {
-                return const SizedBox.shrink();
-              }
-            },
-            disabledBuilder:
-                (BuildContext context, DateTime day, DateTime focusedDay) {
-              return const SizedBox.shrink();
-            },
-            selectedBuilder: (context, date, selectedDay) {
-              return Padding(
-                padding: const EdgeInsets.only(top: 8),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: 32,
-                      padding: const EdgeInsets.symmetric(vertical: 2),
-                      decoration: BoxDecoration(
-                        color: colorScheme.calenderSelectedDay,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Center(
-                        child: Text(
-                          date.day.toString(),
-                          style: textTheme.subtextBold.copyWith(
-                            color: colorScheme.secondary,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
-            todayBuilder: (context, date, focusedDay) {
-              return Padding(
-                padding: const EdgeInsets.only(top: 8),
-                child: Align(
-                  alignment: Alignment.topCenter,
-                  child: Text(
-                    date.day.toString(),
-                    style: textTheme.subtextBold,
-                  ),
-                ),
-              );
-            },
-            markerBuilder: (context, date, events) {
-              print(events);
-              if (events.isEmpty) {
-                return Padding(
-                  padding: const EdgeInsets.only(top: 18),
-                  child: Container(
-                    width: _iconSize,
-                    height: _iconSize,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: colorScheme.notSelected,
-                    ),
-                  ),
-                );
-              } else {
-                final event = events[0] as TodaysQuote;
-                final emotionalType = event.emotionalType;
-                final isSelected = isSameDay(viewState.selectedDate, date);
-                final isToday = isSameDay(DateTime.now(), date);
-                return isToday
-                    ? Material(
-                        shape: CircleBorder(
-                          side: BorderSide(
-                            color: colorScheme.selectedColor,
-                            width: 2.0,
-                          ),
-                        ),
-                        child: Icon(
-                          emotionalType.icon,
-                          size: _iconSize,
-                          color: emotionalType.getColor(context),
-                        ),
-                      )
-                    : Icon(
-                        emotionalType.icon,
-                        size: _iconSize,
-                        color: emotionalType.getColor(context),
-                      );
-              }
-            },
+            defaultBuilder: _buildDefaultCalendarItem(textTheme),
+            outsideBuilder: _buildOutsideCalendarItem(viewState.selectedDate),
+            disabledBuilder: (context, day, focusedDay) =>
+                const SizedBox.shrink(),
+            selectedBuilder: _buildSelectedCalendarItem(colorScheme, textTheme),
+            todayBuilder: _buildDefaultCalendarItem(textTheme),
+            markerBuilder: _buildMarker(colorScheme, viewState.selectedDate),
           ),
         ),
       ),
     );
+  }
+
+  Widget _buildIcon(Color color) {
+    return Icon(
+      FontAwesomeIcons.chevronLeft,
+      color: color,
+    );
+  }
+
+  CalenderBuilder _buildDefaultCalendarItem(MfTextTheme textTheme) {
+    return (context, date, events) {
+      return Padding(
+        padding: const EdgeInsets.only(top: 8),
+        child: Align(
+          alignment: Alignment.topCenter,
+          child: Text(
+            date.day.toString(),
+            style: textTheme.subtextBold,
+          ),
+        ),
+      );
+    };
+  }
+
+  CalenderBuilder _buildOutsideCalendarItem(DateTime selectedDate) {
+    return (context, day, focusedDay) {
+      if (selectedDate.month != day.month) {
+        return const SizedBox.shrink();
+      }
+      return null;
+    };
+  }
+
+  CalenderBuilder _buildSelectedCalendarItem(
+      MfColorScheme colorScheme, MfTextTheme textTheme) {
+    return (context, date, selectedDay) {
+      return Padding(
+        padding: const EdgeInsets.only(top: 8),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              width: 32,
+              padding: const EdgeInsets.symmetric(vertical: 2),
+              decoration: BoxDecoration(
+                color: colorScheme.calenderSelectedDay,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Center(
+                child: Text(
+                  date.day.toString(),
+                  style: textTheme.subtextBold.copyWith(
+                    color: colorScheme.secondary,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    };
+  }
+
+  MarkerBuilder _buildMarker(MfColorScheme colorScheme, DateTime selectedDate) {
+    return (context, date, events) {
+      if (events.isEmpty) {
+        return Padding(
+          padding: const EdgeInsets.only(top: 18),
+          child: Container(
+            width: _iconSize,
+            height: _iconSize,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: colorScheme.notSelected,
+            ),
+          ),
+        );
+      } else {
+        final event = events[0] as TodaysQuote;
+        final emotionalType = event.emotionalType;
+        final isToday = isSameDay(DateTime.now(), date);
+        return isToday
+            ? Material(
+                shape: CircleBorder(
+                  side: BorderSide(
+                    color: colorScheme.calenderSelectedDay,
+                    width: 2.0,
+                  ),
+                ),
+                child: Icon(
+                  emotionalType.icon,
+                  size: _iconSize,
+                  color: emotionalType.getColor(context),
+                ),
+              )
+            : Icon(
+                emotionalType.icon,
+                size: _iconSize,
+                color: emotionalType.getColor(context),
+              );
+      }
+    };
   }
 }

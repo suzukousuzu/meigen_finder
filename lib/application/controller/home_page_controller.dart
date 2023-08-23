@@ -34,7 +34,6 @@ class HomePageController extends _$HomePageController {
     final preferenceManager = ref.read(preferenceManagerProvider);
     final lastDateUpdatedTodayQuoteText =
         preferenceManager.getValue(PreferenceKey.todayQuotes, '').toString();
-    print(lastDateUpdatedTodayQuoteText);
     if (lastDateUpdatedTodayQuoteText.isEmpty) return;
     final date = DateTime.parse(lastDateUpdatedTodayQuoteText);
     state = state.copyWith(lastDateUpdatedTodayQuote: date);
