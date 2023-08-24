@@ -1,14 +1,19 @@
+import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:meigen_finder/application/controller/history_page_controller.dart';
 import 'package:meigen_finder/application/state/history_page_view_state.dart';
 import 'package:meigen_finder/domain/collection/todays_quote.dart';
+import 'package:meigen_finder/presentation/routing/router.dart';
 import 'package:meigen_finder/presentation/theme/mf_theme.dart';
 import 'package:meigen_finder/util/emotional_type_extension.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+import '../../../application/controller/quote_detail_page_controller.dart';
+import '../../../domain/collection/quote.dart';
 import '../../theme/mf_color_scheme.dart';
 import '../../theme/mf_text_theme.dart';
 
@@ -51,8 +56,14 @@ class HistoryPage extends HookConsumerWidget {
             titleCentered: true,
             formatButtonVisible: false,
             titleTextStyle: textTheme.h2,
-            leftChevronIcon: _buildIcon(colorScheme.onBackground),
-            rightChevronIcon: _buildIcon(colorScheme.onBackground),
+            leftChevronIcon: Icon(
+              FontAwesomeIcons.chevronLeft,
+              color: colorScheme.onBackground,
+            ),
+            rightChevronIcon: Icon(
+              FontAwesomeIcons.chevronRight,
+              color: colorScheme.onBackground,
+            ),
           ),
           selectedDayPredicate: (day) => isSameDay(viewState.selectedDate, day),
           onDaySelected: controller.onDaySelected,
@@ -69,17 +80,11 @@ class HistoryPage extends HookConsumerWidget {
                 const SizedBox.shrink(),
             selectedBuilder: _buildSelectedCalendarItem(colorScheme, textTheme),
             todayBuilder: _buildDefaultCalendarItem(textTheme),
-            markerBuilder: _buildMarker(colorScheme, viewState.selectedDate),
+            markerBuilder: _buildMarker(colorScheme, viewState.selectedDate,
+                viewState.likedQuotes ?? []),
           ),
         ),
       ),
-    );
-  }
-
-  Widget _buildIcon(Color color) {
-    return Icon(
-      FontAwesomeIcons.chevronLeft,
-      color: color,
     );
   }
 
@@ -137,7 +142,8 @@ class HistoryPage extends HookConsumerWidget {
     };
   }
 
-  MarkerBuilder _buildMarker(MfColorScheme colorScheme, DateTime selectedDate) {
+  MarkerBuilder _buildMarker(MfColorScheme colorScheme, DateTime selectedDate,
+      List<Quote> likedQuotes) {
     return (context, date, events) {
       if (events.isEmpty) {
         return Padding(
@@ -147,7 +153,7 @@ class HistoryPage extends HookConsumerWidget {
             height: _iconSize,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: colorScheme.notSelected,
+              color: colorScheme.notEmotionalTypeColor,
             ),
           ),
         );
@@ -156,25 +162,147 @@ class HistoryPage extends HookConsumerWidget {
         final emotionalType = event.emotionalType;
         final isToday = isSameDay(DateTime.now(), date);
         return isToday
-            ? Material(
-                shape: CircleBorder(
-                  side: BorderSide(
-                    color: colorScheme.calenderSelectedDay,
-                    width: 2.0,
+            ? GestureDetector(
+                onTap: () {
+                  showFlexibleBottomSheet(
+                      minHeight: 0,
+                      initHeight: 0.2,
+                      context: context,
+                      isSafeArea: true,
+                      builder: (context, scrollController, offset) {
+                        return _BottomSheetContainer(
+                          context: context,
+                          quote: event,
+                          isLike: event.isLiked(likedQuotes),
+                        );
+                      });
+                },
+                child: Material(
+                  shape: CircleBorder(
+                    side: BorderSide(
+                      color: colorScheme.calenderSelectedDay,
+                      width: 2.0,
+                    ),
+                  ),
+                  child: Icon(
+                    emotionalType.icon,
+                    size: _iconSize,
+                    color: emotionalType.getColor(context),
                   ),
                 ),
+              )
+            : GestureDetector(
+                onTap: () {
+                  showFlexibleBottomSheet(
+                      minHeight: 0,
+                      initHeight: 0.2,
+                      context: context,
+                      isSafeArea: true,
+                      builder: (context, scrollController, offset) {
+                        return _BottomSheetContainer(
+                            context: context, quote: event);
+                      });
+                },
                 child: Icon(
                   emotionalType.icon,
                   size: _iconSize,
                   color: emotionalType.getColor(context),
                 ),
-              )
-            : Icon(
-                emotionalType.icon,
-                size: _iconSize,
-                color: emotionalType.getColor(context),
               );
       }
     };
+  }
+}
+
+class _BottomSheetContainer extends StatelessWidget {
+  const _BottomSheetContainer({
+    Key? key,
+    required this.context,
+    required this.quote,
+    this.isLike = false,
+  }) : super(key: key);
+  final BuildContext context;
+  final TodaysQuote quote;
+  final bool isLike;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = MfTheme.of(context);
+    final colorScheme = theme.colorScheme;
+    final textTheme = theme.textTheme;
+    final date = quote.createdAt;
+    return SizedBox(
+      width: double.infinity,
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  '${date.year}年${date.month}月${date.day}日',
+                  style: textTheme.h3.copyWith(color: colorScheme.onBackground),
+                ),
+                Row(
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        context.pop();
+                        QuoteDetailRoute(
+                                QuoteDetailArgument(quote.quote, isLike))
+                            .push(context);
+                      },
+                      icon: const Icon(FontAwesomeIcons.ellipsisVertical,
+                          size: 24),
+                    ),
+                    const SizedBox(
+                      width: 4,
+                    ),
+                    IconButton(
+                      onPressed: () => context.pop(),
+                      icon: const Icon(FontAwesomeIcons.xmark, size: 24),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 8),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              children: [
+                Icon(
+                  quote.emotionalType.icon,
+                  size: 48,
+                  color: quote.emotionalType.getColor(context),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: SizedBox(
+                    height: 48,
+                    child: VerticalDivider(
+                      width: 4,
+                      thickness: 2,
+                      color: colorScheme.onBackground,
+                    ),
+                  ),
+                ),
+                Flexible(
+                  child: Text(
+                    quote.quote.text,
+                    style: textTheme.subtextBold
+                        .copyWith(color: colorScheme.onBackground),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 3,
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
   }
 }
