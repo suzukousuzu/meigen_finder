@@ -45,8 +45,7 @@ class HistoryPage extends HookConsumerWidget {
     return Scaffold(
       body: SafeArea(
         child: TableCalendar(
-          enabledDayPredicate: (day) =>
-              viewState.selectedDate.month == day.month,
+          calendarStyle: const CalendarStyle(outsideDaysVisible: false),
           rowHeight: 80,
           locale: 'ja_JP',
           focusedDay: viewState.focusedDay,

@@ -114,6 +114,7 @@ class QuoteDetailRoute extends GoRouteData {
   QuoteDetailRoute(this.$extra);
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) =>
+      //TODO:ホームから遷移した場合、アニメーションの実装
       NoTransitionPage(
         child: QuoteDetailPage(
           quoteDetailArgument: $extra,

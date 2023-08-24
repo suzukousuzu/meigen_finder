@@ -24,6 +24,7 @@ class HomePage extends HookConsumerWidget {
         body: SafeArea(
       child: Column(
         children: [
+          // TODO:既に今日の名言を表示した場合のデザイン
           const _PromptText(),
           const _EmotionalSelector(),
           _Button(
