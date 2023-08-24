@@ -36,12 +36,7 @@ class HomePageViewState {
 
   @override
   String toString() {
-    return 'HomePageViewState{' +
-        ' emotionalType: $emotionalType,' +
-        ' todaysQuote: $todaysQuote,' +
-        ' likedQuotes: $likedQuotes,' +
-        ' lastDateUpdatedTodayQuote: $lastDateUpdatedTodayQuote,' +
-        '}';
+    return 'HomePageViewState{ emotionalType: $emotionalType, todaysQuote: $todaysQuote, likedQuotes: $likedQuotes, lastDateUpdatedTodayQuote: $lastDateUpdatedTodayQuote,}';
   }
 
   HomePageViewState copyWith({
@@ -62,10 +57,10 @@ class HomePageViewState {
 
   Map<String, dynamic> toMap() {
     return {
-      'emotionalType': this.emotionalType,
-      'todaysQuote': this.todaysQuote,
-      'likedQuotes': this.likedQuotes,
-      'lastDateUpdatedTodayQuote': this.lastDateUpdatedTodayQuote,
+      'emotionalType': emotionalType,
+      'todaysQuote': todaysQuote,
+      'likedQuotes': likedQuotes,
+      'lastDateUpdatedTodayQuote': lastDateUpdatedTodayQuote,
     };
   }
 

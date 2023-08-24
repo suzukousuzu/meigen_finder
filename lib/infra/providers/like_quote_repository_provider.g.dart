@@ -7,7 +7,7 @@ part of 'like_quote_repository_provider.dart';
 // **************************************************************************
 
 String _$likeQuoteRepositoryHash() =>
-    r'74020ab3fc3c77c5051f402c6b26d54ccce24f1e';
+    r'a845529669738bb16cd0d405cb9c507a906a0976';
 
 /// See also [likeQuoteRepository].
 @ProviderFor(likeQuoteRepository)

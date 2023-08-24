@@ -23,10 +23,7 @@ class QuoteDetailPageViewState {
 
   @override
   String toString() {
-    return 'QuoteDetailPageViewState{' +
-        ' quote: $quote,' +
-        ' isLiked: $isLiked,' +
-        '}';
+    return 'QuoteDetailPageViewState{ quote: $quote, isLiked: $isLiked,}';
   }
 
   QuoteDetailPageViewState copyWith({
@@ -41,8 +38,8 @@ class QuoteDetailPageViewState {
 
   Map<String, dynamic> toMap() {
     return {
-      'quote': this.quote,
-      'isLiked': this.isLiked,
+      'quote': quote,
+      'isLiked': isLiked,
     };
   }
 

@@ -28,6 +28,10 @@ RouteBase get $myShellRouteData => ShellRouteData.$route(
           path: '/favorite_quote',
           factory: $FavoriteQuoteRouteExtension._fromState,
         ),
+        GoRouteData.$route(
+          path: '/history',
+          factory: $HistoryPageRouteExtension._fromState,
+        ),
       ],
     );
 
@@ -80,6 +84,23 @@ extension $FavoriteQuoteRouteExtension on FavoriteQuoteRoute {
 
   String get location => GoRouteData.$location(
         '/favorite_quote',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $HistoryPageRouteExtension on HistoryPageRoute {
+  static HistoryPageRoute _fromState(GoRouterState state) => HistoryPageRoute();
+
+  String get location => GoRouteData.$location(
+        '/history',
       );
 
   void go(BuildContext context) => context.go(location);

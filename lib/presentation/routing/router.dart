@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:meigen_finder/presentation/pages/favorite_quote/favorite_quote_page.dart';
+import 'package:meigen_finder/presentation/pages/history/history_page.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import '../../application/controller/quote_detail_page_controller.dart';
@@ -33,16 +34,11 @@ final routerProvider = Provider((ref) {
     TypedGoRoute<FavoriteQuoteRoute>(
       path: '/favorite_quote',
     ),
+    TypedGoRoute<HistoryPageRoute>(
+      path: '/history',
+    ),
   ],
 )
-// @TypedGoRoute<HomeRoute>(path: '/', routes: <TypedGoRoute<GoRouteData>>[
-//   TypedGoRoute<CategoryRoute>(
-//     path: 'category',
-//   ),
-//   TypedGoRoute<QuoteDetailRoute>(
-//     path: 'quote_detail',
-//   ),
-// ])
 class MyShellRouteData extends ShellRouteData {
   const MyShellRouteData();
 
@@ -63,6 +59,8 @@ class MyShellRouteScreen extends StatelessWidget {
     final String location = GoRouterState.of(context).uri.toString();
     if (location.startsWith('/favorite_quote')) {
       return 1;
+    } else if (location.startsWith('/history')) {
+      return 2;
     }
     return 0;
   }
@@ -78,6 +76,8 @@ class MyShellRouteScreen extends StatelessWidget {
         onTap: (index) {
           if (index == 0) {
             GoRouter.of(context).go('/');
+          } else if (index == 2) {
+            GoRouter.of(context).go('/history');
           } else {
             GoRouter.of(context).go('/favorite_quote');
           }
@@ -91,6 +91,10 @@ class MyShellRouteScreen extends StatelessWidget {
             icon: Icon(FontAwesomeIcons.solidHeart),
             label: 'お気に入り',
           ),
+          BottomNavigationBarItem(
+            icon: Icon(FontAwesomeIcons.solidCalendar),
+            label: '履歴',
+          ),
         ],
       ),
     );
@@ -101,15 +105,20 @@ class HomeRoute extends GoRouteData {
   const HomeRoute();
 
   @override
-  Widget build(BuildContext context, GoRouterState state) => const HomePage();
+  Page<void> buildPage(BuildContext context, GoRouterState state) =>
+      const NoTransitionPage(child: HomePage());
 }
 
 class QuoteDetailRoute extends GoRouteData {
   final QuoteDetailArgument $extra;
   QuoteDetailRoute(this.$extra);
   @override
-  Widget build(BuildContext context, GoRouterState state) => QuoteDetailPage(
-        quoteDetailArgument: $extra,
+  Page<void> buildPage(BuildContext context, GoRouterState state) =>
+      //TODO:ホームから遷移した場合、アニメーションの実装
+      NoTransitionPage(
+        child: QuoteDetailPage(
+          quoteDetailArgument: $extra,
+        ),
       );
 }
 
@@ -119,14 +128,11 @@ class FavoriteQuoteRoute extends GoRouteData {
       const NoTransitionPage(child: FavoriteQuotePage());
 }
 
-// class CategoryRoute extends GoRouteData {
-//   const CategoryRoute();
-//   @override
-//   Page<void> buildPage(BuildContext context, GoRouterState state) =>
-//       const ModalBottomSheetPage(
-//         child: CategoryPage(),
-//       );
-// }
+class HistoryPageRoute extends GoRouteData {
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) =>
+      const NoTransitionPage(child: HistoryPage());
+}
 
 class ModalBottomSheetPage<T> extends Page<T> {
   final Widget child;

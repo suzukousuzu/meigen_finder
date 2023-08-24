@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+// ignore: depend_on_referenced_packages
 import 'package:rxdart/rxdart.dart';
 
 mixin DataHolder<T extends Object> {

@@ -13,3 +13,9 @@ class TodaysQuote {
   @Index()
   late DateTime createdAt;
 }
+
+extension Computed on TodaysQuote {
+  bool isLiked(List<Quote> likedQuotes) {
+    return likedQuotes.any((element) => element.id == quote.id);
+  }
+}

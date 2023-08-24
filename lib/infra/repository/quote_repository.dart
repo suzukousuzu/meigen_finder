@@ -85,5 +85,9 @@ class QuoteRepository {
     });
   }
 
-  // TODO:名言の追加機能を書く
+  Future<List<TodaysQuote>> fetchHistory() async {
+    final query = _isar.todaysQuotes.where().build();
+    final results = await query.findAll();
+    return results;
+  }
 }

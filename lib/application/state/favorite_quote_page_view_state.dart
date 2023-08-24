@@ -20,7 +20,7 @@ class FavoriteQuotePageViewState {
 
   @override
   String toString() {
-    return 'FavoriteQuotePageViewState{' + ' likedQuotes: $likedQuotes,' + '}';
+    return 'FavoriteQuotePageViewState{ likedQuotes: $likedQuotes,}';
   }
 
   FavoriteQuotePageViewState copyWith({
@@ -33,7 +33,7 @@ class FavoriteQuotePageViewState {
 
   Map<String, dynamic> toMap() {
     return {
-      'likedQuotes': this.likedQuotes,
+      'likedQuotes': likedQuotes,
     };
   }
 
