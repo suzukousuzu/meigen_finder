@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:isar/isar.dart';
 import 'package:meigen_finder/domain/collection/todays_quote.dart';
+import 'package:meigen_finder/util/datetime_extension.dart';
 
 import '../../domain/collection/emotional_type.dart';
 import '../../domain/collection/quote.dart';
@@ -45,41 +46,19 @@ class QuoteRepository {
     return quotes;
   }
 
-  // お気に入りの名言を返す
-  Future<List<Quote>> fetchFavoriteQuote() async {
-    return [];
-    // final query = _isar.quotes.where().filter().isFavoriteEqualTo(true).build();
-    // final results = await query.findAll();
-    // return results;
+  Future<TodaysQuote?> fetchTodayQuote() async {
+    final todayQuote = await _isar.todaysQuotes
+        .filter()
+        .createdAtEqualTo(DateTime.now().date)
+        .findAll();
+    return todayQuote.firstOrNull;
   }
-
-  // // カテゴリのリストを保存する機能
-  // Future<void> saveCategoryList(List<CategoryType> categoryList) async {
-  //   // final categories = categoryList.map((e) {
-  //   //   return Category()
-  //   //     ..id = e.index
-  //   //     ..categoryType = e;
-  //   // }).toList();
-  //   // await _isar.writeTxn(() async {
-  //   //   final ids = await _isar.categorys.where().idProperty().findAll();
-  //   //   if (ids.isNotEmpty) {
-  //   //     await _isar.categorys.deleteAll(ids);
-  //   //   }
-  //   //   await _isar.categorys.putAll(categories);
-  //   // });
-  // }
-
-  // Future<List<CategoryType>> fetchCategoryList() async {
-  //   final query = _isar.categorys.where().build();
-  //   final results = await query.findAll();
-  //   return results.map((e) => e.categoryType).toList();
-  // }
 
   Future<void> onUpdateTodayQuote(
       TodaysQuote todaysQuote, EmotionalType emotionalType) async {
     await _isar.writeTxn(() async {
       await _isar.todaysQuotes.put(todaysQuote);
-      final now = DateTime.now();
+      final now = DateTime.now().date;
       _preferenceManager.setValue(
           PreferenceKey.todayQuotes, now.toIso8601String());
     });

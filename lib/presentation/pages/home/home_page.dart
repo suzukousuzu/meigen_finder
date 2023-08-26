@@ -16,23 +16,48 @@ class HomePage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.watch(homePageControllerProvider.notifier);
+    final viewState = ref.watch(homePageControllerProvider);
+
+    final theme = MfTheme.of(context);
+    final colorScheme = theme.colorScheme;
+    final textTheme = theme.textTheme;
     useEffect(() {
       controller.fetch();
       return;
     }, const []);
     return Scaffold(
         body: SafeArea(
-      child: Column(
-        children: [
-          // TODO:既に今日の名言を表示した場合のデザイン
-          const _PromptText(),
-          const _EmotionalSelector(),
-          _Button(
-            controller: controller,
-          ),
-        ],
-      ),
-    ));
+      child: viewState.canRetrieveQuoteToday
+          ? Column(
+              children: [
+                const _PromptText(),
+                const _EmotionalSelector(),
+                _Button(
+                  controller: controller,
+                ),
+              ],
+            )
+          : Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  '今日の名言はどうでしたか？',
+                  style: textTheme.h2.copyWith(color: colorScheme.onBackground),
+                ),
+                Text(
+                  '明日もお待ちしております！',
+                  style: textTheme.h2.copyWith(color: colorScheme.onBackground),
+                ),
+                TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      '今日の名言をもう一度表示する',
+                      style: textTheme.h3,
+                    ))
+              ],
+            ),
+    ),);
   }
 }
 
