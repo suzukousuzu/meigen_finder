@@ -84,7 +84,7 @@ class _Button extends ConsumerWidget {
     ref.listen(homePageControllerProvider.select((value) => value.todaysQuote),
         (previous, next) {
       if (previous == null && next != null) {
-        QuoteDetailRoute(
+        QuoteDetailRouteFromHome(
                 QuoteDetailArgument(next.quote, viewState.isLikedQuoted))
             .go(context);
       }

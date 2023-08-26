@@ -47,7 +47,7 @@ class FavoriteQuotePage extends HookConsumerWidget {
                           child: FavoriteQuoteTile(
                             text: quote.text,
                             author: quote.author ?? '',
-                            onTap: () => QuoteDetailRoute(
+                            onTap: () => QuoteDetailRouteFromFavorite(
                                     QuoteDetailArgument(quote, isLiked))
                                 .push(context),
                           ));

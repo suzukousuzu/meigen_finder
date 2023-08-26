@@ -7,7 +7,7 @@ part of 'history_page_controller.dart';
 // **************************************************************************
 
 String _$historyPageControllerHash() =>
-    r'7d19bc1c394f29018a8ac87491b17f4318c79cf5';
+    r'5fdf934b52f1ad3c4c1337be3f1db915cb327727';
 
 /// See also [HistoryPageController].
 @ProviderFor(HistoryPageController)

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:meigen_finder/presentation/theme/mf_theme.dart';
 import 'package:share_plus/share_plus.dart';
@@ -31,6 +32,13 @@ class QuoteDetailPage extends ConsumerWidget {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: colorScheme.transParent,
+        automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+            onPressed: () => context.pop(),
+            icon: const Icon(FontAwesomeIcons.xmark, size: 24),
+          ),
+        ],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
