@@ -18,6 +18,7 @@ class HomePageController extends _$HomePageController {
   @override
   HomePageViewState build() => HomePageViewState(
         emotionalType: null,
+        quoteRetrievalSuccess: false,
       );
 
   Future<void> fetch() async {
@@ -35,6 +36,7 @@ class HomePageController extends _$HomePageController {
   Future<void> _fetchTodayQuote() async {
     final repository = await ref.read(quoteRepositoryProvider.future);
     final todayQuote = await repository.fetchTodayQuote();
+    state = state.copyWith(todaysQuote: todayQuote);
   }
 
   Future<void> _fetchLastDateUpdatedTodayQuote() async {
@@ -80,12 +82,14 @@ class HomePageController extends _$HomePageController {
       await repository.onUpdateTodayQuote(todaysQuote, emotionalType);
       state = state.copyWith(
         todaysQuote: todaysQuote,
+        quoteRetrievalSuccess: true,
       );
     } catch (e) {
       //TODO:エラーハンドリング
       debugPrint(e.toString());
       state = state.copyWith(
         todaysQuote: null,
+        quoteRetrievalSuccess: false,
       );
     }
   }

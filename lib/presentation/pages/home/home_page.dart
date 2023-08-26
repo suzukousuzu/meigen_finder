@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:meigen_finder/application/controller/home_page_controller.dart';
 import 'package:meigen_finder/application/controller/quote_detail_page_controller.dart';
 import 'package:meigen_finder/application/state/home_page_view_state.dart';
+import 'package:meigen_finder/domain/collection/emotional_type.dart';
 import 'package:meigen_finder/presentation/components/button/primary_button.dart';
 import 'package:meigen_finder/presentation/components/selector/emotional_selector.dart';
 import 'package:meigen_finder/presentation/routing/router.dart';
@@ -18,51 +19,36 @@ class HomePage extends HookConsumerWidget {
     final controller = ref.watch(homePageControllerProvider.notifier);
     final viewState = ref.watch(homePageControllerProvider);
 
-    final theme = MfTheme.of(context);
-    final colorScheme = theme.colorScheme;
-    final textTheme = theme.textTheme;
+    final canRetrieveQuoteToday = viewState.canRetrieveQuoteToday;
     useEffect(() {
       controller.fetch();
       return;
     }, const []);
     return Scaffold(
-        body: SafeArea(
-      child: viewState.canRetrieveQuoteToday
-          ? Column(
-              children: [
-                const _PromptText(),
-                const _EmotionalSelector(),
-                _Button(
-                  controller: controller,
-                ),
-              ],
-            )
-          : Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  '今日の名言はどうでしたか？',
-                  style: textTheme.h2.copyWith(color: colorScheme.onBackground),
-                ),
-                Text(
-                  '明日もお待ちしております！',
-                  style: textTheme.h2.copyWith(color: colorScheme.onBackground),
-                ),
-                TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      '今日の名言をもう一度表示する',
-                      style: textTheme.h3,
-                    ))
-              ],
-            ),
-    ),);
+      body: SafeArea(
+          child: Column(
+        children: [
+          _PromptText(
+            canRetrieveQuoteToday: canRetrieveQuoteToday,
+          ),
+          _EmotionalSelector(
+            canRetrieveQuoteToday: canRetrieveQuoteToday,
+            initialType: viewState.todaysQuote?.emotionalType,
+          ),
+          _Button(
+            controller: controller,
+          ),
+        ],
+      )),
+    );
   }
 }
 
 class _PromptText extends StatelessWidget {
-  const _PromptText({Key? key}) : super(key: key);
+  const _PromptText({Key? key, required this.canRetrieveQuoteToday})
+      : super(key: key);
+
+  final bool canRetrieveQuoteToday;
 
   @override
   Widget build(BuildContext context) {
@@ -82,18 +68,28 @@ class _PromptText extends StatelessWidget {
 }
 
 class _EmotionalSelector extends ConsumerWidget {
-  const _EmotionalSelector({Key? key}) : super(key: key);
+  const _EmotionalSelector({
+    Key? key,
+    required this.canRetrieveQuoteToday,
+    this.initialType,
+  }) : super(key: key);
+  final bool canRetrieveQuoteToday;
+  final EmotionalType? initialType;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    print(initialType);
     return Padding(
       padding: const EdgeInsets.fromLTRB(32, 12, 32, 0),
       child: Center(
-        child: EmotionalSelector(onChanged: (emotionalType) {
-          ref
-              .read(homePageControllerProvider.notifier)
-              .updateEmotionalType(emotionalType);
-        }),
+        child: EmotionalSelector(
+            initialType: initialType,
+            isEnable: canRetrieveQuoteToday,
+            onChanged: (emotionalType) {
+              ref
+                  .read(homePageControllerProvider.notifier)
+                  .updateEmotionalType(emotionalType);
+            }),
       ),
     );
   }
@@ -106,11 +102,16 @@ class _Button extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final viewState = ref.watch(homePageControllerProvider);
-    ref.listen(homePageControllerProvider.select((value) => value.todaysQuote),
-        (previous, next) {
-      if (previous == null && next != null) {
+    ref.listen(
+        homePageControllerProvider
+            .select((value) => value.quoteRetrievalSuccess), (previous, next) {
+      final todaysQuote = viewState.todaysQuote;
+      if (todaysQuote == null) {
+        return;
+      }
+      if (previous == false && next == true) {
         QuoteDetailRouteFromHome(
-                QuoteDetailArgument(next.quote, viewState.isLikedQuoted))
+                QuoteDetailArgument(todaysQuote.quote, viewState.isLikedQuoted))
             .go(context);
       }
     });

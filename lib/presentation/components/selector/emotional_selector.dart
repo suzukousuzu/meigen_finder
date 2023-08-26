@@ -11,8 +11,12 @@ class EmotionalSelector extends HookWidget {
   const EmotionalSelector({
     Key? key,
     required this.onChanged,
+    this.initialType,
+    this.isEnable = true,
   }) : super(key: key);
   final ValueChanged<EmotionalType> onChanged;
+  final EmotionalType? initialType;
+  final bool isEnable;
 
   @override
   Widget build(BuildContext context) {
@@ -21,14 +25,21 @@ class EmotionalSelector extends HookWidget {
 
     final selectedEmotionalType = useState<EmotionalType?>(null);
 
+    useEffect(() {
+      selectedEmotionalType.value = initialType;
+      return null;
+    }, [initialType]);
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         IconButton(
-          onPressed: () {
-            selectedEmotionalType.value = EmotionalType.superHappy;
-            onChanged(EmotionalType.superHappy);
-          },
+          onPressed: isEnable
+              ? () {
+                  selectedEmotionalType.value = EmotionalType.superHappy;
+                  onChanged(EmotionalType.superHappy);
+                }
+              : null,
           icon: Icon(
             FontAwesomeIcons.solidFaceLaughSquint,
             size: _iconSize,
@@ -38,10 +49,12 @@ class EmotionalSelector extends HookWidget {
           ),
         ),
         IconButton(
-          onPressed: () {
-            selectedEmotionalType.value = EmotionalType.somewhatHappy;
-            onChanged(EmotionalType.somewhatHappy);
-          },
+          onPressed: isEnable
+              ? () {
+                  selectedEmotionalType.value = EmotionalType.somewhatHappy;
+                  onChanged(EmotionalType.somewhatHappy);
+                }
+              : null,
           icon: Icon(
             FontAwesomeIcons.solidFaceSmile,
             size: _iconSize,
@@ -51,10 +64,12 @@ class EmotionalSelector extends HookWidget {
           ),
         ),
         IconButton(
-          onPressed: () {
-            selectedEmotionalType.value = EmotionalType.normal;
-            onChanged(EmotionalType.normal);
-          },
+          onPressed: isEnable
+              ? () {
+                  selectedEmotionalType.value = EmotionalType.normal;
+                  onChanged(EmotionalType.normal);
+                }
+              : null,
           icon: Icon(
             FontAwesomeIcons.solidFaceMeh,
             size: _iconSize,
@@ -64,10 +79,12 @@ class EmotionalSelector extends HookWidget {
           ),
         ),
         IconButton(
-          onPressed: () {
-            selectedEmotionalType.value = EmotionalType.somewhatSad;
-            onChanged(EmotionalType.somewhatSad);
-          },
+          onPressed: isEnable
+              ? () {
+                  selectedEmotionalType.value = EmotionalType.somewhatSad;
+                  onChanged(EmotionalType.somewhatSad);
+                }
+              : null,
           icon: Icon(
             FontAwesomeIcons.solidFaceFrown,
             size: _iconSize,
@@ -77,10 +94,12 @@ class EmotionalSelector extends HookWidget {
           ),
         ),
         IconButton(
-          onPressed: () {
-            selectedEmotionalType.value = EmotionalType.superSad;
-            onChanged(EmotionalType.superSad);
-          },
+          onPressed: isEnable
+              ? () {
+                  selectedEmotionalType.value = EmotionalType.superSad;
+                  onChanged(EmotionalType.superSad);
+                }
+              : null,
           icon: Icon(
             FontAwesomeIcons.solidFaceSadTear,
             size: _iconSize,
