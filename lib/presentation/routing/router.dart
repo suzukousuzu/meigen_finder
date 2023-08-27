@@ -4,12 +4,14 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:meigen_finder/presentation/pages/favorite_quote/favorite_quote_page.dart';
 import 'package:meigen_finder/presentation/pages/history/history_page.dart';
+import 'package:meigen_finder/presentation/pages/setting/terms_of_service_page.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import '../../application/controller/quote_detail_page_controller.dart';
 import '../components/modal_bottom_sheet/modal_bottom_sheet_container_builder.dart';
 import '../pages/home/home_page.dart';
 import '../pages/quote_detail/quote_detail_page.dart';
+import '../pages/setting/setting_page.dart';
 
 part 'router.g.dart';
 
@@ -41,6 +43,9 @@ final routerProvider = Provider((ref) {
         path: 'quote_detail',
       ),
     ]),
+    TypedGoRoute<SettingRoute>(path: '/setting', routes: [
+      TypedGoRoute<TermsOfServiceRoute>(path: 'terms_of_service'),
+    ]),
   ],
 )
 class MyShellRouteData extends ShellRouteData {
@@ -65,6 +70,8 @@ class MyShellRouteScreen extends StatelessWidget {
       return 1;
     } else if (location.startsWith('/history')) {
       return 2;
+    } else if (location.startsWith('/setting')) {
+      return 3;
     }
     return 0;
   }
@@ -77,11 +84,14 @@ class MyShellRouteScreen extends StatelessWidget {
       body: child,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: selectedIndex,
+        type: BottomNavigationBarType.fixed,
         onTap: (index) {
           if (index == 0) {
             GoRouter.of(context).go('/');
           } else if (index == 2) {
             GoRouter.of(context).go('/history');
+          } else if (index == 3) {
+            GoRouter.of(context).go('/setting');
           } else {
             GoRouter.of(context).go('/favorite_quote');
           }
@@ -98,6 +108,10 @@ class MyShellRouteScreen extends StatelessWidget {
           BottomNavigationBarItem(
             icon: Icon(FontAwesomeIcons.solidCalendar),
             label: '履歴',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(FontAwesomeIcons.gear),
+            label: '設定',
           ),
         ],
       ),
@@ -157,6 +171,18 @@ class QuoteDetailRouteFromHistory extends GoRouteData {
       child: QuoteDetailPage(quoteDetailArgument: $extra),
     );
   }
+}
+
+class SettingRoute extends GoRouteData {
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) =>
+      const NoTransitionPage(child: SettingPage());
+}
+
+class TermsOfServiceRoute extends GoRouteData {
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) =>
+      const NoTransitionPage(child: TermsOfServicePage());
 }
 
 class FavoriteQuoteRoute extends GoRouteData {

@@ -44,6 +44,16 @@ RouteBase get $myShellRouteData => ShellRouteData.$route(
             ),
           ],
         ),
+        GoRouteData.$route(
+          path: '/setting',
+          factory: $SettingRouteExtension._fromState,
+          routes: [
+            GoRouteData.$route(
+              path: 'terms_of_service',
+              factory: $TermsOfServiceRouteExtension._fromState,
+            ),
+          ],
+        ),
       ],
     );
 
@@ -169,4 +179,39 @@ extension $QuoteDetailRouteFromHistoryExtension on QuoteDetailRouteFromHistory {
 
   void replace(BuildContext context) =>
       context.replace(location, extra: $extra);
+}
+
+extension $SettingRouteExtension on SettingRoute {
+  static SettingRoute _fromState(GoRouterState state) => SettingRoute();
+
+  String get location => GoRouteData.$location(
+        '/setting',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $TermsOfServiceRouteExtension on TermsOfServiceRoute {
+  static TermsOfServiceRoute _fromState(GoRouterState state) =>
+      TermsOfServiceRoute();
+
+  String get location => GoRouteData.$location(
+        '/setting/terms_of_service',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
 }
