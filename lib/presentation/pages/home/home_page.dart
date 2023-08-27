@@ -9,6 +9,7 @@ import 'package:meigen_finder/presentation/components/button/primary_button.dart
 import 'package:meigen_finder/presentation/components/selector/emotional_selector.dart';
 import 'package:meigen_finder/presentation/routing/router.dart';
 
+import '../../../application/controller/loading_controller.dart';
 import '../../components/button/label_button.dart';
 import '../../theme/mf_theme.dart';
 
@@ -22,7 +23,9 @@ class HomePage extends HookConsumerWidget {
 
     final canRetrieveQuoteToday = viewState.canRetrieveQuoteToday;
     useEffect(() {
-      controller.fetch();
+      ref
+          .watch(loadingControllerProvider.notifier)
+          .whileLoading(() => controller.fetch());
       return;
     }, const []);
     return Scaffold(

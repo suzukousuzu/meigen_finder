@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:meigen_finder/application/init/init_app.dart';
+import 'package:meigen_finder/presentation/components/loading/loading_screen.dart';
 import 'package:meigen_finder/presentation/routing/router.dart';
 import 'package:meigen_finder/presentation/theme/mf_theme.dart';
 import 'package:stack_trace/stack_trace.dart' as stack_trace;
@@ -33,6 +34,7 @@ class MyApp extends HookConsumerWidget {
     return MaterialApp.router(
       title: '名言ファインダー',
       theme: theme.data,
+      builder: LoadingScreen.init(),
       routerConfig: router,
     );
   }
