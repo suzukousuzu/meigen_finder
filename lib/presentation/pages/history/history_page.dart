@@ -248,7 +248,7 @@ class _BottomSheetContainer extends StatelessWidget {
                     IconButton(
                       onPressed: () {
                         context.pop();
-                        QuoteDetailRoute(
+                        QuoteDetailRouteFromHistory(
                                 QuoteDetailArgument(quote.quote, isLike))
                             .push(context);
                       },

@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:meigen_finder/application/state/home_page_view_state.dart';
 import 'package:meigen_finder/domain/collection/emotional_type.dart';
 import 'package:meigen_finder/infra/providers/like_quote_repository_provider.dart';
+import 'package:meigen_finder/util/datetime_extension.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../domain/collection/todays_quote.dart';
@@ -17,10 +18,12 @@ class HomePageController extends _$HomePageController {
   @override
   HomePageViewState build() => HomePageViewState(
         emotionalType: null,
+        quoteRetrievalSuccess: false,
       );
 
   Future<void> fetch() async {
     await _fetchLikeQuotes();
+    await _fetchTodayQuote();
     await _fetchLastDateUpdatedTodayQuote();
   }
 
@@ -30,12 +33,18 @@ class HomePageController extends _$HomePageController {
     state = state.copyWith(likedQuotes: likeQuotes);
   }
 
+  Future<void> _fetchTodayQuote() async {
+    final repository = await ref.read(quoteRepositoryProvider.future);
+    final todayQuote = await repository.fetchTodayQuote();
+    state = state.copyWith(todaysQuote: todayQuote);
+  }
+
   Future<void> _fetchLastDateUpdatedTodayQuote() async {
     final preferenceManager = ref.read(preferenceManagerProvider);
     final lastDateUpdatedTodayQuoteText =
         preferenceManager.getValue(PreferenceKey.todayQuotes, '').toString();
     if (lastDateUpdatedTodayQuoteText.isEmpty) return;
-    final date = DateTime.parse(lastDateUpdatedTodayQuoteText);
+    final date = DateTime.parse(lastDateUpdatedTodayQuoteText).date;
     state = state.copyWith(lastDateUpdatedTodayQuote: date);
   }
 
@@ -47,6 +56,9 @@ class HomePageController extends _$HomePageController {
     try {
       final emotionalType = state.emotionalType;
       if (emotionalType == null) return;
+      state = state.copyWith(
+        quoteRetrievalSuccess: false,
+      );
       final repository = await ref.read(quoteRepositoryProvider.future);
       final masterData = await repository.getMasterData();
       // emotionalTypeと一致するデータのリストを取得
@@ -68,17 +80,19 @@ class HomePageController extends _$HomePageController {
         ..id = selectedData.id
         ..emotionalType = emotionalType
         ..quote = selectedData
-        ..createdAt = DateTime.now();
+        ..createdAt = DateTime.now().date;
 
       await repository.onUpdateTodayQuote(todaysQuote, emotionalType);
       state = state.copyWith(
         todaysQuote: todaysQuote,
+        quoteRetrievalSuccess: true,
       );
     } catch (e) {
       //TODO:エラーハンドリング
       debugPrint(e.toString());
       state = state.copyWith(
         todaysQuote: null,
+        quoteRetrievalSuccess: false,
       );
     }
   }

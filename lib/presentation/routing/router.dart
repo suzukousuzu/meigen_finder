@@ -9,7 +9,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import '../../application/controller/quote_detail_page_controller.dart';
 import '../components/modal_bottom_sheet/modal_bottom_sheet_container_builder.dart';
 import '../pages/home/home_page.dart';
-import '../pages/home/quote_detail_page.dart';
+import '../pages/quote_detail/quote_detail_page.dart';
 
 part 'router.g.dart';
 
@@ -27,16 +27,20 @@ final routerProvider = Provider((ref) {
 @TypedShellRoute<MyShellRouteData>(
   routes: <TypedRoute<RouteData>>[
     TypedGoRoute<HomeRoute>(path: '/', routes: [
-      TypedGoRoute<QuoteDetailRoute>(
+      TypedGoRoute<QuoteDetailRouteFromHome>(
         path: 'quote_detail',
       ),
     ]),
-    TypedGoRoute<FavoriteQuoteRoute>(
-      path: '/favorite_quote',
-    ),
-    TypedGoRoute<HistoryPageRoute>(
-      path: '/history',
-    ),
+    TypedGoRoute<FavoriteQuoteRoute>(path: '/favorite_quote', routes: [
+      TypedGoRoute<QuoteDetailRouteFromFavorite>(
+        path: 'quote_detail',
+      ),
+    ]),
+    TypedGoRoute<HistoryPageRoute>(path: '/history', routes: [
+      TypedGoRoute<QuoteDetailRouteFromHistory>(
+        path: 'quote_detail',
+      ),
+    ]),
   ],
 )
 class MyShellRouteData extends ShellRouteData {
@@ -109,17 +113,50 @@ class HomeRoute extends GoRouteData {
       const NoTransitionPage(child: HomePage());
 }
 
-class QuoteDetailRoute extends GoRouteData {
+class QuoteDetailRouteFromHome extends GoRouteData {
   final QuoteDetailArgument $extra;
-  QuoteDetailRoute(this.$extra);
+  QuoteDetailRouteFromHome(this.$extra);
   @override
-  Page<void> buildPage(BuildContext context, GoRouterState state) =>
-      //TODO:ホームから遷移した場合、アニメーションの実装
-      NoTransitionPage(
+  Page<void> buildPage(BuildContext context, GoRouterState state) {
+    return CustomTransitionPage(
+        key: state.pageKey,
         child: QuoteDetailPage(
           quoteDetailArgument: $extra,
         ),
-      );
+        transitionDuration: const Duration(seconds: 2),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return ScaleTransition(
+            scale: CurveTween(curve: Curves.bounceInOut).animate(animation),
+            child: child,
+          );
+          //   FadeTransition(
+          //   opacity: CurveTween(curve: Curves.bounceInOut).animate(animation),
+          //   child: child,
+          // );
+        });
+  }
+}
+
+class QuoteDetailRouteFromFavorite extends GoRouteData {
+  final QuoteDetailArgument $extra;
+  QuoteDetailRouteFromFavorite(this.$extra);
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) {
+    return ModalBottomSheetPage(
+      child: QuoteDetailPage(quoteDetailArgument: $extra),
+    );
+  }
+}
+
+class QuoteDetailRouteFromHistory extends GoRouteData {
+  final QuoteDetailArgument $extra;
+  QuoteDetailRouteFromHistory(this.$extra);
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) {
+    return ModalBottomSheetPage(
+      child: QuoteDetailPage(quoteDetailArgument: $extra),
+    );
+  }
 }
 
 class FavoriteQuoteRoute extends GoRouteData {

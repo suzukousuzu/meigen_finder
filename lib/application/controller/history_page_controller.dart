@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:meigen_finder/application/state/history_page_view_state.dart';
+import 'package:meigen_finder/util/datetime_extension.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../infra/data_holder/like_quote_data_holder.dart';
@@ -16,7 +17,7 @@ class HistoryPageController extends _$HistoryPageController {
       state = state.copyWith(likedQuotes: event);
     });
     return HistoryPageViewState(
-        focusedDay: DateTime.now(), selectedDate: DateTime.now());
+        focusedDay: DateTime.now().date, selectedDate: DateTime.now().date);
   }
 
   void onDaySelected(DateTime selectedDay, DateTime focusedDay) {

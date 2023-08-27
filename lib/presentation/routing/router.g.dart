@@ -20,17 +20,29 @@ RouteBase get $myShellRouteData => ShellRouteData.$route(
           routes: [
             GoRouteData.$route(
               path: 'quote_detail',
-              factory: $QuoteDetailRouteExtension._fromState,
+              factory: $QuoteDetailRouteFromHomeExtension._fromState,
             ),
           ],
         ),
         GoRouteData.$route(
           path: '/favorite_quote',
           factory: $FavoriteQuoteRouteExtension._fromState,
+          routes: [
+            GoRouteData.$route(
+              path: 'quote_detail',
+              factory: $QuoteDetailRouteFromFavoriteExtension._fromState,
+            ),
+          ],
         ),
         GoRouteData.$route(
           path: '/history',
           factory: $HistoryPageRouteExtension._fromState,
+          routes: [
+            GoRouteData.$route(
+              path: 'quote_detail',
+              factory: $QuoteDetailRouteFromHistoryExtension._fromState,
+            ),
+          ],
         ),
       ],
     );
@@ -57,8 +69,9 @@ extension $HomeRouteExtension on HomeRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $QuoteDetailRouteExtension on QuoteDetailRoute {
-  static QuoteDetailRoute _fromState(GoRouterState state) => QuoteDetailRoute(
+extension $QuoteDetailRouteFromHomeExtension on QuoteDetailRouteFromHome {
+  static QuoteDetailRouteFromHome _fromState(GoRouterState state) =>
+      QuoteDetailRouteFromHome(
         state.extra as QuoteDetailArgument,
       );
 
@@ -96,6 +109,29 @@ extension $FavoriteQuoteRouteExtension on FavoriteQuoteRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
+extension $QuoteDetailRouteFromFavoriteExtension
+    on QuoteDetailRouteFromFavorite {
+  static QuoteDetailRouteFromFavorite _fromState(GoRouterState state) =>
+      QuoteDetailRouteFromFavorite(
+        state.extra as QuoteDetailArgument,
+      );
+
+  String get location => GoRouteData.$location(
+        '/favorite_quote/quote_detail',
+      );
+
+  void go(BuildContext context) => context.go(location, extra: $extra);
+
+  Future<T?> push<T>(BuildContext context) =>
+      context.push<T>(location, extra: $extra);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location, extra: $extra);
+
+  void replace(BuildContext context) =>
+      context.replace(location, extra: $extra);
+}
+
 extension $HistoryPageRouteExtension on HistoryPageRoute {
   static HistoryPageRoute _fromState(GoRouterState state) => HistoryPageRoute();
 
@@ -111,4 +147,26 @@ extension $HistoryPageRouteExtension on HistoryPageRoute {
       context.pushReplacement(location);
 
   void replace(BuildContext context) => context.replace(location);
+}
+
+extension $QuoteDetailRouteFromHistoryExtension on QuoteDetailRouteFromHistory {
+  static QuoteDetailRouteFromHistory _fromState(GoRouterState state) =>
+      QuoteDetailRouteFromHistory(
+        state.extra as QuoteDetailArgument,
+      );
+
+  String get location => GoRouteData.$location(
+        '/history/quote_detail',
+      );
+
+  void go(BuildContext context) => context.go(location, extra: $extra);
+
+  Future<T?> push<T>(BuildContext context) =>
+      context.push<T>(location, extra: $extra);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location, extra: $extra);
+
+  void replace(BuildContext context) =>
+      context.replace(location, extra: $extra);
 }

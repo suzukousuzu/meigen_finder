@@ -8,6 +8,7 @@ class HomePageViewState {
   TodaysQuote? todaysQuote;
   List<Quote>? likedQuotes;
   DateTime? lastDateUpdatedTodayQuote;
+  bool quoteRetrievalSuccess;
 
 //<editor-fold desc="Data Methods">
   HomePageViewState({
@@ -15,6 +16,7 @@ class HomePageViewState {
     this.todaysQuote,
     this.likedQuotes,
     this.lastDateUpdatedTodayQuote,
+    required this.quoteRetrievalSuccess,
   });
 
   @override
@@ -25,18 +27,20 @@ class HomePageViewState {
           emotionalType == other.emotionalType &&
           todaysQuote == other.todaysQuote &&
           likedQuotes == other.likedQuotes &&
-          lastDateUpdatedTodayQuote == other.lastDateUpdatedTodayQuote);
+          lastDateUpdatedTodayQuote == other.lastDateUpdatedTodayQuote &&
+          quoteRetrievalSuccess == other.quoteRetrievalSuccess);
 
   @override
   int get hashCode =>
       emotionalType.hashCode ^
       todaysQuote.hashCode ^
       likedQuotes.hashCode ^
-      lastDateUpdatedTodayQuote.hashCode;
+      lastDateUpdatedTodayQuote.hashCode ^
+      quoteRetrievalSuccess.hashCode;
 
   @override
   String toString() {
-    return 'HomePageViewState{ emotionalType: $emotionalType, todaysQuote: $todaysQuote, likedQuotes: $likedQuotes, lastDateUpdatedTodayQuote: $lastDateUpdatedTodayQuote,}';
+    return 'HomePageViewState{ emotionalType: $emotionalType, todaysQuote: $todaysQuote, likedQuotes: $likedQuotes, lastDateUpdatedTodayQuote: $lastDateUpdatedTodayQuote, quoteRetrievalSuccess: $quoteRetrievalSuccess,}';
   }
 
   HomePageViewState copyWith({
@@ -44,7 +48,7 @@ class HomePageViewState {
     TodaysQuote? todaysQuote,
     List<Quote>? likedQuotes,
     DateTime? lastDateUpdatedTodayQuote,
-    bool? isUpdatedTodayQuoteSuccessfully,
+    bool? quoteRetrievalSuccess,
   }) {
     return HomePageViewState(
       emotionalType: emotionalType ?? this.emotionalType,
@@ -52,15 +56,18 @@ class HomePageViewState {
       likedQuotes: likedQuotes ?? this.likedQuotes,
       lastDateUpdatedTodayQuote:
           lastDateUpdatedTodayQuote ?? this.lastDateUpdatedTodayQuote,
+      quoteRetrievalSuccess:
+          quoteRetrievalSuccess ?? this.quoteRetrievalSuccess,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'emotionalType': emotionalType,
-      'todaysQuote': todaysQuote,
-      'likedQuotes': likedQuotes,
-      'lastDateUpdatedTodayQuote': lastDateUpdatedTodayQuote,
+      'emotionalType': this.emotionalType,
+      'todaysQuote': this.todaysQuote,
+      'likedQuotes': this.likedQuotes,
+      'lastDateUpdatedTodayQuote': this.lastDateUpdatedTodayQuote,
+      'quoteRetrievalSuccess': this.quoteRetrievalSuccess,
     };
   }
 
@@ -70,6 +77,7 @@ class HomePageViewState {
       todaysQuote: map['todaysQuote'] as TodaysQuote,
       likedQuotes: map['likedQuotes'] as List<Quote>,
       lastDateUpdatedTodayQuote: map['lastDateUpdatedTodayQuote'] as DateTime,
+      quoteRetrievalSuccess: map['quoteRetrievalSuccess'] as bool,
     );
   }
 
@@ -79,4 +87,8 @@ class HomePageViewState {
 extension Computed on HomePageViewState {
   bool get isButtonEnable => emotionalType != null;
   bool get isLikedQuoted => likedQuotes?.contains(todaysQuote?.quote) ?? false;
+  bool get canRetrieveQuoteToday {
+    return lastDateUpdatedTodayQuote == null ||
+        DateTime.now().day != lastDateUpdatedTodayQuote?.day;
+  }
 }
