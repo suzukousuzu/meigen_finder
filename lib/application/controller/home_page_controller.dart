@@ -56,6 +56,9 @@ class HomePageController extends _$HomePageController {
     try {
       final emotionalType = state.emotionalType;
       if (emotionalType == null) return;
+      state = state.copyWith(
+        quoteRetrievalSuccess: false,
+      );
       final repository = await ref.read(quoteRepositoryProvider.future);
       final masterData = await repository.getMasterData();
       // emotionalTypeと一致するデータのリストを取得

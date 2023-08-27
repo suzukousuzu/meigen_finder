@@ -23,6 +23,7 @@ class MfColorScheme {
     required this.notSelected,
     required this.notEmotionalTypeColor,
     required this.calenderSelectedDay,
+    required this.linkColor,
   });
 
   MfColorScheme.light()
@@ -48,6 +49,7 @@ class MfColorScheme {
           notSelected: _gray,
           notEmotionalTypeColor: _gainsboro,
           calenderSelectedDay: _orangePeel,
+          linkColor: _ultramarine,
         );
 
   final Color primary;
@@ -74,6 +76,8 @@ class MfColorScheme {
   final Color notEmotionalTypeColor;
 
   final Color calenderSelectedDay;
+
+  final Color linkColor;
 }
 
 /// 色名参考: https://www.htmlcsscolor.com/
@@ -92,3 +96,4 @@ const _mangoTango = Color(0XFFD17700);
 const _tenne = Color(0XFFBA6600);
 const _goldenBrown = Color(0XFFA25500);
 const _gainsboro = Color(0XFFDDDDDD);
+final _ultramarine = Color(0XFF1A0DAB);
