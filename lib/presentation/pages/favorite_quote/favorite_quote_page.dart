@@ -33,7 +33,7 @@ class FavoriteQuotePage extends HookConsumerWidget {
                       onClear: () => controller.onClear()),
                   pinned: true,
                   bottom: PreferredSize(
-                    preferredSize: Size.fromHeight(16.0), // 追加の高さを指定
+                    preferredSize: const Size.fromHeight(16.0), // 追加の高さを指定
                     child: Container(), // 空のウィジェット
                   ),
                 ),

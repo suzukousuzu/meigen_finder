@@ -32,7 +32,7 @@ class MfColorScheme {
           background: _whiteSmoke,
           onBackgroundBottomSheet: _black,
           onBackground: _nero,
-          surface: _whisper,
+          surface: _white,
           onPrimary: _white,
           secondary: _white,
           onSecondary: _white,
