@@ -42,12 +42,12 @@ class MfTheme {
         color: colorScheme.primary,
         centerTitle: true,
         iconTheme: IconThemeData(
-          size: 32,
-          color: colorScheme.onBackground,
+          size: 24,
+          color: colorScheme.onPrimary,
         ),
         actionsIconTheme: IconThemeData(
-          size: 22,
-          color: colorScheme.onBackground,
+          size: 24,
+          color: colorScheme.onPrimary,
         ),
         titleTextStyle: textTheme.h1.copyWith(
           color: colorScheme.onPrimary,

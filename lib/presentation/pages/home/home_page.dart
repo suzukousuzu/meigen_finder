@@ -10,6 +10,7 @@ import 'package:meigen_finder/presentation/components/selector/emotional_selecto
 import 'package:meigen_finder/presentation/routing/router.dart';
 
 import '../../components/button/label_button.dart';
+import '../../components/loading/execute_while_loading.dart';
 import '../../theme/mf_theme.dart';
 
 class HomePage extends HookConsumerWidget {
@@ -22,7 +23,7 @@ class HomePage extends HookConsumerWidget {
 
     final canRetrieveQuoteToday = viewState.canRetrieveQuoteToday;
     useEffect(() {
-      controller.fetch();
+      executeWhileLoading(() => controller.fetch());
       return;
     }, const []);
     return Scaffold(

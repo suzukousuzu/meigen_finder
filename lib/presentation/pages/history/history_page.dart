@@ -7,6 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:meigen_finder/application/controller/history_page_controller.dart';
 import 'package:meigen_finder/application/state/history_page_view_state.dart';
 import 'package:meigen_finder/domain/collection/todays_quote.dart';
+import 'package:meigen_finder/presentation/components/loading/execute_while_loading.dart';
 import 'package:meigen_finder/presentation/routing/router.dart';
 import 'package:meigen_finder/presentation/theme/mf_theme.dart';
 import 'package:meigen_finder/util/emotional_type_extension.dart';
@@ -36,7 +37,7 @@ class HistoryPage extends HookConsumerWidget {
     final viewState = ref.watch(historyPageControllerProvider);
 
     useEffect(() {
-      controller.fetchHistory();
+      executeWhileLoading(() => controller.fetchHistory());
       return null;
     }, const []);
 
