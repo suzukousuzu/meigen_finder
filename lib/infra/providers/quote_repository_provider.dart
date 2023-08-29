@@ -1,6 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../preference/preference_manager.dart';
+import '../manager/preference_manager.dart';
 import '../repository/quote_repository.dart';
 import 'isar_provider.dart';
 

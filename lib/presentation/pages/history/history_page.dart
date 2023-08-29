@@ -37,7 +37,7 @@ class HistoryPage extends HookConsumerWidget {
     final viewState = ref.watch(historyPageControllerProvider);
 
     useEffect(() {
-      executeWhileLoading(() => controller.fetchHistory());
+      executeWhileLoading(ref, () => controller.fetchHistory());
       return null;
     }, const []);
 

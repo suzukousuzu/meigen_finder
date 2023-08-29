@@ -8,7 +8,8 @@ import 'package:meigen_finder/util/datetime_extension.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../domain/collection/todays_quote.dart';
-import '../../infra/preference/preference_manager.dart';
+import '../../infra/manager/ad_manager.dart';
+import '../../infra/manager/preference_manager.dart';
 import '../../infra/providers/quote_repository_provider.dart';
 
 part 'home_page_controller.g.dart';
@@ -25,6 +26,7 @@ class HomePageController extends _$HomePageController {
     await _fetchLikeQuotes();
     await _fetchTodayQuote();
     await _fetchLastDateUpdatedTodayQuote();
+    _fetchBannerAd();
   }
 
   Future<void> _fetchLikeQuotes() async {
@@ -37,6 +39,12 @@ class HomePageController extends _$HomePageController {
     final repository = await ref.read(quoteRepositoryProvider.future);
     final todayQuote = await repository.fetchTodayQuote();
     state = state.copyWith(todaysQuote: todayQuote);
+  }
+
+  void _fetchBannerAd() {
+    final adManager = ref.read(adManagerProvider);
+    final bannerAd = adManager.bannerAd;
+    state = state.copyWith(bannerAd: bannerAd);
   }
 
   Future<void> _fetchLastDateUpdatedTodayQuote() async {

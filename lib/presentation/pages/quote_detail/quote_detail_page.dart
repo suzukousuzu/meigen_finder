@@ -36,7 +36,11 @@ class QuoteDetailPage extends ConsumerWidget {
         actions: [
           IconButton(
             onPressed: () => context.pop(),
-            icon: const Icon(FontAwesomeIcons.xmark, size: 24),
+            icon: Icon(
+              FontAwesomeIcons.xmark,
+              size: 24,
+              color: colorScheme.onBackground,
+            ),
           ),
         ],
       ),
