@@ -63,7 +63,10 @@ class HomePageController extends _$HomePageController {
   Future<void> onUpdateTodayQuote() async {
     try {
       final emotionalType = state.emotionalType;
-      if (emotionalType == null) return;
+      if (emotionalType == null) {
+        throw StateError('emotionalType is null');
+      }
+
       state = state.copyWith(
         quoteRetrievalSuccess: false,
       );

@@ -1,11 +1,12 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:launch_review/launch_review.dart';
 import 'package:meigen_finder/presentation/theme/mf_theme.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../application/controller/setting_page_controller.dart';
+import '../../components/loading/execute_while_loading.dart';
 import '../../components/tile/setting_list_tile_right_arrow.dart';
 import '../../routing/router.dart';
 
@@ -21,7 +22,14 @@ class SettingPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = MfTheme.of(context);
     final colorScheme = theme.colorScheme;
-    final textTheme = theme.textTheme;
+
+    final controller = ref.watch(settingPageControllerProvider.notifier);
+    final viewState = ref.watch(settingPageControllerProvider);
+
+    useEffect(() {
+      executeWhileLoading(ref, () => controller.fetchAppVersion());
+      return null;
+    }, const []);
     return Scaffold(
       backgroundColor: colorScheme.background,
       body: SafeArea(
@@ -51,28 +59,28 @@ class SettingPage extends HookConsumerWidget {
               SettingListTileRightArrow(
                 label: 'レビューを書く',
                 onTap: () {
-                  // LaunchReview.launch(
-                  //   androidAppId: "jp.ringrin.mode_on",
-                  //   iOSAppId: "6449795570",
-                  // );
+                  LaunchReview.launch(
+                    androidAppId: "jp.ringrin.meigen_finder",
+                    iOSAppId: "6463764141",
+                  );
                 },
                 topLeftRadius: 0,
                 topRightRadius: 0,
                 bottomRightRadius: 0,
                 bottomLeftRadius: 0,
               ),
-              const _Divider(),
-              SettingListTileRightArrow(
-                label: 'アプリをシェアする',
-                onTap: () {
-                  // アプリのシェア
-                  Share.share(Platform.isIOS
-                      ? 'https://apps.apple.com/us/app/mode-on/id6449795570'
-                      : 'https://play.google.com/store/apps/details?id=jp.ringrin.mode_on');
-                },
-                topRightRadius: 0,
-                topLeftRadius: 0,
-              ),
+              // const _Divider(),
+              // SettingListTileRightArrow(
+              //   label: 'アプリをシェアする',
+              //   onTap: () {
+              //     // アプリのシェア
+              //     Share.share(Platform.isIOS
+              //         ? 'https://apps.apple.com/us/app/mode-on/id6449795570'
+              //         : 'https://play.google.com/store/apps/details?id=jp.ringrin.mode_on');
+              //   },
+              //   topRightRadius: 0,
+              //   topLeftRadius: 0,
+              // ),
               const SizedBox(
                 height: 32.0,
               ),
@@ -94,9 +102,9 @@ class SettingPage extends HookConsumerWidget {
               const SizedBox(
                 height: 32.0,
               ),
-              const SettingListTileRightArrow(
+              SettingListTileRightArrow(
                 label: 'バージョン情報',
-                trailingWidget: Text('1.0.0'),
+                trailingWidget: Text(viewState.appVersion),
               ),
             ],
           ),
