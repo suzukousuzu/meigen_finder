@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:meigen_finder/application/controller/home_page_controller.dart';
 import 'package:meigen_finder/application/controller/quote_detail_page_controller.dart';
@@ -21,26 +22,35 @@ class HomePage extends HookConsumerWidget {
     final controller = ref.watch(homePageControllerProvider.notifier);
     final viewState = ref.watch(homePageControllerProvider);
 
+    final bannerAd = viewState.bannerAd;
+
     final canRetrieveQuoteToday = viewState.canRetrieveQuoteToday;
     useEffect(() {
-      executeWhileLoading(() => controller.fetch());
+      executeWhileLoading(ref, () => controller.fetch());
       return;
     }, const []);
     return Scaffold(
       body: SafeArea(
-          child: Column(
+          child: Stack(
         children: [
-          _PromptText(
-            canRetrieveQuoteToday: canRetrieveQuoteToday,
+          Column(
+            children: [
+              _PromptText(
+                canRetrieveQuoteToday: canRetrieveQuoteToday,
+              ),
+              _EmotionalSelector(
+                canRetrieveQuoteToday: canRetrieveQuoteToday,
+                initialType: viewState.todaysQuote?.emotionalType,
+              ),
+              _Button(
+                controller: controller,
+                canRetrieveQuoteToday: canRetrieveQuoteToday,
+              ),
+            ],
           ),
-          _EmotionalSelector(
-            canRetrieveQuoteToday: canRetrieveQuoteToday,
-            initialType: viewState.todaysQuote?.emotionalType,
-          ),
-          _Button(
-            controller: controller,
-            canRetrieveQuoteToday: canRetrieveQuoteToday,
-          ),
+          if (bannerAd != null) ...{
+            _Banner(bannerAd: bannerAd),
+          },
         ],
       )),
     );
@@ -116,7 +126,7 @@ class _Button extends ConsumerWidget {
       if (todaysQuote == null) {
         return;
       }
-      if (previous == false && next == true) {
+      if (next == true) {
         QuoteDetailRouteFromHome(
                 QuoteDetailArgument(todaysQuote.quote, viewState.isLikedQuoted))
             .go(context);
@@ -136,10 +146,37 @@ class _Button extends ConsumerWidget {
           : LabelButton(
               label: '今日の名言を再度みる',
               onPressed: () {
+                // TODO:全画面広告の実装
                 QuoteDetailRouteFromHome(QuoteDetailArgument(
                         todaysQuote!.quote, viewState.isLikedQuoted))
                     .go(context);
               }),
+    );
+  }
+}
+
+class _Banner extends StatelessWidget {
+  const _Banner({
+    Key? key,
+    required this.bannerAd,
+  }) : super(key: key);
+
+  final BannerAd bannerAd;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Align(
+        alignment: Alignment.bottomCenter,
+        child: SizedBox(
+          width: bannerAd.size.width.toDouble(),
+          height: bannerAd.size.height.toDouble(),
+          child: AdWidget(
+            ad: bannerAd,
+          ),
+        ),
+      ),
     );
   }
 }

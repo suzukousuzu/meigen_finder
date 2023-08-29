@@ -7,7 +7,7 @@ import 'package:meigen_finder/util/datetime_extension.dart';
 
 import '../../domain/collection/emotional_type.dart';
 import '../../domain/collection/quote.dart';
-import '../preference/preference_manager.dart';
+import '../manager/preference_manager.dart';
 
 class QuoteRepository {
   QuoteRepository(this._isar, this._preferenceManager);

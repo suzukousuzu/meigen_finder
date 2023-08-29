@@ -1,3 +1,4 @@
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:meigen_finder/domain/collection/emotional_type.dart';
 import 'package:meigen_finder/domain/collection/todays_quote.dart';
 
@@ -9,6 +10,7 @@ class HomePageViewState {
   List<Quote>? likedQuotes;
   DateTime? lastDateUpdatedTodayQuote;
   bool quoteRetrievalSuccess;
+  BannerAd? bannerAd;
 
 //<editor-fold desc="Data Methods">
   HomePageViewState({
@@ -17,6 +19,7 @@ class HomePageViewState {
     this.likedQuotes,
     this.lastDateUpdatedTodayQuote,
     required this.quoteRetrievalSuccess,
+    this.bannerAd,
   });
 
   @override
@@ -28,7 +31,8 @@ class HomePageViewState {
           todaysQuote == other.todaysQuote &&
           likedQuotes == other.likedQuotes &&
           lastDateUpdatedTodayQuote == other.lastDateUpdatedTodayQuote &&
-          quoteRetrievalSuccess == other.quoteRetrievalSuccess);
+          quoteRetrievalSuccess == other.quoteRetrievalSuccess &&
+          bannerAd == other.bannerAd);
 
   @override
   int get hashCode =>
@@ -36,11 +40,19 @@ class HomePageViewState {
       todaysQuote.hashCode ^
       likedQuotes.hashCode ^
       lastDateUpdatedTodayQuote.hashCode ^
-      quoteRetrievalSuccess.hashCode;
+      quoteRetrievalSuccess.hashCode ^
+      bannerAd.hashCode;
 
   @override
   String toString() {
-    return 'HomePageViewState{ emotionalType: $emotionalType, todaysQuote: $todaysQuote, likedQuotes: $likedQuotes, lastDateUpdatedTodayQuote: $lastDateUpdatedTodayQuote, quoteRetrievalSuccess: $quoteRetrievalSuccess,}';
+    return 'HomePageViewState{' +
+        ' emotionalType: $emotionalType,' +
+        ' todaysQuote: $todaysQuote,' +
+        ' likedQuotes: $likedQuotes,' +
+        ' lastDateUpdatedTodayQuote: $lastDateUpdatedTodayQuote,' +
+        ' quoteRetrievalSuccess: $quoteRetrievalSuccess,' +
+        ' bannerAd: $bannerAd,' +
+        '}';
   }
 
   HomePageViewState copyWith({
@@ -49,6 +61,7 @@ class HomePageViewState {
     List<Quote>? likedQuotes,
     DateTime? lastDateUpdatedTodayQuote,
     bool? quoteRetrievalSuccess,
+    BannerAd? bannerAd,
   }) {
     return HomePageViewState(
       emotionalType: emotionalType ?? this.emotionalType,
@@ -58,6 +71,7 @@ class HomePageViewState {
           lastDateUpdatedTodayQuote ?? this.lastDateUpdatedTodayQuote,
       quoteRetrievalSuccess:
           quoteRetrievalSuccess ?? this.quoteRetrievalSuccess,
+      bannerAd: bannerAd ?? this.bannerAd,
     );
   }
 
@@ -68,6 +82,7 @@ class HomePageViewState {
       'likedQuotes': this.likedQuotes,
       'lastDateUpdatedTodayQuote': this.lastDateUpdatedTodayQuote,
       'quoteRetrievalSuccess': this.quoteRetrievalSuccess,
+      'bannerAd': this.bannerAd,
     };
   }
 
@@ -78,6 +93,7 @@ class HomePageViewState {
       likedQuotes: map['likedQuotes'] as List<Quote>,
       lastDateUpdatedTodayQuote: map['lastDateUpdatedTodayQuote'] as DateTime,
       quoteRetrievalSuccess: map['quoteRetrievalSuccess'] as bool,
+      bannerAd: map['bannerAd'] as BannerAd,
     );
   }
 
