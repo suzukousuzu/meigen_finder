@@ -1,4 +1,4 @@
-package com.example.meigen_finder
+package jp.ringrin.meigen_finder
 
 import io.flutter.embedding.android.FlutterActivity
 
