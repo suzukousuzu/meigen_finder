@@ -128,10 +128,13 @@ class HistoryPage extends HookConsumerWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Center(
-                child: Text(
-                  date.day.toString(),
-                  style: textTheme.subtextBold.copyWith(
-                    color: colorScheme.secondary,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 2),
+                  child: Text(
+                    date.day.toString(),
+                    style: textTheme.subtextBold.copyWith(
+                      color: colorScheme.secondary,
+                    ),
                   ),
                 ),
               ),

@@ -23,7 +23,9 @@ void main() {
   ]);
 
   //ステータスバーの色の設定
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: Colors.black,
+  ));
   runApp(const ProviderScope(child: MyApp()));
 }
 
