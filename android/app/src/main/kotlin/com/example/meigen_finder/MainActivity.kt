@@ -1,4 +1,4 @@
-package jp.ringrin.meigen_finder
+package jp.ringrin.kibun_e_meigen
 
 import io.flutter.embedding.android.FlutterActivity
 

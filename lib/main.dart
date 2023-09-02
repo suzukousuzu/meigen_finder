@@ -40,7 +40,7 @@ class MyApp extends HookConsumerWidget {
       return;
     }, const []);
     return MaterialApp.router(
-      title: '名言ファインダー',
+      title: '気分e名言',
       theme: theme.data,
       builder: LoadingScreen.init(),
       routerConfig: router,
