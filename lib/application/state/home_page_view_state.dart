@@ -102,7 +102,12 @@ class HomePageViewState {
 
 extension Computed on HomePageViewState {
   bool get isButtonEnable => emotionalType != null;
-  bool get isLikedQuoted => likedQuotes?.contains(todaysQuote?.quote) ?? false;
+  bool get isLikedQuoted {
+    final likedQuoteTexts = likedQuotes?.map((e) => e.text).toList();
+    final todaysQuoteTexts = todaysQuote?.quote.text;
+    return likedQuoteTexts?.contains(todaysQuoteTexts) ?? false;
+  }
+
   bool get canRetrieveQuoteToday {
     return lastDateUpdatedTodayQuote == null ||
         DateTime.now().day != lastDateUpdatedTodayQuote?.day;

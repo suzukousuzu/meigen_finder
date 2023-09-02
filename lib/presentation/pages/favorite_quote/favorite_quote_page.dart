@@ -22,47 +22,52 @@ class FavoriteQuotePage extends HookConsumerWidget {
     final textTheme = theme.textTheme;
     const isLiked = true;
     return Scaffold(
-      body: favoriteQuotes.isNotEmpty
-          ? SafeArea(
-              child: CustomScrollView(
-              slivers: [
-                SliverAppBar(
-                  backgroundColor: colorScheme.background,
-                  title: SearchTextField(
-                      onFieldSubmitted: controller.searchFavoriteQuote,
-                      onClear: () => controller.onClear()),
-                  pinned: true,
-                  bottom: PreferredSize(
-                    preferredSize: const Size.fromHeight(16.0), // 追加の高さを指定
-                    child: Container(), // 空のウィジェット
-                  ),
-                ),
-                SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                      final quote = favoriteQuotes[index];
-                      return Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 8),
-                          child: FavoriteQuoteTile(
-                            text: quote.text,
-                            author: quote.author ?? '',
-                            onTap: () => QuoteDetailRouteFromFavorite(
-                                    QuoteDetailArgument(quote, isLiked))
-                                .push(context),
-                          ));
-                    },
-                    childCount: favoriteQuotes.length,
-                  ),
-                ),
-              ],
-            ))
-          : Center(
-              child: Text(
-                'お気に入りの名言はありません',
-                style: textTheme.h3.copyWith(color: colorScheme.onBackground),
-              ),
+        body: SafeArea(
+            child: CustomScrollView(
+      slivers: [
+        SliverPadding(
+          padding: const EdgeInsets.only(top: 32.0),
+          sliver: SliverAppBar(
+            backgroundColor: colorScheme.background,
+            title: SearchTextField(
+                onFieldSubmitted: controller.searchFavoriteQuote,
+                onClear: () => controller.onClear()),
+            pinned: true,
+            bottom: PreferredSize(
+              preferredSize: const Size.fromHeight(16.0), // 追加の高さを指定
+              child: Container(), // 空のウィジェット
             ),
-    );
+          ),
+        ),
+        favoriteQuotes.isNotEmpty
+            ? SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (context, index) {
+                    final quote = favoriteQuotes[index];
+                    return Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 8),
+                        child: FavoriteQuoteTile(
+                          text: quote.text,
+                          author: quote.author ?? '',
+                          onTap: () => QuoteDetailRouteFromFavorite(
+                                  QuoteDetailArgument(quote, isLiked))
+                              .push(context),
+                        ));
+                  },
+                  childCount: favoriteQuotes.length,
+                ),
+              )
+            : SliverToBoxAdapter(
+                child: Center(
+                  child: Text(
+                    'お気に入りの名言はありません',
+                    style:
+                        textTheme.h3.copyWith(color: colorScheme.onBackground),
+                  ),
+                ),
+              ),
+      ],
+    )));
   }
 }

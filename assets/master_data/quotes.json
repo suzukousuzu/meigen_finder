@@ -484,6 +484,666 @@
     "text": "自分の中に答えがある。静かな瞬間を持ち、答えを聞く勇気が必要だ。",
     "author": "オプラ・ウィンフリー",
     "category": "somewhatSad"
+  },
+  {
+    "id": 81,
+    "text": "最も大切なことは、絶えず心を若く保つことだ。",
+    "author": "ヘンリー・フォード",
+    "category": "superHappy"
+  },
+  {
+    "id": 82,
+    "text": "人生の意味は、生きることに意味を見つけることだ。",
+    "author": "アルバート・カミュ",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 83,
+    "text": "成功するための最良の方法は、一度失敗してしまうことだ。",
+    "author": "トーマス・エジソン",
+    "category": "normal"
+  },
+  {
+    "id": 84,
+    "text": "失敗は避けられない。しかし、それが何を意味するかは、自分次第だ。",
+    "author": "オプラ・ウィンフリー",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 85,
+    "text": "人生は苦しい。だがそれは、強くなるための過程でもある。",
+    "author": "フリードリッヒ・ニーチェ",
+    "category": "superSad"
+  },
+  {
+    "id": 86,
+    "text": "幸せは、目的地ではなく、生き方だ。",
+    "author": "ラルフ・ワルド・エマーソン",
+    "category": "superHappy"
+  },
+  {
+    "id": 87,
+    "text": "困難を乗り越えることで、人は強くなる。",
+    "author": "アーノルド・シュワルツェネッガー",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 88,
+    "text": "どれだけ待っても、夢は自分からは来ない。行って掴むものだ。",
+    "author": "アブラハム・リンカーン",
+    "category": "normal"
+  },
+  {
+    "id": 89,
+    "text": "人は、過去の失敗によって、未来の成功への道を学ぶ。",
+    "author": "デイル・カーネギー",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 90,
+    "text": "失われたものすべてが、他の形で戻ってくる。",
+    "author": "フョードル・ドストエフスキー",
+    "category": "superSad"
+  },
+  {
+    "id": 91,
+    "text": "自分を信じること、それが成功の秘訣だ。",
+    "author": "リチャード・バートン",
+    "category": "superHappy"
+  },
+  {
+    "id": 92,
+    "text": "目的を持って生きることで、人生は意味を持つ。",
+    "author": "ロバート・バイロン",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 93,
+    "text": "チャンスは、準備が整った者にしか微笑まない。",
+    "author": "ルイス・パスツール",
+    "category": "normal"
+  },
+  {
+    "id": 94,
+    "text": "過去を振り返ってはいけない。そうしなければ、二度と前進できない。",
+    "author": "ウィル・ロジャース",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 95,
+    "text": "私たちの最大の栄光は、決して落ちないことではなく、落ちるたびに立ち上がることだ。",
+    "author": "ネルソン・マンデラ",
+    "category": "superSad"
+  },
+  {
+    "id": 96,
+    "text": "人生で成功するためには、自分の夢に信じ続けることが大切だ。",
+    "author": "エレノア・ルーズベルト",
+    "category": "superHappy"
+  },
+  {
+    "id": 97,
+    "text": "成功への道は、常に建設中だ。",
+    "author": "リリー・トムリン",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 98,
+    "text": "失敗から学び、再び挑戦する。それが成功への道だ。",
+    "author": "デイル・カーネギー",
+    "category": "normal"
+  },
+  {
+    "id": 99,
+    "text": "過去の失敗を恐れず、未来の夢に向かって進もう。",
+    "author": "リンダ・ポールト",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 100,
+    "text": "人生は苦しい。だが、それは成長するチャンスでもある。",
+    "author": "エリザベス・キューブラー＝ロス",
+    "category": "superSad"
+  },
+  {
+    "id": 101,
+    "text": "人生で重要なのは、他人に何を与えるかだ。",
+    "author": "アルバート・アインシュタイン",
+    "category": "superHappy"
+  },
+  {
+    "id": 102,
+    "text": "幸せになるためには、自分自身を知ることが大切だ。",
+    "author": "ソクラテス",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 103,
+    "text": "人生で成功するためには、勇気を持って行動することが必要だ。",
+    "author": "テオドール・ルーズベルト",
+    "category": "normal"
+  },
+  {
+    "id": 104,
+    "text": "過去に囚われず、未来を信じることが、前進する力となる。",
+    "author": "ヘレン・ケラー",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 105,
+    "text": "人生で最もつらい瞬間は、自分の力を信じるチャンスでもある。",
+    "author": "ボブ・マーリー",
+    "category": "superSad"
+  },
+  {
+    "id": 106,
+    "text": "失敗を恐れず、夢を追い求める勇気を持とう。",
+    "author": "ジョン・F・ケネディ",
+    "category": "superHappy"
+  },
+  {
+    "id": 107,
+    "text": "人生は一度きり。後悔しないように、自分らしく生きよう。",
+    "author": "マリリン・モンロー",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 108,
+    "text": "人生で重要なのは、自分がどれだけ進化するかだ。",
+    "author": "モハマド・ガンディー",
+    "category": "normal"
+  },
+  {
+    "id": 109,
+    "text": "悲しみや失望を、成長の糧に変えよう。",
+    "author": "デズモンド・ツツ",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 110,
+    "text": "人生で最も困難なことは、自分自身について考えることだ。",
+    "author": "ヨハン・ゲーテ",
+    "category": "superSad"
+  },
+  {
+    "id": 111,
+    "text": "人生で一番大切なのは、愛だ。",
+    "author": "マザー・テレサ",
+    "category": "superHappy"
+  },
+  {
+    "id": 112,
+    "text": "人生で最も価値のあるものは、友情だ。",
+    "author": "アリストテレス",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 113,
+    "text": "自分の可能性を信じることで、人は成功に近づく。",
+    "author": "ノーマン・ヴィンセント・ピール",
+    "category": "normal"
+  },
+  {
+    "id": 114,
+    "text": "他人の意見に流されず、自分の心を信じよう。",
+    "author": "スティーブ・ジョブズ",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 115,
+    "text": "失敗は成功への第一歩だ。",
+    "author": "ウィンストン・チャーチル",
+    "category": "superSad"
+  },
+  {
+    "id": 116,
+    "text": "笑顔は、自分も周りも幸せにする。",
+    "author": "シャーリー・テンプル",
+    "category": "superHappy"
+  },
+  {
+    "id": 117,
+    "text": "幸せは、目の前の小さなことに感謝することで得られる。",
+    "author": "エピクテトス",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 118,
+    "text": "人生は挑戦の連続だ。それを受け入れよう。",
+    "author": "ジム・ローン",
+    "category": "normal"
+  },
+  {
+    "id": 119,
+    "text": "他人の期待にとらわれず、自分の人生を生きよう。",
+    "author": "エレノア・ルーズベルト",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 120,
+    "text": "絶望の中でも、希望を見つけることができる。",
+    "author": "アンネ・フランク",
+    "category": "superSad"
+  },
+  {
+    "id": 121,
+    "text": "夢を追い求める旅は困難だが、それだけの価値がある。",
+    "author": "スティーブ・ジョブズ",
+    "category": "superHappy"
+  },
+  {
+    "id": 122,
+    "text": "小さな善行も、無意味なものではない。",
+    "author": "マザー・テレサ",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 123,
+    "text": "自分自身を信じることが、成功の第一歩だ。",
+    "author": "ウィル・スミス",
+    "category": "normal"
+  },
+  {
+    "id": 124,
+    "text": "過去の過ちから学び、未来に向かって進もう。",
+    "author": "ネルソン・マンデラ",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 125,
+    "text": "失敗は、成功するためのステップだ。",
+    "author": "トーマス・エジソン",
+    "category": "superSad"
+  },
+  {
+    "id": 126,
+    "text": "愛とは、他人の幸福を自分の幸福以上に願うことだ。",
+    "author": "ロバート・ハインライン",
+    "category": "superHappy"
+  },
+  {
+    "id": 127,
+    "text": "幸せは、自分が決めるものだ。",
+    "author": "アブラハム・リンカーン",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 128,
+    "text": "進化することで、人は強くなる。",
+    "author": "ガンディ",
+    "category": "normal"
+  },
+  {
+    "id": 129,
+    "text": "人生の目的は、意味を見つけることだ。",
+    "author": "ヴィクトール・フランクル",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 130,
+    "text": "人生の困難は、成長する機会でもある。",
+    "author": "エリザベス・キューブラー＝ロス",
+    "category": "superSad"
+  },
+  {
+    "id": 131,
+    "text": "成功の秘訣は、自分を知り、自分を信じることだ。",
+    "author": "ナポレオン・ヒル",
+    "category": "superHappy"
+  },
+  {
+    "id": 132,
+    "text": "人生は冒険だ。リスクを取らなければ、何も得られない。",
+    "author": "アンドレ・ジッド",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 133,
+    "text": "人生で大切なのは、他人との関係だ。",
+    "author": "ジョージ・ワシントン",
+    "category": "normal"
+  },
+  {
+    "id": 134,
+    "text": "困難を乗り越えることで、人は成長する。",
+    "author": "ジョシュア・J・マリン",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 135,
+    "text": "失敗は避けられないが、それを受け入れ、学び、進むことが大切だ。",
+    "author": "ヘンリー・フォード",
+    "category": "superSad"
+  },
+  {
+    "id": 136,
+    "text": "成功の鍵は、自分自身を知り、信じることだ。",
+    "author": "ビル・ゲイツ",
+    "category": "superHappy"
+  },
+  {
+    "id": 137,
+    "text": "困難を乗り越えることで、人は強くなる。",
+    "author": "アーノルド・シュワルツェネッガー",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 138,
+    "text": "幸せとは、自分の人生を生きることだ。",
+    "author": "ミハイ・チクセントミハイ",
+    "category": "normal"
+  },
+  {
+    "id": 139,
+    "text": "人生は短い。だから、愛すること、夢を追い求めること、楽しむことが大切だ。",
+    "author": "ルイーザ・メイ・オルコット",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 140,
+    "text": "人生は困難だが、それはそれで美しい。",
+    "author": "フレデリック・ニーチェ",
+    "category": "superSad"
+  },
+  {
+    "id": 141,
+    "text": "私たちの最大の栄光は、決して落ちないことではなく、落ちるたびに立ち上がることにある。",
+    "author": "ネルソン・マンデラ",
+    "category": "superHappy"
+  },
+  {
+    "id": 142,
+    "text": "過去を思い出して涙するよりも、未来を想像して笑顔になろう。",
+    "author": "ウィル・ロジャース",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 143,
+    "text": "人生は70％の苦しみと、30％の幸福から成り立っている。でも、その30％の幸福のために、70％の苦しみに耐える価値がある。",
+    "author": "ソクラテス",
+    "category": "normal"
+  },
+  {
+    "id": 144,
+    "text": "失敗は避けられない運命である。しかし、それは終わりではなく、新しい始まりである。",
+    "author": "ヘンリー・フォード",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 145,
+    "text": "人生の道のりは険しいが、その道のりを進むことで、我々は最強の自分を見つけることができる。",
+    "author": "フリードリヒ・ニーチェ",
+    "category": "superSad"
+  },
+  {
+    "id": 146,
+    "text": "人は一人では生きられない。他人の支えがあって初めて、人は人として生きられる。",
+    "author": "マザー・テレサ",
+    "category": "superHappy"
+  },
+  {
+    "id": 147,
+    "text": "成功の鍵は、自分を信じ、自分の力を信じることだ。",
+    "author": "マハトマ・ガンディ",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 148,
+    "text": "私たちの人生は、私たちの思考によって作られる。",
+    "author": "マーカス・オーリリウス",
+    "category": "normal"
+  },
+  {
+    "id": 149,
+    "text": "人生は短い。だから、愛し、尊敬し、信頼し、生きることが大切だ。",
+    "author": "ウィリアム・シェイクスピア",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 150,
+    "text": "失敗は成功への道標だ。",
+    "author": "ウィンストン・チャーチル",
+    "category": "superSad"
+  },
+  {
+    "id": 151,
+    "text": "どうして自分を責めるんですか？他人がちゃんと必要な時に責めてくれるんだからいいじゃないですか",
+    "author": "アインシュタイン",
+    "category": "superSad"
+  },
+  {
+    "id": 152,
+    "text": "いいかい、怖かったら怖いほど、逆にそこに飛び込むんだ",
+    "author": "岡本太郎",
+    "category": "superSad"
+  },
+  {
+    "id": 153,
+    "text": "人にできて、きみだけにできないなんてことあるもんか。毎日の小さな努力のつみ重ねが、歴史を作っていくんだよ",
+    "author": "ドラえもん",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 154,
+    "text": "誰にもできる事とできねェ事がある。お前にできねェ事はおれがやる おれにできねェ事をお前がやれ！",
+    "author": "ヴィンスモーク・サンジ",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 155,
+    "text": "おれは助けてもらわねェと生きていけねェ自信がある！",
+    "author": "モンキー・D・ルフィ",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 156,
+    "text": "失った物ばかり数えるな!!! 無いものは無い!!! 確認せい!! お前にまだ残っておるものは何じゃ!!!",
+    "author": "ジンベイ",
+    "category": "superSad"
+  },
+  {
+    "id": 157,
+    "text": "「あきらめたらそこで試合終了だよ",
+    "author": "安西先生",
+    "category": "superSad"
+  },
+  {
+    "id": 158,
+    "text": "自分で変われるのが人間の強さだ",
+    "author": "ワンパンマン",
+    "category": "normal"
+  },
+  {
+    "id": 159,
+    "text": "限界はあるものでなく、自分で決めるものでござるよ",
+    "author": "るろうに剣心",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 160,
+    "text": "意味のないことをたくさんするのが人生なんじゃよ",
+    "author": "ちびまる子ちゃん",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 161,
+    "text": "言いたい人には言わせておけばいい。今に見てろって熱くなれるから。そっちの方がずっといい。",
+    "author": "宇宙よりも遠い場所",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 162,
+    "text": "無駄だとは言わねェ この世に不可能という事は何一つねェからな",
+    "author": "黒ひげ",
+    "category": "superHappy"
+  },
+  {
+    "id": 163,
+    "text": "今の時代を作れるのは 今を生きてる人間だけだよ…！！",
+    "author": "シルバーズ・レイリー",
+    "category": "superHappy"
+  },
+  {
+    "id": 164,
+    "text": "ちょっと工夫すれば どんな山でも切り崩すことは、できるものだガネ",
+    "author": "ミスター3（ギャルディーノ）",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 165,
+    "text": "存在する事は罪にならねェ！！",
+    "author": "フランキー",
+    "category": "superSad"
+  },
+  {
+    "id": 166,
+    "text": "人の夢は！！終わらねェ！！！",
+    "author": "黒ひげ",
+    "category": "superHappy"
+  },
+  {
+    "id": 167,
+    "text": "勝利も敗北も知り逃げ回って涙を流して男は一人前になる 泣いたっていいんだ！！乗り越えろ！",
+    "author": "シャンクス",
+    "category": "superSad"
+  },
+  {
+    "id": 168,
+    "text": "泣く程 くやしかったら…もっと強くなってみせろ！！",
+    "author": "スモーカー",
+    "category": "superSad"
+  },
+  {
+    "id": 169,
+    "text": "男にゃあ どうしても戦いを避けちゃならねェ時がある 仲間の夢を笑われた時だ！！",
+    "author": "ウソップ",
+    "category": "superSad"
+  },
+  {
+    "id": 170,
+    "text": "結果は すぐには ついて来ねェよ やれるだけの事をやったら男はドンと胸を張ってりゃいいんだ…！！",
+    "author": "トム",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 171,
+    "text": "おめェ チビのくせに色々苦しそうだで 笑ったらええでよ！苦しい時は笑ったらええ！",
+    "author": "ハグワール・D・サウロ",
+    "category": "superSad"
+  },
+  {
+    "id": 172,
+    "text": "バカげた理屈だと人は笑うだろうが結構じゃねェか！！それでこそ！！“ロマン”だ！！",
+    "author": "モンブラン・クリケット",
+    "category": "superHappy"
+  },
+  {
+    "id": 173,
+    "text": "力に屈したら男に生まれた意味がねェだろう おれは決して人生に“くい”は残さない…！！",
+    "author": "ポートガス・D・エース",
+    "category": "superSad"
+  },
+  {
+    "id": 174,
+    "text": "まだあわてるような時間じゃない",
+    "author": "仙道彰",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 175,
+    "text": "俺に今できることをやるよ! やってやる!",
+    "author": "桜木花道",
+    "category": "superHappy"
+  },
+  {
+    "id": 176,
+    "text": "基本が大事 だろ? ゴリ",
+    "author": "桜木花道",
+    "category": "normal"
+  },
+  {
+    "id": 177,
+    "text": "屈辱は10倍にして返すぜ じい",
+    "author": "桜木花道",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 178,
+    "text": "言ったことは，まげねぇ。それが俺の忍道だ！",
+    "author": "うずまきナルト",
+    "category": "superHappy"
+  },
+  {
+    "id": 179,
+    "text": "人は大切の何かを守りたいと思ったときに，本当に強くなれるものなんです。",
+    "author": "白",
+    "category": "superHappy"
+  },
+  {
+    "id": 180,
+    "text": "嬉しい時には泣いてもいいんだぜ。",
+    "author": "うずまきナルト",
+    "category": "superHappy"
+  },
+  {
+    "id": 181,
+    "text": "運命なんて，誰かが決めるもんじゃない。",
+    "author": "うずまきナルト",
+    "category": "superSad"
+  },
+  {
+    "id": 182,
+    "text": "このまま逃げて筋を通さねぇまま生きていくような、そういうめんどくせー生き方もしたくねーんすよ。",
+    "author": "奈良シカマル",
+    "category": "superHappy"
+  },
+  {
+    "id": 183,
+    "text": "俺があきらめるのをあきらめろ！",
+    "author": "うずまきナルト",
+    "category": "superSad"
+  },
+  {
+    "id": 184,
+    "text": "自分を信じない奴になんかに，努力する価値は無い！",
+    "author": "マイト・ガイ",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 185,
+    "text": "運命なんて誰かが決めるもんじゃない！",
+    "author": "日向ネジ",
+    "category": "superSad"
+  },
+  {
+    "id": 186,
+    "text": "俺たちも託される側から、託す側にならねーと",
+    "author": "奈良シカマル",
+    "category": "superHappy"
+  },
+  {
+    "id": 187,
+    "text": "屈辱は10倍にして返すぜ じい",
+    "author": "桜木花道",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 188,
+    "text": " 期待に応えたいんだ…！笑って、応えられるような…カッコイイ人（ヒーロー）に…なりたいんだ…",
+    "author": "緑谷出久",
+    "category": "superHappy"
+  },
+  {
+    "id": 189,
+    "text": "常にトップを狙う者とそうでない者…そのわずかな気持ちの差は、社会に出てから大きく響くぞ…",
+    "author": "オールマイト",
+    "category": "superHappy"
+  },
+  {
+    "id": 190,
+    "text": "僕も本気で、獲りに行く！",
+    "author": "緑谷出久",
+    "category": "superHappy"
   }
 ]
 
