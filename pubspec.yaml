@@ -59,6 +59,7 @@ dependencies:
   google_mobile_ads: ^3.0.0
   package_info_plus: ^4.1.0
   flutter_launcher_icons: ^0.13.1
+  firebase_core: ^2.15.1
 
 
 dev_dependencies:

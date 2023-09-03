@@ -11,6 +11,7 @@ class SettingPageController extends _$SettingPageController {
 
   Future<void> fetchAppVersion() async {
     final packageInfo = await PackageInfo.fromPlatform();
+    print(packageInfo.packageName);
     state = state.copyWith(appVersion: packageInfo.version);
   }
 }

@@ -119,16 +119,14 @@ class _Button extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final viewState = ref.watch(homePageControllerProvider);
-    final todaysQuote = viewState.todaysQuote;
     ref.listen(
-        homePageControllerProvider
-            .select((value) => value.quoteRetrievalSuccess), (previous, next) {
-      if (next == true) {
-        if (todaysQuote == null) {
-          return;
-        }
-        QuoteDetailRouteFromHome(
-                QuoteDetailArgument(todaysQuote.quote, viewState.isLikedQuoted))
+        homePageControllerProvider.select((value) =>
+            value.quoteRetrievalSuccess && value.todaysQuote != null),
+        (previous, next) {
+      if (previous == false && next == true) {
+        final todaysQuote = viewState.todaysQuote;
+        QuoteDetailRouteFromHome(QuoteDetailArgument(
+                todaysQuote!.quote, viewState.isLikedQuoted))
             .go(context);
       }
     });

@@ -1,15 +1,18 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:meigen_finder/application/init/init_app.dart';
+import 'package:meigen_finder/firebase_options_dev.dart' as dev;
+import 'package:meigen_finder/firebase_options_prod.dart' as prod;
 import 'package:meigen_finder/presentation/components/loading/loading_screen.dart';
 import 'package:meigen_finder/presentation/routing/router.dart';
 import 'package:meigen_finder/presentation/theme/mf_theme.dart';
 import 'package:stack_trace/stack_trace.dart' as stack_trace;
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   initializeDateFormatting();
   FlutterError.demangleStackTrace = (StackTrace stack) {
@@ -17,6 +20,16 @@ void main() {
     if (stack is stack_trace.Chain) return stack.toTrace().vmTrace;
     return stack;
   };
+  const flavorName = String.fromEnvironment('flavor');
+  // Flavor に応じた FirebaseOptions を準備する
+  final firebaseOptions = flavorName == 'prod'
+      ? prod.DefaultFirebaseOptions.currentPlatform
+      : dev.DefaultFirebaseOptions.currentPlatform;
+
+  // Firebase の初期化
+  await Firebase.initializeApp(
+    options: firebaseOptions,
+  );
   //向き指定
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp, //縦固定
@@ -35,8 +48,6 @@ class MyApp extends HookConsumerWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const flavorName = String.fromEnvironment('flavor');
-    print(flavorName); // 'dev'
     final theme = ref.watch(mfThemeProvider);
     final router = ref.watch(routerProvider);
     useEffect(() {
