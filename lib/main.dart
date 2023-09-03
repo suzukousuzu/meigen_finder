@@ -35,6 +35,8 @@ class MyApp extends HookConsumerWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    const flavorName = String.fromEnvironment('flavor');
+    print(flavorName); // 'dev'
     final theme = ref.watch(mfThemeProvider);
     final router = ref.watch(routerProvider);
     useEffect(() {
