@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>452476929242-auhhhdk0h1lsr0nj3gv3l34c3a2bhm9c.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.452476929242-auhhhdk0h1lsr0nj3gv3l34c3a2bhm9c</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAjIoLkA_pAm4MnDxMdzOW168GOzAqO5DY</string>
+	<key>GCM_SENDER_ID</key>
+	<string>452476929242</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.meigenFinder.RunnerTests</string>
+	<key>PROJECT_ID</key>
+	<string>kibunemeigen-f722a</string>
+	<key>STORAGE_BUCKET</key>
+	<string>kibunemeigen-f722a.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:452476929242:ios:07233e9085d67c684411e3</string>
+</dict>
+</plist>
