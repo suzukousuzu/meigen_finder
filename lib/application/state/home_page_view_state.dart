@@ -4,21 +4,36 @@ import 'package:meigen_finder/domain/collection/todays_quote.dart';
 
 import '../../domain/collection/quote.dart';
 
+class TodayQuoteResult {
+  final TodaysQuote? todaysQuote;
+  final bool quoteRetrievalSuccess;
+
+  TodayQuoteResult(this.todaysQuote, this.quoteRetrievalSuccess);
+
+  TodayQuoteResult copyWith({
+    TodaysQuote? todaysQuote,
+    bool? quoteRetrievalSuccess,
+  }) {
+    return TodayQuoteResult(
+      todaysQuote ?? this.todaysQuote,
+      quoteRetrievalSuccess ?? this.quoteRetrievalSuccess,
+    );
+  }
+}
+
 class HomePageViewState {
   EmotionalType? emotionalType;
-  TodaysQuote? todaysQuote;
+  TodayQuoteResult? todayQuoteResult;
   List<Quote>? likedQuotes;
   DateTime? lastDateUpdatedTodayQuote;
-  bool quoteRetrievalSuccess;
   BannerAd? bannerAd;
 
 //<editor-fold desc="Data Methods">
   HomePageViewState({
     this.emotionalType,
-    this.todaysQuote,
+    this.todayQuoteResult,
     this.likedQuotes,
     this.lastDateUpdatedTodayQuote,
-    required this.quoteRetrievalSuccess,
     this.bannerAd,
   });
 
@@ -28,49 +43,37 @@ class HomePageViewState {
       (other is HomePageViewState &&
           runtimeType == other.runtimeType &&
           emotionalType == other.emotionalType &&
-          todaysQuote == other.todaysQuote &&
+          todayQuoteResult == other.todayQuoteResult &&
           likedQuotes == other.likedQuotes &&
           lastDateUpdatedTodayQuote == other.lastDateUpdatedTodayQuote &&
-          quoteRetrievalSuccess == other.quoteRetrievalSuccess &&
           bannerAd == other.bannerAd);
 
   @override
   int get hashCode =>
       emotionalType.hashCode ^
-      todaysQuote.hashCode ^
+      todayQuoteResult.hashCode ^
       likedQuotes.hashCode ^
       lastDateUpdatedTodayQuote.hashCode ^
-      quoteRetrievalSuccess.hashCode ^
       bannerAd.hashCode;
 
   @override
   String toString() {
-    return 'HomePageViewState{' +
-        ' emotionalType: $emotionalType,' +
-        ' todaysQuote: $todaysQuote,' +
-        ' likedQuotes: $likedQuotes,' +
-        ' lastDateUpdatedTodayQuote: $lastDateUpdatedTodayQuote,' +
-        ' quoteRetrievalSuccess: $quoteRetrievalSuccess,' +
-        ' bannerAd: $bannerAd,' +
-        '}';
+    return 'HomePageViewState{ emotionalType: $emotionalType, todayQuoteResult: $todayQuoteResult, likedQuotes: $likedQuotes, lastDateUpdatedTodayQuote: $lastDateUpdatedTodayQuote, bannerAd: $bannerAd,}';
   }
 
   HomePageViewState copyWith({
     EmotionalType? emotionalType,
-    TodaysQuote? todaysQuote,
+    TodayQuoteResult? todayQuoteResult,
     List<Quote>? likedQuotes,
     DateTime? lastDateUpdatedTodayQuote,
-    bool? quoteRetrievalSuccess,
     BannerAd? bannerAd,
   }) {
     return HomePageViewState(
       emotionalType: emotionalType ?? this.emotionalType,
-      todaysQuote: todaysQuote ?? this.todaysQuote,
+      todayQuoteResult: todayQuoteResult ?? this.todayQuoteResult,
       likedQuotes: likedQuotes ?? this.likedQuotes,
       lastDateUpdatedTodayQuote:
           lastDateUpdatedTodayQuote ?? this.lastDateUpdatedTodayQuote,
-      quoteRetrievalSuccess:
-          quoteRetrievalSuccess ?? this.quoteRetrievalSuccess,
       bannerAd: bannerAd ?? this.bannerAd,
     );
   }
@@ -78,10 +81,9 @@ class HomePageViewState {
   Map<String, dynamic> toMap() {
     return {
       'emotionalType': this.emotionalType,
-      'todaysQuote': this.todaysQuote,
+      'todayQuoteResult': this.todayQuoteResult,
       'likedQuotes': this.likedQuotes,
       'lastDateUpdatedTodayQuote': this.lastDateUpdatedTodayQuote,
-      'quoteRetrievalSuccess': this.quoteRetrievalSuccess,
       'bannerAd': this.bannerAd,
     };
   }
@@ -89,10 +91,9 @@ class HomePageViewState {
   factory HomePageViewState.fromMap(Map<String, dynamic> map) {
     return HomePageViewState(
       emotionalType: map['emotionalType'] as EmotionalType,
-      todaysQuote: map['todaysQuote'] as TodaysQuote,
+      todayQuoteResult: map['todayQuoteResult'] as TodayQuoteResult,
       likedQuotes: map['likedQuotes'] as List<Quote>,
       lastDateUpdatedTodayQuote: map['lastDateUpdatedTodayQuote'] as DateTime,
-      quoteRetrievalSuccess: map['quoteRetrievalSuccess'] as bool,
       bannerAd: map['bannerAd'] as BannerAd,
     );
   }
@@ -104,7 +105,7 @@ extension Computed on HomePageViewState {
   bool get isButtonEnable => emotionalType != null;
   bool get isLikedQuoted {
     final likedQuoteTexts = likedQuotes?.map((e) => e.text).toList();
-    final todaysQuoteTexts = todaysQuote?.quote.text;
+    final todaysQuoteTexts = todayQuoteResult?.todaysQuote?.quote.text;
     return likedQuoteTexts?.contains(todaysQuoteTexts) ?? false;
   }
 

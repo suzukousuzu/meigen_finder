@@ -40,7 +40,8 @@ class HomePage extends HookConsumerWidget {
               ),
               _EmotionalSelector(
                 canRetrieveQuoteToday: canRetrieveQuoteToday,
-                initialType: viewState.todaysQuote?.emotionalType,
+                initialType:
+                    viewState.todayQuoteResult?.todaysQuote?.emotionalType,
               ),
               _Button(
                 controller: controller,
@@ -119,17 +120,18 @@ class _Button extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final viewState = ref.watch(homePageControllerProvider);
-    ref.listen(
-        homePageControllerProvider.select((value) =>
-            value.quoteRetrievalSuccess && value.todaysQuote != null),
-        (previous, next) {
-      if (previous == false && next == true) {
-        final todaysQuote = viewState.todaysQuote;
-        QuoteDetailRouteFromHome(QuoteDetailArgument(
-                todaysQuote!.quote, viewState.isLikedQuoted))
-            .go(context);
+    ref.listen(homePageControllerProvider.select((value) {
+      return value.todayQuoteResult;
+    }), (previous, next) {
+      final todaysQuote = next?.todaysQuote;
+      final quoteRetrievalSuccess = next?.quoteRetrievalSuccess;
+      if (todaysQuote != null && quoteRetrievalSuccess == true) {
+        QuoteDetailRouteFromHome(
+          QuoteDetailArgument(todaysQuote.quote, viewState.isLikedQuoted),
+        ).go(context);
       }
     });
+    final todaysQuote = viewState.todayQuoteResult?.todaysQuote;
     return Padding(
       padding: const EdgeInsets.fromLTRB(32, 32, 32, 0),
       child: canRetrieveQuoteToday
