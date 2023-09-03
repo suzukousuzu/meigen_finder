@@ -19,7 +19,7 @@ class HomePageController extends _$HomePageController {
   @override
   HomePageViewState build() => HomePageViewState(
         emotionalType: null,
-        quoteRetrievalSuccess: false,
+        todayQuoteResult: TodayQuoteResult(null, false),
       );
 
   Future<void> fetch() async {
@@ -38,7 +38,9 @@ class HomePageController extends _$HomePageController {
   Future<void> _fetchTodayQuote() async {
     final repository = await ref.read(quoteRepositoryProvider.future);
     final todayQuote = await repository.fetchTodayQuote();
-    state = state.copyWith(todaysQuote: todayQuote);
+    final todayQuoteResult =
+        state.todayQuoteResult?.copyWith(todaysQuote: todayQuote);
+    state = state.copyWith(todayQuoteResult: todayQuoteResult);
   }
 
   void _fetchBannerAd() {
@@ -67,9 +69,6 @@ class HomePageController extends _$HomePageController {
         throw StateError('emotionalType is null');
       }
 
-      state = state.copyWith(
-        quoteRetrievalSuccess: false,
-      );
       final repository = await ref.read(quoteRepositoryProvider.future);
       final masterData = await repository.getMasterData();
       // emotionalTypeと一致するデータのリストを取得
@@ -95,15 +94,13 @@ class HomePageController extends _$HomePageController {
 
       await repository.onUpdateTodayQuote(todaysQuote, emotionalType);
       state = state.copyWith(
-        todaysQuote: todaysQuote,
-        quoteRetrievalSuccess: true,
+        todayQuoteResult: TodayQuoteResult(todaysQuote, true),
       );
     } catch (e) {
       //TODO:エラーハンドリング
       debugPrint(e.toString());
       state = state.copyWith(
-        todaysQuote: null,
-        quoteRetrievalSuccess: false,
+        todayQuoteResult: TodayQuoteResult(null, false),
       );
     }
   }
