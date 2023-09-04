@@ -1144,6 +1144,390 @@
     "text": "僕も本気で、獲りに行く！",
     "author": "緑谷出久",
     "category": "superHappy"
+  },
+  {
+    "id": 191,
+    "text": "神様は私たちに成功してほしいなんて思っていません。ただ、挑戦することを望んでいるだけよ。",
+    "author": "マザー・テレサ",
+    "category": "superSad"
+  },
+  {
+    "id": 192,
+    "text": "私は失敗したことがない。ただ、1万通りの、うまく行かない方法を見つけただけだ。",
+    "author": "トーマス・エジソン",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 193,
+    "text": "誰もの心に、何かに向かって燃える火があります。それを見つけ、燃やし続けることが、私たちの人生の目的なのです。",
+    "author": "メアリー・ルー・レットン",
+    "category": "superHappy"
+  },
+  {
+    "id": 194,
+    "text": "人を信じよ、しかし、その百倍も自らを信じよ。",
+    "author": "手塚治虫",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 195,
+    "text": "成果が出ないときこそ、不安がらずに、恐れずに、迷わずに一歩一歩進めるかどうかが、成長の分岐点であると考えています。",
+    "author": "羽生善治",
+    "category": "superSad"
+  },
+  {
+    "id": 196,
+    "text": "俺たちも託される側から、託す側にならねーと",
+    "author": "奈良シカマル",
+    "category": "superHappy"
+  },
+  {
+    "id": 197,
+    "text": "人は何度やりそこなっても、「もういっぺん」の勇気を失わなければ、かならずものになる。",
+    "author": "松下幸之助",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 198,
+    "text": " いいかい、怖かったら怖いほど、逆にそこに飛び込むんだ。",
+    "author": "岡本太郎",
+    "category": "superSad"
+  },
+  {
+    "id": 199,
+    "text": "あせってはいけません。ただ、牛のように、図々しく進んで行くのが大事です。",
+    "author": "夏目漱石",
+    "category": "superSad"
+  },
+  {
+    "id": 200,
+    "text": "人生はどちらかです。勇気をもって挑むか、棒にふるか。",
+    "author": "ヘレン・ケラー",
+    "category": "superSad"
+  },
+  {
+    "id": 201,
+    "text": "逃げない、はればれと立ち向かう、それがぼくのモットーだ。",
+    "author": "岡本太郎",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 202,
+    "text": "楽観的になりたいなら、客観的になることだ。",
+    "author": "斎藤茂太",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 203,
+    "text": "人の世に失敗ちゅうことは、ありゃせんぞ",
+    "author": "坂本龍馬",
+    "category": "superSad"
+  },
+  {
+    "id": 204,
+    "text": "苦しいという言葉だけはどんなことがあっても言わないでおこうじゃないか。",
+    "author": "高杉晋作",
+    "category": "superSad"
+  },
+  {
+    "id": 205,
+    "text": "虹を見たければ、ちょっとやそっとの雨は我慢しなくちゃ。。",
+    "author": "ドリー・パートン",
+    "category": "superSad"
+  },
+  {
+    "id": 196,
+    "text": "俺たちも託される側から、託す側にならねーと",
+    "author": "奈良シカマル",
+    "category": "superHappy"
+  },
+  {
+    "id": 197,
+    "text": "人は何度やりそこなっても、「もういっぺん」の勇気を失わなければ、かならずものになる。",
+    "author": "松下幸之助",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 198,
+    "text": " いいかい、怖かったら怖いほど、逆にそこに飛び込むんだ。",
+    "author": "岡本太郎",
+    "category": "superSad"
+  },
+  {
+    "id": 199,
+    "text": "あせってはいけません。ただ、牛のように、図々しく進んで行くのが大事です。",
+    "author": "夏目漱石",
+    "category": "superSad"
+  },
+  {
+    "id": 200,
+    "text": "人生はどちらかです。勇気をもって挑むか、棒にふるか。",
+    "author": "ヘレン・ケラー",
+    "category": "superSad"
+  },
+  {
+    "id": 201,
+    "text": "追いかけ続ける勇気さえあれば、夢は必ず叶います。",
+    "author": "ウォルト・ディズニー",
+    "category": "superHappy"
+  },
+  {
+    "id": 202,
+    "text": "喜びは、分かち合うことで倍増する。",
+    "author": "ブッダ",
+    "category": "superHappy"
+  },
+  {
+    "id": 203,
+    "text": "人生は楽しむためにある。",
+    "author": "マザー・テレサ",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 204,
+    "text": "どんなに小さな進歩でも、進歩は進歩だ。",
+    "author": "アリ・ワイズマン",
+    "category": "normal"
+  },
+  {
+    "id": 205,
+    "text": "失敗は避けられない、諦めることは選択だ。",
+    "author": "スティーヴン・A. リチャーズ",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 206,
+    "text": "時々、光の中に入るために、闇の中を歩む必要がある。",
+    "author": "ベッキー ブローカット",
+    "category": "superSad"
+  },
+  {
+    "id": 207,
+    "text": "私は大事なショットを外した後のことなんて考えたことがない。もし考えたならいつも悪い結果を思ってしまうからさ",
+    "author": "マイケル・ジョーダン",
+    "category": "superSad"
+  },
+  {
+    "id": 201,
+    "text": "追いかけ続ける勇気さえあれば、夢は必ず叶います。",
+    "author": "ウォルト・ディズニー",
+    "category": "superHappy"
+  },
+  {
+    "id": 208,
+    "text": "成功するための最良の方法は一度成功を愛することだ。",
+    "author": "ヴィンス・ランバルディ",
+    "category": "superHappy"
+  },
+  {
+    "id": 209,
+    "text": "やる気があれば方法は見つかる。",
+    "author": "ジム・ローン",
+    "category": "superHappy"
+  },
+  {
+    "id": 210,
+    "text": "人生は自分が楽しむために生きるものである。",
+    "author": "アブラハム・リンカーン",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 211,
+    "text": "幸福は行動にある。",
+    "author": "アリストテレス",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 212,
+    "text": "すべてが思い通りにいくことはない。しかし、前に進むことはできる。",
+    "author": "ロバート・ダウニー・ジュニア",
+    "category": "normal"
+  },
+  {
+    "id": 213,
+    "text": "人は自分の考える通りの人生を生きる。",
+    "author": "ナポレオン・ヒル",
+    "category": "normal"
+  },
+  {
+    "id": 214,
+    "text": "毎日が新しいチャンスである。",
+    "author": "オプラ・ウィンフリー",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 215,
+    "text": "失敗から学ぶことは、成功よりも価値がある。",
+    "author": "ジョン・C・マックスウェル",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 216,
+    "text": "人生は80%のどのように反応するか、20%の何が起こるかである。",
+    "author": "チャールズ・R・スウィンドル",
+    "category": "normal"
+  },
+  {
+    "id": 217,
+    "text": "今を楽しむことが最高の復讐である。",
+    "author": "ゲーリー・シャンドリング",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 218,
+    "text": "行動することはすべての成功の鍵である。",
+    "author": "ピカソ",
+    "category": "superHappy"
+  },
+  {
+    "id": 219,
+    "text": "夢を追い続けることで、夢は実現する。",
+    "author": "ジョン・ウッデン",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 220,
+    "text": "最高の時を待っていると、一生待ち続けることになる。",
+    "author": "アンノウン",
+    "category": "normal"
+  },
+  {
+    "id": 221,
+    "text": "結果を変えるためには、アプローチを変える必要がある。",
+    "author": "トニー・ロビンス",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 222,
+    "text": "喜びは、今を生きることにある。",
+    "author": "ディーパク・チョプラ",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 223,
+    "text": "成功は継続の産物である。",
+    "author": "デイル・カーネギー",
+    "category": "superHappy"
+  },
+  {
+    "id": 224,
+    "text": "人生の真実は、過去ではなく、現在にある。",
+    "author": "マハトマ・ガンジー",
+    "category": "normal"
+  },
+  {
+    "id": 225,
+    "text": "どんな困難も、それを乗り越えるための方法がある。",
+    "author": "チャレンジャー",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 226,
+    "text": "成功するための最良の方法は、まず自分を愛することだ。",
+    "author": "オグ・マンディーノ",
+    "category": "superHappy"
+  },
+  {
+    "id": 227,
+    "text": "今日の努力が明日の成功をもたらす。",
+    "author": "アノニマス",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 228,
+    "text": "無駄口を叩く暇があったら生き残るために最善を尽くせ",
+    "author": "幼女戦記",
+    "category": "superHappy"
+  },
+  {
+    "id": 229,
+    "text": "熱くなるのは良い。だが焦るな！ 喧嘩に勝つには熱いハートとクールな頭脳だ",
+    "author": "天元突破グレンラガン",
+    "category": "superHappy"
+  },
+  {
+    "id": 230,
+    "text": "簡単なことは面白くないだろ",
+    "author": "天晴爛漫",
+    "category": "superHappy"
+  },
+  {
+    "id": 231,
+    "text": "わたしの不幸は誰かが決めるものじゃない",
+    "author": "魔法少女サイト",
+    "category": "superSad"
+  },
+  {
+    "id": 232,
+    "text": "成せば大抵なんとかなる！",
+    "author": "勇者の章",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 233,
+    "text": "好きなことをする努力家はねぇ、最強なんですよ",
+    "author": "ブルーピリオド",
+    "category": "superHappy"
+  },
+  {
+    "id": 234,
+    "text": "悔しいと思えるあなたは強いです",
+    "author": "BEASTARS",
+    "category": "superSad"
+  },
+  {
+    "id": 235,
+    "text": "言いたい人には言わせておけばいい。今に見てろって熱くなれるから",
+    "author": "宇宙よりも遠い場所",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 236,
+    "text": "誰かに認められるとかどうでもいんじゃねぇのか？",
+    "author": "TIGER&BUNNY",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 237,
+    "text": "何度も壁にぶち当たるなんてそんなの当たり前じゃないですか",
+    "author": "黒子のバスケ",
+    "category": "superSad"
+  },
+  {
+    "id": 238,
+    "text": "この世に難関などはない。難関というものはあくまでも本人の主観の問題なのである。",
+    "author": "ワコール創業者　塚本幸一",
+    "category": "normal"
+  },
+  {
+    "id": 239,
+    "text": "太陽の光を借りて照っている大きな月よりも、自分から光を放つ小さな灯火でありたいものだ。",
+    "author": "森鴎外",
+    "category": "somewhatHappy"
+  },
+  {
+    "id": 240,
+    "text": "私の最大の栄光は一度も失敗しないことではなく、倒れるごとにまた起きるところにあった。",
+    "author": "本田宗一郎",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 241,
+    "text": "常に一歩前進することを心掛けよ。停止は退歩を意味する。",
+    "author": "野村財閥創業者　野村徳七",
+    "category": "superHappy"
+  },
+  {
+    "id": 242,
+    "text": "勉強するから、何をしたいのか分かる。勉強しないから、何をしたいのか分からない。",
+    "author": "北野武",
+    "category": "somewhatSad"
+  },
+  {
+    "id": 243,
+    "text": "なんでもいいから、まずやってみる。それだけなんだよ。",
+    "author": "岡本太郎",
+    "category": "superHappy"
   }
 ]
 

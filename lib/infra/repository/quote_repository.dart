@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:isar/isar.dart';
 import 'package:meigen_finder/domain/collection/todays_quote.dart';
+import 'package:meigen_finder/infra/data_holder/date_time_holder.dart';
 import 'package:meigen_finder/util/datetime_extension.dart';
 
 import '../../domain/collection/emotional_type.dart';
@@ -10,10 +11,15 @@ import '../../domain/collection/quote.dart';
 import '../manager/preference_manager.dart';
 
 class QuoteRepository {
-  QuoteRepository(this._isar, this._preferenceManager);
+  QuoteRepository(
+    this._isar,
+    this._preferenceManager,
+    this._dateTimeHolder,
+  );
 
   final Isar _isar;
   final PreferenceManager _preferenceManager;
+  final DateTimeHolder _dateTimeHolder;
 
   // 全ての名言を返す(変更があれば通知される)
   // Stream<List<Quote>> watchAll() async* {
@@ -51,7 +57,9 @@ class QuoteRepository {
         .filter()
         .createdAtEqualTo(DateTime.now().date)
         .findAll();
-    return todayQuote.firstOrNull;
+    final gotTodayQuote = todayQuote.firstOrNull;
+    if (gotTodayQuote == null) return null;
+    return gotTodayQuote;
   }
 
   Future<void> onUpdateTodayQuote(
@@ -59,6 +67,7 @@ class QuoteRepository {
     await _isar.writeTxn(() async {
       await _isar.todaysQuotes.put(todaysQuote);
       final now = DateTime.now().date;
+      _dateTimeHolder.update(now);
       _preferenceManager.setValue(
           PreferenceKey.todayQuotes, now.toIso8601String());
     });

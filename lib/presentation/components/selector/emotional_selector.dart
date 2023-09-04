@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:meigen_finder/presentation/theme/mf_theme.dart';
 
@@ -39,7 +40,9 @@ class EmotionalSelector extends HookWidget {
                   selectedEmotionalType.value = EmotionalType.superHappy;
                   onChanged(EmotionalType.superHappy);
                 }
-              : null,
+              : () {
+                  _showToast(context);
+                },
           icon: Icon(
             FontAwesomeIcons.solidFaceLaughSquint,
             size: _iconSize,
@@ -54,7 +57,7 @@ class EmotionalSelector extends HookWidget {
                   selectedEmotionalType.value = EmotionalType.somewhatHappy;
                   onChanged(EmotionalType.somewhatHappy);
                 }
-              : null,
+              : () => _showToast(context),
           icon: Icon(
             FontAwesomeIcons.solidFaceSmile,
             size: _iconSize,
@@ -69,7 +72,7 @@ class EmotionalSelector extends HookWidget {
                   selectedEmotionalType.value = EmotionalType.normal;
                   onChanged(EmotionalType.normal);
                 }
-              : null,
+              : () => _showToast(context),
           icon: Icon(
             FontAwesomeIcons.solidFaceMeh,
             size: _iconSize,
@@ -84,7 +87,7 @@ class EmotionalSelector extends HookWidget {
                   selectedEmotionalType.value = EmotionalType.somewhatSad;
                   onChanged(EmotionalType.somewhatSad);
                 }
-              : null,
+              : () => _showToast(context),
           icon: Icon(
             FontAwesomeIcons.solidFaceFrown,
             size: _iconSize,
@@ -99,7 +102,7 @@ class EmotionalSelector extends HookWidget {
                   selectedEmotionalType.value = EmotionalType.superSad;
                   onChanged(EmotionalType.superSad);
                 }
-              : null,
+              : () => _showToast(context),
           icon: Icon(
             FontAwesomeIcons.solidFaceSadTear,
             size: _iconSize,
@@ -111,4 +114,16 @@ class EmotionalSelector extends HookWidget {
       ],
     );
   }
+}
+
+_showToast(BuildContext context) {
+  final theme = MfTheme.of(context);
+  final colorScheme = theme.colorScheme;
+
+  Fluttertoast.showToast(
+      msg: "今日の名言はもう取得済みです",
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.TOP,
+      textColor: colorScheme.onSecondary,
+      fontSize: 16.0);
 }

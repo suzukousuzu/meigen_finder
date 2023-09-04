@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:meigen_finder/application/state/home_page_view_state.dart';
 import 'package:meigen_finder/domain/collection/emotional_type.dart';
+import 'package:meigen_finder/infra/data_holder/date_time_holder.dart';
 import 'package:meigen_finder/infra/providers/like_quote_repository_provider.dart';
 import 'package:meigen_finder/util/datetime_extension.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -17,10 +18,18 @@ part 'home_page_controller.g.dart';
 @riverpod
 class HomePageController extends _$HomePageController {
   @override
-  HomePageViewState build() => HomePageViewState(
-        emotionalType: null,
-        todayQuoteResult: TodayQuoteResult(null, false),
+  HomePageViewState build() {
+    final dateTimeHolder = ref.watch(dateTimeHolderProvider);
+    dateTimeHolder.stream.listen((dateTime) {
+      state = state.copyWith(
+        lastDateUpdatedTodayQuote: dateTime,
       );
+    });
+    return HomePageViewState(
+      emotionalType: null,
+      todayQuoteResult: TodayQuoteResult(null, false),
+    );
+  }
 
   Future<void> fetch() async {
     await _fetchLikeQuotes();
