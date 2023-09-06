@@ -56,6 +56,7 @@ class MyApp extends HookConsumerWidget {
     }, const []);
     return MaterialApp.router(
       title: '名言ファインダー',
+      debugShowCheckedModeBanner: false,
       theme: theme.data,
       builder: LoadingScreen.init(),
       routerConfig: router,
