@@ -49,9 +49,9 @@ class HomePage extends HookConsumerWidget {
               ),
             ],
           ),
-          // if (bannerAd != null) ...{
-          //   _Banner(bannerAd: bannerAd),
-          // },
+          if (bannerAd != null) ...{
+            _Banner(bannerAd: bannerAd),
+          },
         ],
       )),
     );
