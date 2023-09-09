@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
+import 'package:meigen_finder/presentation/components/app_bar/mf_sliver_app_bar.dart';
 import 'package:meigen_finder/presentation/constant/terms_of_service_text.dart';
 
 import '../../theme/mf_theme.dart';
@@ -13,47 +16,77 @@ class TermsOfServicePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return const Scaffold(
+        body: CustomScrollView(
+      slivers: [
+        _AppBar(),
+        _Body(),
+      ],
+    ));
+  }
+}
+
+class _AppBar extends StatelessWidget {
+  const _AppBar({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = MfTheme.of(context).colorScheme;
+    return MfSliverAppBar(
+      title: title,
+      automaticallyImplyLeading: false,
+      trailing: IconButton(
+        onPressed: () => context.pop(),
+        icon: Icon(
+          FontAwesomeIcons.xmark,
+          size: 24,
+          color: colorScheme.onBackground,
+        ),
+      ),
+    );
+  }
+}
+
+class _Body extends StatelessWidget {
+  const _Body({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     final theme = MfTheme.of(context);
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        title: Text(title, style: textTheme.textBold),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Container(
-            decoration: BoxDecoration(
-              color: colorScheme.surface,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const _PromptText(),
-                ...List.generate(
-                  14,
-                  (index) {
-                    final sectionTitle = _createTermsOfServiceText(
-                        index, TermsOfServiceTextType.sectionTiTle);
-                    final description = _createTermsOfServiceText(
-                        index, TermsOfServiceTextType.description);
-                    return _TermsOfServiceContent(
-                        title: sectionTitle, description: description);
-                  },
+    return SliverPadding(
+      padding: const EdgeInsets.fromLTRB(16, 4, 16, 4),
+      sliver: SliverToBoxAdapter(
+        child: Container(
+          decoration: BoxDecoration(
+            color: colorScheme.surface,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const _PromptText(),
+              ...List.generate(
+                14,
+                (index) {
+                  final sectionTitle = _createTermsOfServiceText(
+                      index, TermsOfServiceTextType.sectionTiTle);
+                  final description = _createTermsOfServiceText(
+                      index, TermsOfServiceTextType.description);
+                  return _TermsOfServiceContent(
+                      title: sectionTitle, description: description);
+                },
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 8, left: 16, bottom: 36),
+                child: Text(
+                  enforcementDateText,
+                  textAlign: TextAlign.left,
+                  style: textTheme.subtext,
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 8, left: 16, bottom: 36),
-                  child: Text(
-                    enforcementDateText,
-                    textAlign: TextAlign.left,
-                    style: textTheme.subtext,
-                  ),
-                )
-              ],
-            ),
+              )
+            ],
           ),
         ),
       ),

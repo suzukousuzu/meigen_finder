@@ -11,6 +11,7 @@ import '../../application/controller/quote_detail_page_controller.dart';
 import '../components/modal_bottom_sheet/modal_bottom_sheet_container_builder.dart';
 import '../pages/home/home_page.dart';
 import '../pages/quote_detail/quote_detail_page.dart';
+import '../pages/setting/premium_page.dart';
 import '../pages/setting/setting_page.dart';
 
 part 'router.g.dart';
@@ -18,11 +19,14 @@ part 'router.g.dart';
 final GlobalKey<NavigatorState> _shellNavigatorKey =
     GlobalKey<NavigatorState>();
 
+final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
+
 /// 画面遷移定義プロバイダー
 final routerProvider = Provider((ref) {
   return GoRouter(
     initialLocation: '/',
     routes: $appRoutes,
+    navigatorKey: _rootNavigatorKey,
   );
 });
 
@@ -45,6 +49,7 @@ final routerProvider = Provider((ref) {
     ]),
     TypedGoRoute<SettingRoute>(path: '/setting', routes: [
       TypedGoRoute<TermsOfServiceRoute>(path: 'terms_of_service'),
+      TypedGoRoute<PremiumRoute>(path: 'premium'),
     ]),
   ],
 )
@@ -130,6 +135,9 @@ class HomeRoute extends GoRouteData {
 class QuoteDetailRouteFromHome extends GoRouteData {
   final QuoteDetailArgument $extra;
   QuoteDetailRouteFromHome(this.$extra);
+
+  static final GlobalKey<NavigatorState> $parentNavigatorKey =
+      _rootNavigatorKey;
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
     return CustomTransitionPage(
@@ -154,6 +162,9 @@ class QuoteDetailRouteFromHome extends GoRouteData {
 class QuoteDetailRouteFromFavorite extends GoRouteData {
   final QuoteDetailArgument $extra;
   QuoteDetailRouteFromFavorite(this.$extra);
+
+  static final GlobalKey<NavigatorState> $parentNavigatorKey =
+      _rootNavigatorKey;
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
     return ModalBottomSheetPage(
@@ -165,6 +176,8 @@ class QuoteDetailRouteFromFavorite extends GoRouteData {
 class QuoteDetailRouteFromHistory extends GoRouteData {
   final QuoteDetailArgument $extra;
   QuoteDetailRouteFromHistory(this.$extra);
+  static final GlobalKey<NavigatorState> $parentNavigatorKey =
+      _rootNavigatorKey;
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
     return ModalBottomSheetPage(
@@ -180,9 +193,19 @@ class SettingRoute extends GoRouteData {
 }
 
 class TermsOfServiceRoute extends GoRouteData {
+  static final GlobalKey<NavigatorState> $parentNavigatorKey =
+      _rootNavigatorKey;
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) =>
-      const NoTransitionPage(child: TermsOfServicePage());
+      const ModalBottomSheetPage(child: TermsOfServicePage());
+}
+
+class PremiumRoute extends GoRouteData {
+  static final GlobalKey<NavigatorState> $parentNavigatorKey =
+      _rootNavigatorKey;
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) =>
+      const ModalBottomSheetPage(child: PremiumPage());
 }
 
 class FavoriteQuoteRoute extends GoRouteData {

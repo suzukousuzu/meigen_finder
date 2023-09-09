@@ -12,14 +12,11 @@ import 'package:flutter/widgets.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/sakura.png
-  AssetGenImage get sakura => const AssetGenImage('assets/images/sakura.png');
-
-  /// File path: assets/images/space.png
-  AssetGenImage get space => const AssetGenImage('assets/images/space.png');
+  /// File path: assets/images/smiley_face.svg
+  String get smileyFace => 'assets/images/smiley_face.svg';
 
   /// List of all assets
-  List<AssetGenImage> get values => [sakura, space];
+  List<String> get values => [smileyFace];
 }
 
 class $AssetsMasterDataGen {

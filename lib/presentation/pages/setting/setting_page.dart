@@ -40,15 +40,13 @@ class SettingPage extends HookConsumerWidget {
               const SizedBox(
                 height: 32.0,
               ),
-              // if (!ref.read(settingNotifierProvider.notifier).isPremium) ...{
-              //   SettingListTileRightArrow(
-              //     label: t.deleteAd,
-              //     onTap: () => const PremiumRoute().go(context),
-              //   ),
-              //   const SizedBox(
-              //     height: 32.0,
-              //   ),
-              // },
+              SettingListTileRightArrow(
+                label: '広告を消す',
+                onTap: () => PremiumRoute().go(context),
+              ),
+              const SizedBox(
+                height: 32.0,
+              ),
               SettingListTileRightArrow(
                 label: 'アプリへのご意見・ご要望',
                 onTap: () => _launchUrl(_opinionToAppUrl),
