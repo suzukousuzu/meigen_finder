@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:meigen_finder/presentation/theme/mf_theme.dart';
 import 'package:share_plus/share_plus.dart';
@@ -8,7 +10,7 @@ import 'package:share_plus/share_plus.dart';
 import '../../../application/controller/quote_detail_page_controller.dart';
 import '../../../domain/collection/quote.dart';
 
-class QuoteDetailPage extends ConsumerWidget {
+class QuoteDetailPage extends HookConsumerWidget {
   const QuoteDetailPage({
     Key? key,
     required this.quoteDetailArgument,
@@ -25,6 +27,13 @@ class QuoteDetailPage extends ConsumerWidget {
         ref.watch(quoteDetailControllerProvider(quoteDetailArgument));
     final controller =
         ref.watch(quoteDetailControllerProvider(quoteDetailArgument).notifier);
+
+    final bannerAd = viewState.bannerAd;
+
+    useEffect(() {
+      Future(() => controller.fetchBannerAd());
+      return;
+    }, const []);
 
     final quote = viewState.quote;
     final isLiked = viewState.isLiked;
@@ -44,20 +53,25 @@ class QuoteDetailPage extends ConsumerWidget {
           ),
         ],
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
+      body: Stack(
         children: [
-          _MeigenText(
-            quote: quote,
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              _MeigenText(
+                quote: quote,
+              ),
+              _ShareAndLike(
+                quote: quote,
+                isLiked: isLiked,
+                controller: controller,
+              ),
+            ],
           ),
-          _ShareAndLike(
-            quote: quote,
-            isLiked: isLiked,
-            controller: controller,
-          ),
-
-          //TODO:バナー広告
+          if (bannerAd != null) ...{
+            _Banner(bannerAd: bannerAd),
+          },
         ],
       ),
     );
@@ -166,6 +180,32 @@ class _ShareAndLike extends StatelessWidget {
             ),
           )
         ],
+      ),
+    );
+  }
+}
+
+class _Banner extends StatelessWidget {
+  const _Banner({
+    Key? key,
+    required this.bannerAd,
+  }) : super(key: key);
+
+  final BannerAd bannerAd;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Align(
+        alignment: Alignment.bottomCenter,
+        child: SizedBox(
+          width: bannerAd.size.width.toDouble(),
+          height: bannerAd.size.height.toDouble(),
+          child: AdWidget(
+            ad: bannerAd,
+          ),
+        ),
       ),
     );
   }

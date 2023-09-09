@@ -53,7 +53,7 @@ class HomePageController extends _$HomePageController {
   }
 
   void _fetchBannerAd() {
-    final adManager = ref.read(adManagerProvider);
+    final adManager = ref.watch(adManagerProvider);
     final bannerAd = adManager.bannerAd;
     state = state.copyWith(bannerAd: bannerAd);
   }

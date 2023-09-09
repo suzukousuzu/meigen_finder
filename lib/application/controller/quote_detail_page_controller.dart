@@ -3,6 +3,7 @@ import 'package:meigen_finder/domain/collection/quote.dart';
 import 'package:meigen_finder/infra/providers/like_quote_repository_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../../infra/manager/ad_manager.dart';
 import '../state/quote_detail_page_view_state.dart';
 
 part 'quote_detail_page_controller.g.dart';
@@ -35,5 +36,14 @@ class QuoteDetailController extends _$QuoteDetailController {
     } catch (e) {
       debugPrint(e.toString());
     }
+  }
+
+  void fetchBannerAd() {
+    final adManager = ref.read(adManagerProvider);
+    //「This AdWidget is already in the Widget tree」というエラーがでるので、再度bannerIdを初期化する
+    adManager.initBannerAd();
+    adManager.loadBannerAd();
+    final bannerAd = adManager.bannerAd;
+    state = state.copyWith(bannerAd: bannerAd);
   }
 }
