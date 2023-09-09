@@ -6,7 +6,7 @@ part of 'quote_repository_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$quoteRepositoryHash() => r'66765b47a522c30c387250f5096a84f9af8caf15';
+String _$quoteRepositoryHash() => r'82a0da0ee0e165fc5e3146d81e29d2ca19ea9779';
 
 /// See also [quoteRepository].
 @ProviderFor(quoteRepository)

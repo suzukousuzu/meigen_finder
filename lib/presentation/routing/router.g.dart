@@ -21,6 +21,7 @@ RouteBase get $myShellRouteData => ShellRouteData.$route(
             GoRouteData.$route(
               path: 'quote_detail',
               factory: $QuoteDetailRouteFromHomeExtension._fromState,
+              parentNavigatorKey: QuoteDetailRouteFromHome.$parentNavigatorKey,
             ),
           ],
         ),
@@ -31,6 +32,8 @@ RouteBase get $myShellRouteData => ShellRouteData.$route(
             GoRouteData.$route(
               path: 'quote_detail',
               factory: $QuoteDetailRouteFromFavoriteExtension._fromState,
+              parentNavigatorKey:
+                  QuoteDetailRouteFromFavorite.$parentNavigatorKey,
             ),
           ],
         ),
@@ -41,6 +44,8 @@ RouteBase get $myShellRouteData => ShellRouteData.$route(
             GoRouteData.$route(
               path: 'quote_detail',
               factory: $QuoteDetailRouteFromHistoryExtension._fromState,
+              parentNavigatorKey:
+                  QuoteDetailRouteFromHistory.$parentNavigatorKey,
             ),
           ],
         ),
@@ -51,6 +56,12 @@ RouteBase get $myShellRouteData => ShellRouteData.$route(
             GoRouteData.$route(
               path: 'terms_of_service',
               factory: $TermsOfServiceRouteExtension._fromState,
+              parentNavigatorKey: TermsOfServiceRoute.$parentNavigatorKey,
+            ),
+            GoRouteData.$route(
+              path: 'premium',
+              factory: $PremiumRouteExtension._fromState,
+              parentNavigatorKey: PremiumRoute.$parentNavigatorKey,
             ),
           ],
         ),
@@ -204,6 +215,23 @@ extension $TermsOfServiceRouteExtension on TermsOfServiceRoute {
 
   String get location => GoRouteData.$location(
         '/setting/terms_of_service',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $PremiumRouteExtension on PremiumRoute {
+  static PremiumRoute _fromState(GoRouterState state) => PremiumRoute();
+
+  String get location => GoRouteData.$location(
+        '/setting/premium',
       );
 
   void go(BuildContext context) => context.go(location);
