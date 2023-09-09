@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:meigen_finder/presentation/components/app_bar/mf_sliver_app_bar.dart';
 import 'package:meigen_finder/presentation/constant/terms_of_service_text.dart';
 
@@ -14,10 +16,7 @@ class TermsOfServicePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = MfTheme.of(context);
-    final colorScheme = theme.colorScheme;
-    final textTheme = theme.textTheme;
-    return Scaffold(
+    return const Scaffold(
         body: CustomScrollView(
       slivers: [
         _AppBar(),
@@ -32,9 +31,18 @@ class _AppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = MfTheme.of(context);
-    return const MfSliverAppBar(
+    final colorScheme = MfTheme.of(context).colorScheme;
+    return MfSliverAppBar(
       title: title,
+      automaticallyImplyLeading: false,
+      trailing: IconButton(
+        onPressed: () => context.pop(),
+        icon: Icon(
+          FontAwesomeIcons.xmark,
+          size: 24,
+          color: colorScheme.onBackground,
+        ),
+      ),
     );
   }
 }

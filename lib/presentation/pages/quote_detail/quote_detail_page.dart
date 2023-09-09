@@ -56,6 +56,8 @@ class QuoteDetailPage extends ConsumerWidget {
             isLiked: isLiked,
             controller: controller,
           ),
+
+          //TODO:バナー広告
         ],
       ),
     );

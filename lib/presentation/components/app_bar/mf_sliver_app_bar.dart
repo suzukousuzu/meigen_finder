@@ -19,6 +19,7 @@ class MfSliverAppBar extends StatelessWidget {
   final Widget? trailing;
   final Color? backgroundColor;
   final bool showTrailingWhenLargeTitle;
+  final bool automaticallyImplyLeading;
 
   const MfSliverAppBar({
     super.key,
@@ -27,6 +28,7 @@ class MfSliverAppBar extends StatelessWidget {
     this.trailing,
     this.backgroundColor,
     this.showTrailingWhenLargeTitle = true,
+    this.automaticallyImplyLeading = true,
   });
 
   @override
@@ -38,6 +40,7 @@ class MfSliverAppBar extends StatelessWidget {
       userLargeTitle: title,
       userTitle: title,
       mfTheme: MfTheme.of(context),
+      automaticallyImplyLeading: automaticallyImplyLeading,
     );
 
     final mediaQuery = MediaQuery.of(context);
@@ -203,6 +206,7 @@ class _AppBarStaticComponents {
     required String userTitle,
     required String userLargeTitle,
     required MfTheme mfTheme,
+    required bool automaticallyImplyLeading,
   })  : trailing = userTrailing,
         title = _createTitle(
           userTitle: userTitle,
@@ -212,11 +216,13 @@ class _AppBarStaticComponents {
           userLargeTitle: userLargeTitle,
           mfTheme: mfTheme,
         ),
-        leading = _createLeading(
-          userLeading: userLeading,
-          route: route,
-          mfTheme: mfTheme,
-        );
+        leading = automaticallyImplyLeading
+            ? _createLeading(
+                userLeading: userLeading,
+                route: route,
+                mfTheme: mfTheme,
+              )
+            : const SizedBox.shrink();
 
   final Widget? leading;
   final Text title;
