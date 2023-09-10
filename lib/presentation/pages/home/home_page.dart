@@ -1,3 +1,4 @@
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -11,6 +12,7 @@ import 'package:meigen_finder/presentation/components/selector/emotional_selecto
 import 'package:meigen_finder/presentation/routing/router.dart';
 
 import '../../components/button/label_button.dart';
+import '../../components/dialog/att_dialog.dart';
 import '../../components/loading/execute_while_loading.dart';
 import '../../theme/mf_theme.dart';
 
@@ -26,7 +28,11 @@ class HomePage extends HookConsumerWidget {
 
     final canRetrieveQuoteToday = viewState.canRetrieveQuoteToday;
     useEffect(() {
-      executeWhileLoading(ref, () => controller.fetch());
+      Future(() => _initAtt(context));
+      executeWhileLoading(ref, () {
+        return controller.fetch();
+      });
+
       return;
     }, const []);
     return Scaffold(
@@ -54,6 +60,26 @@ class HomePage extends HookConsumerWidget {
           },
         ],
       )),
+    );
+  }
+
+  Future<void> _initAtt(BuildContext context) async {
+    await AppTrackingTransparency.trackingAuthorizationStatus.then((attStatus) {
+      if (attStatus == TrackingStatus.notDetermined) {
+        _showCustomTrackingDialog(context);
+      }
+    });
+  }
+
+  Future<void> _showCustomTrackingDialog(BuildContext context) async {
+    showAttDialog(
+      context: context,
+      title: '広告表示をカスタマイズ',
+      content:
+          '気分e名言は広告に支えられてます。次の画面で【許可】をタップすると、より関連性の高い広告が表示されるようになります。\n\n※設定がオフの場合、興味関心とは関連しない広告が表示されます',
+      onPressed: () async {
+        await AppTrackingTransparency.requestTrackingAuthorization();
+      },
     );
   }
 }
