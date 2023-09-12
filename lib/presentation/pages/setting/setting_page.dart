@@ -44,6 +44,14 @@ class SettingPage extends HookConsumerWidget {
                 label: '広告を消す',
                 onTap: () => PremiumRoute().go(context),
               ),
+              const _Divider(),
+              SettingListTileRightArrow(
+                label: '開発者の支援をする',
+                trailingWidget: const Text('¥200'),
+                onTap: () {
+                  // TODO:寄付の処理
+                },
+              ),
               const SizedBox(
                 height: 32.0,
               ),
