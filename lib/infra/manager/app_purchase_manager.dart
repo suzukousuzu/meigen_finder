@@ -4,22 +4,33 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
+
+enum PurchaseMode {
+  donation,
+  deleteAd,
+}
+
+final inAppPurchaseManagerProvider = Provider<InAppPurchaseManager>(
+  (ref) => InAppPurchaseManager(),
+);
 
 class InAppPurchaseManager {
   Offerings? _offerings;
 
-  @override
   Offerings? get offerings => _offerings;
+
+  Package? get deleteAdPackage => _offerings?.all['delete_ad']?.lifetime;
+  Package? get donationPackage =>
+      _offerings?.all['donation']?.availablePackages[0];
 
   bool _isPremiumPlan = false;
 
-  @override
-  bool get isPremiumPlan => _isPremiumPlan;
-
   ///初期化処理
-  @override
   Future<void> initInAppPurchase() async {
+    await dotenv.load(fileName: "assets/.env");
+
     final androidKey = dotenv.get('REVENUECAT_KEY_ANDROID');
     final iosKey = dotenv.get('REVENUECAT_KEY_IOS');
 
@@ -55,8 +66,11 @@ class InAppPurchaseManager {
   }
 
   ///購入処理
-  Future<void> makePurchase() async {
-    final package = offerings?.all['delete_ad']?.lifetime;
+  Future<void> makePurchase(PurchaseMode mode) async {
+    final package = switch (mode) {
+      PurchaseMode.deleteAd => deleteAdPackage,
+      PurchaseMode.donation => donationPackage,
+    };
 
     if (package == null) return;
     try {

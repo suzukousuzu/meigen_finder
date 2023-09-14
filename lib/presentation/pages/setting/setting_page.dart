@@ -26,6 +26,8 @@ class SettingPage extends HookConsumerWidget {
     final controller = ref.watch(settingPageControllerProvider.notifier);
     final viewState = ref.watch(settingPageControllerProvider);
 
+    final donationPriceString = controller.donationPriceString;
+
     useEffect(() {
       executeWhileLoading(ref, () => controller.fetchAppVersion());
       return null;
@@ -44,14 +46,19 @@ class SettingPage extends HookConsumerWidget {
                 label: '広告を消す',
                 onTap: () => PremiumRoute().go(context),
               ),
-              const _Divider(),
-              SettingListTileRightArrow(
-                label: '開発者の支援をする',
-                trailingWidget: const Text('¥200'),
-                onTap: () {
-                  // TODO:寄付の処理
-                },
-              ),
+              if (donationPriceString != null) ...{
+                const _Divider(),
+                SettingListTileRightArrow(
+                  label: '開発者の支援をする',
+                  trailingWidget: Text(donationPriceString),
+                  onTap: () {
+                    executeWhileLoading(ref, () {
+                      return controller.donate();
+                    });
+                  },
+                ),
+              },
+
               const SizedBox(
                 height: 32.0,
               ),

@@ -32,8 +32,12 @@ class $AssetsMasterDataGen {
 class Assets {
   Assets._();
 
+  static const String env = 'assets/.env';
   static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsMasterDataGen masterData = $AssetsMasterDataGen();
+
+  /// List of all assets
+  List<String> get values => [env];
 }
 
 class AssetGenImage {
