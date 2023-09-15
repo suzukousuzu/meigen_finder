@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:launch_review/launch_review.dart';
 import 'package:meigen_finder/presentation/theme/mf_theme.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../application/controller/setting_page_controller.dart';
@@ -58,7 +61,6 @@ class SettingPage extends HookConsumerWidget {
                   },
                 ),
               },
-
               const SizedBox(
                 height: 32.0,
               ),
@@ -82,18 +84,18 @@ class SettingPage extends HookConsumerWidget {
                 bottomRightRadius: 0,
                 bottomLeftRadius: 0,
               ),
-              // const _Divider(),
-              // SettingListTileRightArrow(
-              //   label: 'アプリをシェアする',
-              //   onTap: () {
-              //     // アプリのシェア
-              //     Share.share(Platform.isIOS
-              //         ? 'https://apps.apple.com/us/app/mode-on/id6449795570'
-              //         : 'https://play.google.com/store/apps/details?id=jp.ringrin.mode_on');
-              //   },
-              //   topRightRadius: 0,
-              //   topLeftRadius: 0,
-              // ),
+              const _Divider(),
+              SettingListTileRightArrow(
+                label: 'アプリをシェアする',
+                onTap: () {
+                  // アプリのシェア
+                  Share.share(Platform.isIOS
+                      ? 'https://apps.apple.com/us/app/気分e名言/id6463764141'
+                      : 'https://play.google.com/store/apps/details?id=jp.ringrin.kibun_e_meigen');
+                },
+                topRightRadius: 0,
+                topLeftRadius: 0,
+              ),
               const SizedBox(
                 height: 32.0,
               ),
