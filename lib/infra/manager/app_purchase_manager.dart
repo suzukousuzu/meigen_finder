@@ -5,18 +5,36 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:meigen_finder/infra/manager/preference_manager.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
+
+import '../data_holder/is_premium_plan_holder.dart';
 
 enum PurchaseMode {
   donation,
   deleteAd,
 }
 
-final inAppPurchaseManagerProvider = Provider<InAppPurchaseManager>(
-  (ref) => InAppPurchaseManager(),
+final inAppPurchaseManagerProvider = Provider.autoDispose<InAppPurchaseManager>(
+  (ref) {
+    final isPremiumPlanHolder = ref.watch(isPremiumPlanHolderProvider);
+    final preferenceManager = ref.watch(preferenceManagerProvider);
+    return InAppPurchaseManager(
+      isPremiumPlanHolder,
+      preferenceManager,
+    );
+  },
 );
 
 class InAppPurchaseManager {
+  final IsPremiumPlanHolder isPremiumPlanHolder;
+  final PreferenceManager preferenceManager;
+
+  InAppPurchaseManager(
+    this.isPremiumPlanHolder,
+    this.preferenceManager,
+  );
+
   Offerings? _offerings;
 
   Offerings? get offerings => _offerings;
@@ -63,6 +81,14 @@ class InAppPurchaseManager {
     } else {
       _isPremiumPlan = false;
     }
+
+    preferenceManager.setValue(
+      PreferenceKey.premiumPlan,
+      _isPremiumPlan,
+    );
+
+    // キャッシュ更新
+    isPremiumPlanHolder.update(_isPremiumPlan);
   }
 
   ///購入処理

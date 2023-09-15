@@ -3,7 +3,9 @@ import 'package:meigen_finder/domain/collection/quote.dart';
 import 'package:meigen_finder/infra/providers/like_quote_repository_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../../infra/data_holder/is_premium_plan_holder.dart';
 import '../../infra/manager/ad_manager.dart';
+import '../../infra/manager/preference_manager.dart';
 import '../state/quote_detail_page_view_state.dart';
 
 part 'quote_detail_page_controller.g.dart';
@@ -19,10 +21,27 @@ class QuoteDetailArgument {
 @riverpod
 class QuoteDetailController extends _$QuoteDetailController {
   @override
-  QuoteDetailPageViewState build(QuoteDetailArgument quoteDetailArgument) =>
-      QuoteDetailPageViewState(
-          quote: quoteDetailArgument.quote,
-          isLiked: quoteDetailArgument.isLiked);
+  QuoteDetailPageViewState build(QuoteDetailArgument quoteDetailArgument) {
+    final isPremiumPlanHolder = ref.watch(isPremiumPlanHolderProvider);
+    isPremiumPlanHolder.stream.listen((isPremium) {
+      state = state.copyWith(
+        isPremium: isPremium,
+      );
+    });
+    return QuoteDetailPageViewState(
+      quote: quoteDetailArgument.quote,
+      isLiked: quoteDetailArgument.isLiked,
+      isPremium: false,
+    );
+  }
+
+  void fetchIsPremiumPlan() {
+    final preferenceManager = ref.read(preferenceManagerProvider);
+    final isPremiumPlan =
+        preferenceManager.getValue(PreferenceKey.premiumPlan, false) as bool;
+
+    state = state.copyWith(isPremium: isPremiumPlan);
+  }
 
   Future<void> like(Quote quote, bool isLiked) async {
     try {

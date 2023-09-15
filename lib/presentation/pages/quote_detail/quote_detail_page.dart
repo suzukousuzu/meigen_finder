@@ -69,7 +69,7 @@ class QuoteDetailPage extends HookConsumerWidget {
               ),
             ],
           ),
-          if (bannerAd != null) ...{
+          if (bannerAd != null && !viewState.isPremium) ...{
             _Banner(bannerAd: bannerAd),
           },
         ],

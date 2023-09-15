@@ -7,6 +7,7 @@ final preferenceManagerProvider = Provider((ref) {
 
 enum PreferenceKey {
   todayQuotes,
+  premiumPlan,
 }
 
 extension StringExtension on PreferenceKey {

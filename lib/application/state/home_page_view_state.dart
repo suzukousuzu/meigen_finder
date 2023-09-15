@@ -27,6 +27,7 @@ class HomePageViewState {
   List<Quote>? likedQuotes;
   DateTime? lastDateUpdatedTodayQuote;
   BannerAd? bannerAd;
+  bool isPremium;
 
 //<editor-fold desc="Data Methods">
   HomePageViewState({
@@ -35,6 +36,7 @@ class HomePageViewState {
     this.likedQuotes,
     this.lastDateUpdatedTodayQuote,
     this.bannerAd,
+    required this.isPremium,
   });
 
   @override
@@ -46,7 +48,8 @@ class HomePageViewState {
           todayQuoteResult == other.todayQuoteResult &&
           likedQuotes == other.likedQuotes &&
           lastDateUpdatedTodayQuote == other.lastDateUpdatedTodayQuote &&
-          bannerAd == other.bannerAd);
+          bannerAd == other.bannerAd &&
+          isPremium == other.isPremium);
 
   @override
   int get hashCode =>
@@ -54,11 +57,19 @@ class HomePageViewState {
       todayQuoteResult.hashCode ^
       likedQuotes.hashCode ^
       lastDateUpdatedTodayQuote.hashCode ^
-      bannerAd.hashCode;
+      bannerAd.hashCode ^
+      isPremium.hashCode;
 
   @override
   String toString() {
-    return 'HomePageViewState{ emotionalType: $emotionalType, todayQuoteResult: $todayQuoteResult, likedQuotes: $likedQuotes, lastDateUpdatedTodayQuote: $lastDateUpdatedTodayQuote, bannerAd: $bannerAd,}';
+    return 'HomePageViewState{' +
+        ' emotionalType: $emotionalType,' +
+        ' todayQuoteResult: $todayQuoteResult,' +
+        ' likedQuotes: $likedQuotes,' +
+        ' lastDateUpdatedTodayQuote: $lastDateUpdatedTodayQuote,' +
+        ' bannerAd: $bannerAd,' +
+        ' isPremium: $isPremium,' +
+        '}';
   }
 
   HomePageViewState copyWith({
@@ -67,6 +78,7 @@ class HomePageViewState {
     List<Quote>? likedQuotes,
     DateTime? lastDateUpdatedTodayQuote,
     BannerAd? bannerAd,
+    bool? isPremium,
   }) {
     return HomePageViewState(
       emotionalType: emotionalType ?? this.emotionalType,
@@ -75,16 +87,18 @@ class HomePageViewState {
       lastDateUpdatedTodayQuote:
           lastDateUpdatedTodayQuote ?? this.lastDateUpdatedTodayQuote,
       bannerAd: bannerAd ?? this.bannerAd,
+      isPremium: isPremium ?? this.isPremium,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'emotionalType': this.emotionalType,
-      'todayQuoteResult': this.todayQuoteResult,
-      'likedQuotes': this.likedQuotes,
-      'lastDateUpdatedTodayQuote': this.lastDateUpdatedTodayQuote,
-      'bannerAd': this.bannerAd,
+      'emotionalType': emotionalType,
+      'todayQuoteResult': todayQuoteResult,
+      'likedQuotes': likedQuotes,
+      'lastDateUpdatedTodayQuote': lastDateUpdatedTodayQuote,
+      'bannerAd': bannerAd,
+      'isPremium': isPremium,
     };
   }
 
@@ -95,6 +109,7 @@ class HomePageViewState {
       likedQuotes: map['likedQuotes'] as List<Quote>,
       lastDateUpdatedTodayQuote: map['lastDateUpdatedTodayQuote'] as DateTime,
       bannerAd: map['bannerAd'] as BannerAd,
+      isPremium: map['isPremium'] as bool,
     );
   }
 
