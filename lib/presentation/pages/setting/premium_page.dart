@@ -1,20 +1,38 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:meigen_finder/presentation/components/button/primary_button.dart';
 import 'package:meigen_finder/presentation/theme/mf_theme.dart';
 
+import '../../../application/controller/premium_page_controller.dart';
 import '../../../gen/assets.gen.dart';
+import '../../components/loading/execute_while_loading.dart';
+import '../../routing/router.dart';
 
-class PremiumPage extends StatelessWidget {
+class PremiumPage extends HookConsumerWidget {
   const PremiumPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = MfTheme.of(context);
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
+
+    final controller = ref.watch(premiumPageControllerProvider.notifier);
+    final viewState = ref.watch(premiumPageControllerProvider);
+
+    final priceString = viewState.premiumPriceString;
+
+    useEffect(() {
+      Future(() => controller.fetchPriceString());
+      return null;
+    }, const []);
 
     return Scaffold(
       appBar: AppBar(
@@ -31,20 +49,25 @@ class PremiumPage extends StatelessWidget {
           ),
         ],
       ),
-      body: const Column(
+      body: Column(
         children: [
           Expanded(
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _PromptText(),
-                  _Image(),
+                  const _PromptText(),
+                  const _Image(),
+                  if (priceString.isNotEmpty) ...{
+                    _DisplayPrice(priceString: priceString),
+                  },
                 ],
               ),
             ),
           ),
-          _BottomButton(),
+          _BottomButton(
+            controller: controller,
+          ),
         ],
       ),
     );
@@ -58,8 +81,8 @@ class _Image extends StatelessWidget {
   Widget build(BuildContext context) {
     return SvgPicture.asset(
       Assets.images.smileyFace,
-      width: 260,
-      height: 260,
+      width: 240,
+      height: 240,
     );
   }
 }
@@ -77,7 +100,7 @@ class _PromptText extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            '広告を削除！！',
+            '広告を削除',
             style: textTheme.h1.copyWith(
               color: colorScheme.superHappy,
             ),
@@ -96,25 +119,97 @@ class _PromptText extends StatelessWidget {
   }
 }
 
-class _BottomButton extends StatelessWidget {
-  const _BottomButton({Key? key}) : super(key: key);
+class _DisplayPrice extends StatelessWidget {
+  const _DisplayPrice({
+    Key? key,
+    required this.priceString,
+  }) : super(key: key);
+
+  final String priceString;
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = MfTheme.of(context).textTheme;
+    final colorScheme = MfTheme.of(context).colorScheme;
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
+      child: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 6),
+              child: Text(
+                '買い切り',
+                style: textTheme.textBold
+                    .copyWith(color: colorScheme.onBackground),
+              ),
+            ),
+            const SizedBox(width: 8),
+            Text(
+              priceString,
+              style: textTheme.h2.copyWith(
+                color: colorScheme.superHappy,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _BottomButton extends ConsumerWidget {
+  const _BottomButton({
+    Key? key,
+    required this.controller,
+  }) : super(key: key);
+  final PremiumPageController controller;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = MfTheme.of(context);
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
+      padding: const EdgeInsets.fromLTRB(20, 12, 20, 8),
       child: Column(
         children: [
           PrimaryButton(
             label: '広告を削除する',
-            onPressed: () {},
+            onPressed: () {
+              executeWhileLoading(ref, () {
+                return controller.purchasePremium().whenComplete(() {
+                  Fluttertoast.showToast(
+                      msg: '広告を削除しました！',
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.TOP,
+                      textColor: colorScheme.surface,
+                      fontSize: 16.0);
+
+                  const HomeRoute().go(context);
+                });
+              });
+            },
           ),
           TextButton(
             onPressed: () {
-              // TODO:購入の復元
+              if (Platform.isIOS) {
+                executeWhileLoading(
+                  ref,
+                  () => controller.restore(),
+                ).then((_) {
+                  const HomeRoute().go(context);
+                });
+              } else {
+                Fluttertoast.showToast(
+                    msg: '現在、Androidでは復元機能は利用できません',
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.TOP,
+                    textColor: colorScheme.surface,
+                    fontSize: 16.0);
+              }
             },
             child: Text(
               '購入を復元する',

@@ -24,6 +24,8 @@ class HomePage extends HookConsumerWidget {
     final controller = ref.watch(homePageControllerProvider.notifier);
     final viewState = ref.watch(homePageControllerProvider);
 
+    print('premium: ${viewState.isPremium}');
+
     final bannerAd = viewState.bannerAd;
 
     final canRetrieveQuoteToday = viewState.canRetrieveQuoteToday;
@@ -55,9 +57,9 @@ class HomePage extends HookConsumerWidget {
               ),
             ],
           ),
-          // if (bannerAd != null) ...{
-          //   _Banner(bannerAd: bannerAd),
-          // },
+          if (bannerAd != null && !viewState.isPremium) ...{
+            _Banner(bannerAd: bannerAd),
+          },
         ],
       )),
     );

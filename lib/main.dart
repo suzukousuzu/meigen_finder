@@ -36,9 +36,12 @@ Future<void> main() async {
   ]);
 
   //ステータスバーの色の設定
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarColor: Colors.black,
-  ));
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarBrightness: Brightness.light,
+      statusBarIconBrightness: Brightness.dark,
+    ),
+  );
   runApp(const ProviderScope(child: MyApp()));
 }
 

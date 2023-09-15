@@ -9,6 +9,7 @@ import 'package:meigen_finder/util/datetime_extension.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../domain/collection/todays_quote.dart';
+import '../../infra/data_holder/is_premium_plan_holder.dart';
 import '../../infra/manager/ad_manager.dart';
 import '../../infra/manager/preference_manager.dart';
 import '../../infra/providers/quote_repository_provider.dart';
@@ -25,9 +26,18 @@ class HomePageController extends _$HomePageController {
         lastDateUpdatedTodayQuote: dateTime,
       );
     });
+
+    final isPremiumPlanHolder = ref.watch(isPremiumPlanHolderProvider);
+    isPremiumPlanHolder.stream.listen((isPremium) {
+      state = state.copyWith(
+        isPremium: isPremium,
+      );
+    });
+
     return HomePageViewState(
       emotionalType: null,
       todayQuoteResult: TodayQuoteResult(null, false),
+      isPremium: false,
     );
   }
 

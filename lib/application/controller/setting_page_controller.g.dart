@@ -7,7 +7,7 @@ part of 'setting_page_controller.dart';
 // **************************************************************************
 
 String _$settingPageControllerHash() =>
-    r'd449331bcbe0c0bdf004cc424eaa3885c1843476';
+    r'e90a582cb263ed6bedce9a564f42bb12e0bc0499';
 
 /// See also [SettingPageController].
 @ProviderFor(SettingPageController)
