@@ -39,28 +39,29 @@ class HomePage extends HookConsumerWidget {
     }, const []);
     return Scaffold(
       body: SafeArea(
-          child: Stack(
-        children: [
-          Column(
-            children: [
-              _PromptText(
-                canRetrieveQuoteToday: canRetrieveQuoteToday,
-              ),
-              _EmotionalSelector(
-                canRetrieveQuoteToday: canRetrieveQuoteToday,
-                initialType: viewState.emotionalType,
-              ),
-              _Button(
-                controller: controller,
-                canRetrieveQuoteToday: canRetrieveQuoteToday,
-              ),
-            ],
-          ),
-          if (bannerAd != null && !viewState.isPremium) ...{
-            _Banner(bannerAd: bannerAd),
-          },
-        ],
-      )),
+        child: Stack(
+          children: [
+            Column(
+              children: [
+                _PromptText(
+                  canRetrieveQuoteToday: canRetrieveQuoteToday,
+                ),
+                _EmotionalSelector(
+                  canRetrieveQuoteToday: canRetrieveQuoteToday,
+                  initialType: viewState.emotionalType,
+                ),
+                _Button(
+                  controller: controller,
+                  canRetrieveQuoteToday: canRetrieveQuoteToday,
+                ),
+              ],
+            ),
+            if (bannerAd != null && !viewState.isPremium) ...{
+              _Banner(bannerAd: bannerAd),
+            },
+          ],
+        ),
+      ),
     );
   }
 
