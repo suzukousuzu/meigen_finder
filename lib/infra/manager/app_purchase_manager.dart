@@ -64,7 +64,6 @@ class InAppPurchaseManager {
 
     await Purchases.configure(configuration!);
     _offerings = await Purchases.getOfferings();
-    print('_offerings: $_offerings');
   }
 
   void updatePurchases(CustomerInfo purchaseInfo) {
