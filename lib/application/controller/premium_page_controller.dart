@@ -12,14 +12,14 @@ class PremiumPageController extends _$PremiumPageController {
       const PremiumPageViewState(isPremium: false, premiumPriceString: '');
 
   void fetchPriceString() {
-    final inAppPurchaseManager = ref.read(inAppPurchaseManagerProvider);
+    final inAppPurchaseManager = ref.watch(inAppPurchaseManagerProvider);
     final premiumPackage = inAppPurchaseManager.deleteAdPackage;
     final priceString = premiumPackage?.storeProduct.priceString;
     state = state.copyWith(premiumPriceString: priceString);
   }
 
   Future<void> purchasePremium() async {
-    final inAppPurchaseManager = ref.read(inAppPurchaseManagerProvider);
+    final inAppPurchaseManager = ref.watch(inAppPurchaseManagerProvider);
     await inAppPurchaseManager.makePurchase(PurchaseMode.deleteAd);
   }
 
