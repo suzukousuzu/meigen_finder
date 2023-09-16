@@ -49,9 +49,9 @@ class AdManager {
 
   static String get appId {
     if (Platform.isAndroid) {
-      return "ca-app-pub-5327122452999188~5309993198";
-    } else if (Platform.isIOS) {
       return "ca-app-pub-5327122452999188~1466024364";
+    } else if (Platform.isIOS) {
+      return "ca-app-pub-5327122452999188~2779106034";
     } else {
       throw UnsupportedError("Unsupported platform");
     }
@@ -59,11 +59,9 @@ class AdManager {
 
   static String get bannerAdUnitId {
     if (Platform.isAndroid) {
-      return "ca-app-pub-5327122452999188/6717478900";
+      return "ca-app-pub-5327122452999188/1078139415";
     } else if (Platform.isIOS) {
-      //test:ca-app-pub-3940256099942544/2934735716
-      //本物：ca-app-pub-5327122452999188/1242663086
-      return "ca-app-pub-3940256099942544/2934735716";
+      return "ca-app-pub-5327122452999188/1242663086";
     } else {
       throw UnsupportedError("Unsupported platform");
     }
