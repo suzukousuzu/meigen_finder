@@ -48,8 +48,7 @@ class HomePage extends HookConsumerWidget {
               ),
               _EmotionalSelector(
                 canRetrieveQuoteToday: canRetrieveQuoteToday,
-                initialType:
-                    viewState.todayQuoteResult?.todaysQuote?.emotionalType,
+                initialType: viewState.emotionalType,
               ),
               _Button(
                 controller: controller,
