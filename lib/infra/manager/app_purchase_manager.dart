@@ -15,7 +15,7 @@ enum PurchaseMode {
   deleteAd,
 }
 
-final inAppPurchaseManagerProvider = Provider.autoDispose<InAppPurchaseManager>(
+final inAppPurchaseManagerProvider = Provider<InAppPurchaseManager>(
   (ref) {
     final isPremiumPlanHolder = ref.watch(isPremiumPlanHolderProvider);
     final preferenceManager = ref.watch(preferenceManagerProvider);
@@ -98,7 +98,7 @@ class InAppPurchaseManager {
       PurchaseMode.donation => donationPackage,
     };
 
-    if (package == null) return;
+    if (package == null) throw StateError('package is null');
     try {
       await Purchases.purchasePackage(package);
     } on PlatformException catch (e) {

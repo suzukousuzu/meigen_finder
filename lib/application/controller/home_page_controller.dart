@@ -38,13 +38,17 @@ class HomePageController extends _$HomePageController {
       emotionalType: null,
       todayQuoteResult: TodayQuoteResult(null, false),
       isPremium: false,
+      todaysQuoteDisplayCount: 0,
     );
   }
 
   Future<void> fetch() async {
-    await _fetchLikeQuotes();
-    await _fetchTodayQuote();
-    await _fetchLastDateUpdatedTodayQuote();
+    Future.wait([
+      _fetchLikeQuotes(),
+      _fetchTodayQuote(),
+      _fetchLastDateUpdatedTodayQuote(),
+      _fetchTodaysQuoteDisplayCount(),
+    ]);
     _fetchBannerAd();
   }
 
@@ -60,6 +64,13 @@ class HomePageController extends _$HomePageController {
     final todayQuoteResult =
         state.todayQuoteResult?.copyWith(todaysQuote: todayQuote);
     state = state.copyWith(todayQuoteResult: todayQuoteResult);
+  }
+
+  Future<void> _fetchTodaysQuoteDisplayCount() async {
+    final preferenceManager = ref.read(preferenceManagerProvider);
+    final todaysQuoteDisplayCount = preferenceManager.getValue(
+        PreferenceKey.todaysQuoteDisplayCount, 0) as int;
+    state = state.copyWith(todaysQuoteDisplayCount: todaysQuoteDisplayCount);
   }
 
   void _fetchBannerAd() {
@@ -115,6 +126,18 @@ class HomePageController extends _$HomePageController {
       state = state.copyWith(
         todayQuoteResult: TodayQuoteResult(todaysQuote, true),
       );
+      // 今日の名言の表示回数を保存
+      final preferenceManager = ref.read(preferenceManagerProvider);
+      if (state.todaysQuoteDisplayCount <= 2) {
+        preferenceManager.setValue(PreferenceKey.todaysQuoteDisplayCount,
+            state.todaysQuoteDisplayCount + 1);
+        final adManager = ref.read(adManagerProvider);
+        if (!state.isPremium && state.todaysQuoteDisplayCount == 2) {
+          adManager.showInterstitialAd();
+        }
+      } else {
+        preferenceManager.setValue(PreferenceKey.todaysQuoteDisplayCount, 0);
+      }
     } catch (e) {
       //TODO:エラーハンドリング
       debugPrint(e.toString());

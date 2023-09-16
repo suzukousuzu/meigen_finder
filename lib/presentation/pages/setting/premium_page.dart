@@ -181,13 +181,6 @@ class _BottomButton extends ConsumerWidget {
             onPressed: () {
               executeWhileLoading(ref, () {
                 return controller.purchasePremium().whenComplete(() {
-                  Fluttertoast.showToast(
-                      msg: '広告を削除しました！',
-                      toastLength: Toast.LENGTH_SHORT,
-                      gravity: ToastGravity.TOP,
-                      textColor: colorScheme.surface,
-                      fontSize: 16.0);
-
                   const HomeRoute().go(context);
                 });
               });

@@ -7,6 +7,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:meigen_finder/application/init/init_app.dart';
 import 'package:meigen_finder/firebase_options_dev.dart' as dev;
 import 'package:meigen_finder/firebase_options_prod.dart' as prod;
+import 'package:meigen_finder/presentation/components/loading/execute_while_loading.dart';
 import 'package:meigen_finder/presentation/components/loading/loading_screen.dart';
 import 'package:meigen_finder/presentation/routing/router.dart';
 import 'package:meigen_finder/presentation/theme/mf_theme.dart';
@@ -54,7 +55,10 @@ class MyApp extends HookConsumerWidget {
     final theme = ref.watch(mfThemeProvider);
     final router = ref.watch(routerProvider);
     useEffect(() {
-      ref.read(initAppProvider).execute();
+      executeWhileLoading(ref, () {
+        return ref.watch(initAppProvider).execute();
+      });
+
       return;
     }, const []);
     return MaterialApp.router(
