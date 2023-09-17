@@ -25,6 +25,7 @@ class EmotionalSelector extends HookWidget {
     final colorScheme = theme.colorScheme;
 
     final selectedEmotionalType = useState<EmotionalType?>(null);
+    print('selectedEmotionalType: ${selectedEmotionalType.value}');
 
     useEffect(() {
       selectedEmotionalType.value = initialType;
