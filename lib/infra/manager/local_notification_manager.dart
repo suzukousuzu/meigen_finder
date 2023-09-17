@@ -9,7 +9,6 @@ final localNotificationManagerProvider =
 
 class LocalNotificationManager {
   Future<void> init() async {
-    // tz.initializeTimeZones();
     const initializationSettingsAndroid =
         AndroidInitializationSettings('@mipmap/ic_launcher');
     final initializationSettingsIOS = DarwinInitializationSettings(
@@ -39,6 +38,7 @@ class LocalNotificationManager {
             channelDescription: "CHANNEL_DESCRIPTION 1",
             importance: Importance.max,
             priority: Priority.high,
+            icon: '@mipmap/ic_launcher',
             showWhen: false);
     const iosChannelSpecifics = DarwinNotificationDetails(
         //sound: 'my_sound.aiff',
@@ -51,11 +51,16 @@ class LocalNotificationManager {
 
     // 時間を日本時間の午後8時に設定します
     final tz.TZDateTime now = tz.TZDateTime.now(tz.getLocation('Asia/Tokyo'));
-    final tz.TZDateTime scheduledDate = tz.TZDateTime(
-        tz.getLocation('Asia/Tokyo'), now.year, now.month, now.day, 21, 56);
+    tz.TZDateTime scheduledDate = tz.TZDateTime(
+        tz.getLocation('Asia/Tokyo'), now.year, now.month, now.day, 20);
+    if (scheduledDate.isBefore(now)) {
+      scheduledDate = scheduledDate.add(
+        const Duration(days: 1),
+      );
+    }
 
-    await flutterLocalNotificationsPlugin.zonedSchedule(0, 'Scheduled Title',
-        'Scheduled Body', scheduledDate, platformChannelSpecifics,
+    await flutterLocalNotificationsPlugin.zonedSchedule(0, '本日の名言は既に表示しましたか？',
+        '名言の力で人生を楽しんでいきましょう！', scheduledDate, platformChannelSpecifics,
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime,
         matchDateTimeComponents: DateTimeComponents.time);
