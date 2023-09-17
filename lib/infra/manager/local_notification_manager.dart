@@ -52,14 +52,14 @@ class LocalNotificationManager {
     // 時間を日本時間の午後8時に設定します
     final tz.TZDateTime now = tz.TZDateTime.now(tz.getLocation('Asia/Tokyo'));
     tz.TZDateTime scheduledDate = tz.TZDateTime(
-        tz.getLocation('Asia/Tokyo'), now.year, now.month, now.day, 20);
+        tz.getLocation('Asia/Tokyo'), now.year, now.month, now.day, 8);
     if (scheduledDate.isBefore(now)) {
       scheduledDate = scheduledDate.add(
         const Duration(days: 1),
       );
     }
 
-    await flutterLocalNotificationsPlugin.zonedSchedule(0, '本日の名言は既に表示しましたか？',
+    await flutterLocalNotificationsPlugin.zonedSchedule(0, '今日の名言は表示しましたか？',
         '名言の力で人生を楽しんでいきましょう！', scheduledDate, platformChannelSpecifics,
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime,

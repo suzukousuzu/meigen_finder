@@ -1,4 +1,6 @@
 PODS:
+  - app_settings (4.3.0):
+    - Flutter
   - app_tracking_transparency (0.0.1):
     - Flutter
   - Firebase/CoreOnly (10.12.0):
@@ -74,6 +76,8 @@ PODS:
     - nanopb/encode (= 2.30909.0)
   - nanopb/decode (2.30909.0)
   - nanopb/encode (2.30909.0)
+  - notification_permissions (0.4.4):
+    - Flutter
   - package_info_plus (0.4.5):
     - Flutter
   - path_provider_foundation (0.0.1):
@@ -98,6 +102,7 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
+  - app_settings (from `.symlinks/plugins/app_settings/ios`)
   - app_tracking_transparency (from `.symlinks/plugins/app_tracking_transparency/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - Flutter (from `Flutter`)
@@ -107,6 +112,7 @@ DEPENDENCIES:
   - google_mobile_ads (from `.symlinks/plugins/google_mobile_ads/ios`)
   - isar_flutter_libs (from `.symlinks/plugins/isar_flutter_libs/ios`)
   - launch_review (from `.symlinks/plugins/launch_review/ios`)
+  - notification_permissions (from `.symlinks/plugins/notification_permissions/ios`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - purchases_flutter (from `.symlinks/plugins/purchases_flutter/ios`)
@@ -131,6 +137,8 @@ SPEC REPOS:
     - Toast
 
 EXTERNAL SOURCES:
+  app_settings:
+    :path: ".symlinks/plugins/app_settings/ios"
   app_tracking_transparency:
     :path: ".symlinks/plugins/app_tracking_transparency/ios"
   firebase_core:
@@ -149,6 +157,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/isar_flutter_libs/ios"
   launch_review:
     :path: ".symlinks/plugins/launch_review/ios"
+  notification_permissions:
+    :path: ".symlinks/plugins/notification_permissions/ios"
   package_info_plus:
     :path: ".symlinks/plugins/package_info_plus/ios"
   path_provider_foundation:
@@ -165,6 +175,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/webview_flutter_wkwebview/ios"
 
 SPEC CHECKSUMS:
+  app_settings: ee4ae4d1c9a907a23b81c40e5c56a5ca8a20a62b
   app_tracking_transparency: 5b1745ef9ade815f7455cb6a0848349589afb7c5
   Firebase: 07150e75d142fb9399f6777fa56a187b17f833a0
   firebase_core: 4a3246a02f828a01c74a2c26427037786d90f17f
@@ -182,6 +193,7 @@ SPEC CHECKSUMS:
   isar_flutter_libs: b69f437aeab9c521821c3f376198c4371fa21073
   launch_review: 75d5a956ba8eaa493e9c9d4bf4c05e505e8d5ed0
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
+  notification_permissions: 825ea1bf2a52ab585c53fd7b5e8e96876d735d4b
   package_info_plus: fd030dabf36271f146f1f3beacd48f564b0f17f7
   path_provider_foundation: 29f094ae23ebbca9d3d0cec13889cd9060c0e943
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
