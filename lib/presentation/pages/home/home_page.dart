@@ -1,5 +1,6 @@
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_badger/flutter_app_badger.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -7,10 +8,13 @@ import 'package:meigen_finder/application/controller/home_page_controller.dart';
 import 'package:meigen_finder/application/controller/quote_detail_page_controller.dart';
 import 'package:meigen_finder/application/state/home_page_view_state.dart';
 import 'package:meigen_finder/domain/collection/emotional_type.dart';
+import 'package:meigen_finder/presentation/components/analytics/event_log.dart';
+import 'package:meigen_finder/presentation/components/analytics/event_type.dart';
 import 'package:meigen_finder/presentation/components/button/primary_button.dart';
 import 'package:meigen_finder/presentation/components/selector/emotional_selector.dart';
 import 'package:meigen_finder/presentation/routing/router.dart';
 
+import '../../../util/app_life_cycle_observer.dart';
 import '../../components/button/label_button.dart';
 import '../../components/dialog/att_dialog.dart';
 import '../../components/loading/execute_while_loading.dart';
@@ -24,12 +28,11 @@ class HomePage extends HookConsumerWidget {
     final controller = ref.watch(homePageControllerProvider.notifier);
     final viewState = ref.watch(homePageControllerProvider);
 
-    print('premium: ${viewState.isPremium}');
-
     final bannerAd = viewState.bannerAd;
 
     final canRetrieveQuoteToday = viewState.canRetrieveQuoteToday;
     useEffect(() {
+      FlutterAppBadger.removeBadge();
       Future(() => _initAtt(context));
       executeWhileLoading(ref, () {
         return controller.fetch();
@@ -37,6 +40,13 @@ class HomePage extends HookConsumerWidget {
 
       return;
     }, const []);
+
+    ref.listen(appLifecycleProvider, (previous, next) {
+      if (next == AppLifecycleState.resumed) {
+        FlutterAppBadger.removeBadge();
+      }
+    });
+
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -167,6 +177,7 @@ class _Button extends ConsumerWidget {
               label: '今日の名言',
               onPressed: viewState.isButtonEnable
                   ? () {
+                      eventLog(EventType.todayQuoteButton);
                       controller.onUpdateTodayQuote();
                     }
                   : null,
@@ -174,7 +185,8 @@ class _Button extends ConsumerWidget {
           : LabelButton(
               label: '今日の名言を再度みる',
               onPressed: () {
-                // TODO:全画面広告の実装
+                eventLog(EventType.retryTodayButtonQuote);
+
                 QuoteDetailRouteFromHome(QuoteDetailArgument(
                         todaysQuote!.quote, viewState.isLikedQuoted))
                     .go(context);
