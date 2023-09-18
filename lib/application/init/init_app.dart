@@ -33,11 +33,11 @@ class InitApp {
       _localNotificationManager.init(),
       _adManager.initAdmob(),
       _inAppPurchaseManager.initInAppPurchase(),
-    ]).whenComplete(() {
-      _adManager.initBannerAd();
-      _adManager.initInterstitialAd();
-      _adManager.loadBannerAd();
-      _localNotificationManager.scheduleDaily8PMNotification();
-    });
+    ]);
+    
+    _localNotificationManager.scheduleDaily8PMNotification();
+    _adManager.initBannerAd();
+    _adManager.initInterstitialAd();
+    _adManager.loadBannerAd();
   }
 }
