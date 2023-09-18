@@ -34,9 +34,10 @@ class InitApp {
       _adManager.initAdmob(),
       _inAppPurchaseManager.initInAppPurchase(),
     ]);
+    
+    _localNotificationManager.scheduleDaily8PMNotification();
     _adManager.initBannerAd();
     _adManager.initInterstitialAd();
     _adManager.loadBannerAd();
-    _localNotificationManager.scheduleDaily8PMNotification();
   }
 }
