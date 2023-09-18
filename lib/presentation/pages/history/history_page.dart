@@ -1,4 +1,3 @@
-import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -167,12 +166,9 @@ class HistoryPage extends HookConsumerWidget {
         return isToday
             ? GestureDetector(
                 onTap: () {
-                  showFlexibleBottomSheet(
-                      minHeight: 0,
-                      initHeight: 0.2,
+                  showModalBottomSheet(
                       context: context,
-                      isSafeArea: true,
-                      builder: (context, scrollController, offset) {
+                      builder: (context) {
                         return _BottomSheetContainer(
                           context: context,
                           quote: event,
