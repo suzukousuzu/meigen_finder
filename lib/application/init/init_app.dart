@@ -24,12 +24,14 @@ class InitApp {
   final InAppPurchaseManager _inAppPurchaseManager;
 
   Future<void> execute() async {
-    _preferenceManager.init();
-    _adManager.initAdmob().whenComplete(() {
-      _adManager.initBannerAd();
-      _adManager.initInterstitialAd();
-      _adManager.loadBannerAd();
-    });
-    _inAppPurchaseManager.initInAppPurchase();
+    Future.wait([
+      _preferenceManager.init(),
+      _adManager.initAdmob(),
+      _inAppPurchaseManager.initInAppPurchase(),
+    ]);
+
+    _adManager.initBannerAd();
+    _adManager.initInterstitialAd();
+    _adManager.loadBannerAd();
   }
 }
