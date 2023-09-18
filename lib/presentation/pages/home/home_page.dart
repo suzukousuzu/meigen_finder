@@ -8,6 +8,8 @@ import 'package:meigen_finder/application/controller/home_page_controller.dart';
 import 'package:meigen_finder/application/controller/quote_detail_page_controller.dart';
 import 'package:meigen_finder/application/state/home_page_view_state.dart';
 import 'package:meigen_finder/domain/collection/emotional_type.dart';
+import 'package:meigen_finder/presentation/components/analytics/event_log.dart';
+import 'package:meigen_finder/presentation/components/analytics/event_type.dart';
 import 'package:meigen_finder/presentation/components/button/primary_button.dart';
 import 'package:meigen_finder/presentation/components/selector/emotional_selector.dart';
 import 'package:meigen_finder/presentation/routing/router.dart';
@@ -25,8 +27,6 @@ class HomePage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.watch(homePageControllerProvider.notifier);
     final viewState = ref.watch(homePageControllerProvider);
-
-    print('premium: ${viewState.isPremium}');
 
     final bannerAd = viewState.bannerAd;
 
@@ -177,6 +177,7 @@ class _Button extends ConsumerWidget {
               label: '今日の名言',
               onPressed: viewState.isButtonEnable
                   ? () {
+                      eventLog(EventType.todayQuoteButton);
                       controller.onUpdateTodayQuote();
                     }
                   : null,
@@ -184,7 +185,8 @@ class _Button extends ConsumerWidget {
           : LabelButton(
               label: '今日の名言を再度みる',
               onPressed: () {
-                // TODO:全画面広告の実装
+                eventLog(EventType.retryTodayButtonQuote);
+
                 QuoteDetailRouteFromHome(QuoteDetailArgument(
                         todaysQuote!.quote, viewState.isLikedQuoted))
                     .go(context);
