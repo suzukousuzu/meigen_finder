@@ -50,20 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCOnbFIgHDZkT44oOmU9kdNw8tu8HklaBI',
-    appId: '1:452476929242:android:e1797e70312979d34411e3',
-    messagingSenderId: '452476929242',
-    projectId: 'kibunemeigen-f722a',
-    storageBucket: 'kibunemeigen-f722a.appspot.com',
+    apiKey: 'AIzaSyCp9bBmORXN6rvjkIp-bPTyAt9VBeseiEM',
+    appId: '1:889158339717:android:87c8ea962c3d9f34b5edec',
+    messagingSenderId: '889158339717',
+    projectId: 'kibun-e-meigen-43735',
+    storageBucket: 'kibun-e-meigen-43735.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAjIoLkA_pAm4MnDxMdzOW168GOzAqO5DY',
-    appId: '1:452476929242:ios:07233e9085d67c684411e3',
-    messagingSenderId: '452476929242',
-    projectId: 'kibunemeigen-f722a',
-    storageBucket: 'kibunemeigen-f722a.appspot.com',
-    iosClientId: '452476929242-auhhhdk0h1lsr0nj3gv3l34c3a2bhm9c.apps.googleusercontent.com',
-    iosBundleId: 'com.example.meigenFinder.RunnerTests',
+    apiKey: 'AIzaSyA_T5Pvh8XxbV6DsPOyPLhKGZs1qVWRf2A',
+    appId: '1:889158339717:ios:940cecf74c9beeffb5edec',
+    messagingSenderId: '889158339717',
+    projectId: 'kibun-e-meigen-43735',
+    storageBucket: 'kibun-e-meigen-43735.appspot.com',
+    iosBundleId: 'jp.ringrin.kibun.e.meigen',
   );
 }
