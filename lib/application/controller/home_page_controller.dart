@@ -43,13 +43,14 @@ class HomePageController extends _$HomePageController {
   }
 
   Future<void> fetch() async {
+    _fetchBannerAd();
+    _initInterstitialAd();
     Future.wait([
       _fetchLikeQuotes(),
       _fetchTodayQuote(),
       _fetchLastDateUpdatedTodayQuote(),
       _fetchTodaysQuoteDisplayCount(),
     ]);
-    _fetchBannerAd();
   }
 
   Future<void> _fetchLikeQuotes() async {
@@ -74,9 +75,17 @@ class HomePageController extends _$HomePageController {
   }
 
   void _fetchBannerAd() {
-    final adManager = ref.watch(adManagerProvider);
+    final adManager = ref.read(adManagerProvider);
+
+    adManager.initBannerAd();
+    adManager.loadBannerAd();
     final bannerAd = adManager.bannerAd;
     state = state.copyWith(bannerAd: bannerAd);
+  }
+
+  void _initInterstitialAd() {
+    final adManager = ref.read(adManagerProvider);
+    adManager.initInterstitialAd();
   }
 
   Future<void> _fetchLastDateUpdatedTodayQuote() async {

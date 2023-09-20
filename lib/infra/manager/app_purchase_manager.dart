@@ -102,7 +102,7 @@ class InAppPurchaseManager {
     try {
       await Purchases.purchasePackage(package);
     } on PlatformException catch (e) {
-      debugPrint(e.toString());
+      debugPrint('error: ${e.toString()}');
       final errorCode = PurchasesErrorHelper.getErrorCode(e);
       if (errorCode == PurchasesErrorCode.purchaseCancelledError) {
         debugPrint('userCancel');
