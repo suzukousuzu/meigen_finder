@@ -22,7 +22,6 @@ class PremiumPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = MfTheme.of(context);
     final colorScheme = theme.colorScheme;
-    final textTheme = theme.textTheme;
 
     final controller = ref.watch(premiumPageControllerProvider.notifier);
     final viewState = ref.watch(premiumPageControllerProvider);
@@ -30,7 +29,7 @@ class PremiumPage extends HookConsumerWidget {
     final priceString = viewState.premiumPriceString;
 
     useEffect(() {
-      Future(() => controller.fetchPriceString());
+      Future(() => controller.fetch());
       return null;
     }, const []);
 
@@ -67,6 +66,7 @@ class PremiumPage extends HookConsumerWidget {
           ),
           _BottomButton(
             controller: controller,
+            isPremium: viewState.isPremium,
           ),
         ],
       ),
@@ -163,8 +163,10 @@ class _DisplayPrice extends StatelessWidget {
 class _BottomButton extends ConsumerWidget {
   const _BottomButton({
     Key? key,
+    this.isPremium = false,
     required this.controller,
   }) : super(key: key);
+  final bool isPremium;
   final PremiumPageController controller;
 
   @override
@@ -176,16 +178,25 @@ class _BottomButton extends ConsumerWidget {
       padding: const EdgeInsets.fromLTRB(20, 12, 20, 8),
       child: Column(
         children: [
-          PrimaryButton(
-            label: '広告を削除する',
-            onPressed: () {
-              executeWhileLoading(ref, () {
-                return controller.purchasePremium().whenComplete(() {
-                  const HomeRoute().go(context);
+          if (!isPremium) ...{
+            PrimaryButton(
+              label: '広告を削除する',
+              onPressed: () {
+                executeWhileLoading(ref, () {
+                  return controller.purchasePremium().whenComplete(() {
+                    const HomeRoute().go(context);
+                  });
                 });
-              });
-            },
-          ),
+              },
+            ),
+          } else ...{
+            Text(
+              'このアイテムは購入済みです',
+              style: textTheme.h3.copyWith(
+                color: colorScheme.onBackground,
+              ),
+            )
+          },
           TextButton(
             onPressed: () {
               if (Platform.isIOS) {

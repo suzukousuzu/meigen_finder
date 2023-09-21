@@ -59,7 +59,7 @@ class QuoteDetailController extends _$QuoteDetailController {
 
   void fetchBannerAd() {
     final adManager = ref.read(adManagerProvider);
-    //「This AdWidget is already in the Widget tree」というエラーがでるので、再度bannerIdを初期化する
+
     adManager.initBannerAd();
     adManager.loadBannerAd();
     final bannerAd = adManager.bannerAd;

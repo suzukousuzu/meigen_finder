@@ -62,7 +62,11 @@ class InAppPurchaseManager {
       configuration = PurchasesConfiguration(iosKey);
     }
 
-    await Purchases.configure(configuration!);
+    if (configuration == null) {
+      throw StateError('configuration is null');
+    }
+    await Purchases.configure(configuration);
+
     _offerings = await Purchases.getOfferings();
   }
 
@@ -102,7 +106,7 @@ class InAppPurchaseManager {
     try {
       await Purchases.purchasePackage(package);
     } on PlatformException catch (e) {
-      debugPrint(e.toString());
+      debugPrint('error: ${e.toString()}');
       final errorCode = PurchasesErrorHelper.getErrorCode(e);
       if (errorCode == PurchasesErrorCode.purchaseCancelledError) {
         debugPrint('userCancel');

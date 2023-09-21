@@ -36,8 +36,5 @@ class InitApp {
     ]);
     
     _localNotificationManager.scheduleDaily8PMNotification();
-    _adManager.initBannerAd();
-    _adManager.initInterstitialAd();
-    _adManager.loadBannerAd();
   }
 }
