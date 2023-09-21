@@ -62,7 +62,11 @@ class InAppPurchaseManager {
       configuration = PurchasesConfiguration(iosKey);
     }
 
-    await Purchases.configure(configuration!);
+    if (configuration == null) {
+      throw StateError('configuration is null');
+    }
+    await Purchases.configure(configuration);
+
     _offerings = await Purchases.getOfferings();
   }
 

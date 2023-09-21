@@ -252,5 +252,7 @@
 	<false/>
     <key>NSUserTrackingUsageDescription</key>
     <string>お客様の興味や関心に合わせた広告を表示するためにのみ利用されます。</string>
+    <key>com.apple.security.app-sandbox</key>
+    <true/>
 </dict>
 </plist>
