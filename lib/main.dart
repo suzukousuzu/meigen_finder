@@ -12,10 +12,12 @@ import 'package:meigen_finder/presentation/components/loading/loading_screen.dar
 import 'package:meigen_finder/presentation/routing/router.dart';
 import 'package:meigen_finder/presentation/theme/mf_theme.dart';
 import 'package:stack_trace/stack_trace.dart' as stack_trace;
+import 'package:timezone/data/latest.dart' as tz;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   initializeDateFormatting();
+  tz.initializeTimeZones();
   FlutterError.demangleStackTrace = (StackTrace stack) {
     if (stack is stack_trace.Trace) return stack.vmTrace;
     if (stack is stack_trace.Chain) return stack.toTrace().vmTrace;

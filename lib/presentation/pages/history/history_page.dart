@@ -1,4 +1,3 @@
-import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -167,12 +166,9 @@ class HistoryPage extends HookConsumerWidget {
         return isToday
             ? GestureDetector(
                 onTap: () {
-                  showFlexibleBottomSheet(
-                      minHeight: 0,
-                      initHeight: 0.2,
+                  showModalBottomSheet(
                       context: context,
-                      isSafeArea: true,
-                      builder: (context, scrollController, offset) {
+                      builder: (context) {
                         return _BottomSheetContainer(
                           context: context,
                           quote: event,
@@ -196,12 +192,9 @@ class HistoryPage extends HookConsumerWidget {
               )
             : GestureDetector(
                 onTap: () {
-                  showFlexibleBottomSheet(
-                      minHeight: 0,
-                      initHeight: 0.2,
+                  showModalBottomSheet(
                       context: context,
-                      isSafeArea: true,
-                      builder: (context, scrollController, offset) {
+                      builder: (context) {
                         return _BottomSheetContainer(
                             context: context, quote: event);
                       });
@@ -236,75 +229,80 @@ class _BottomSheetContainer extends StatelessWidget {
     final date = quote.createdAt;
     return SizedBox(
       width: double.infinity,
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  '${date.year}年${date.month}月${date.day}日',
-                  style: textTheme.h3.copyWith(color: colorScheme.onBackground),
-                ),
-                Row(
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        context.pop();
-                        QuoteDetailRouteFromHistory(
-                                QuoteDetailArgument(quote.quote, isLike))
-                            .push(context);
-                      },
-                      icon: const Icon(FontAwesomeIcons.ellipsisVertical,
-                          size: 24),
-                    ),
-                    const SizedBox(
-                      width: 4,
-                    ),
-                    IconButton(
-                      onPressed: () => context.pop(),
-                      icon: const Icon(FontAwesomeIcons.xmark, size: 24),
-                    ),
-                  ],
-                ),
-              ],
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 8),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    '${date.year}年${date.month}月${date.day}日',
+                    style:
+                        textTheme.h3.copyWith(color: colorScheme.onBackground),
+                  ),
+                  Row(
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          context.pop();
+                          QuoteDetailRouteFromHistory(
+                                  QuoteDetailArgument(quote.quote, isLike))
+                              .push(context);
+                        },
+                        icon: const Icon(FontAwesomeIcons.ellipsisVertical,
+                            size: 24),
+                      ),
+                      const SizedBox(
+                        width: 4,
+                      ),
+                      IconButton(
+                        onPressed: () => context.pop(),
+                        icon: const Icon(FontAwesomeIcons.xmark, size: 24),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-          const SizedBox(height: 8),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              children: [
-                Icon(
-                  quote.emotionalType.icon,
-                  size: 48,
-                  color: quote.emotionalType.getColor(context),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: SizedBox(
-                    height: 48,
-                    child: VerticalDivider(
-                      width: 4,
-                      thickness: 2,
-                      color: colorScheme.onBackground,
+            const SizedBox(height: 8),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                children: [
+                  Icon(
+                    quote.emotionalType.icon,
+                    size: 48,
+                    color: quote.emotionalType.getColor(context),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: SizedBox(
+                      height: 48,
+                      child: VerticalDivider(
+                        width: 4,
+                        thickness: 2,
+                        color: colorScheme.onBackground,
+                      ),
                     ),
                   ),
-                ),
-                Flexible(
-                  child: Text(
-                    quote.quote.text,
-                    style: textTheme.subtextBold
-                        .copyWith(color: colorScheme.onBackground),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 3,
+                  Flexible(
+                    child: Text(
+                      quote.quote.text,
+                      style: textTheme.subtextBold
+                          .copyWith(color: colorScheme.onBackground),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 3,
+                    ),
                   ),
-                ),
-              ],
-            ),
-          )
-        ],
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
