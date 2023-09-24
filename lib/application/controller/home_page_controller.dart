@@ -39,6 +39,7 @@ class HomePageController extends _$HomePageController {
       todayQuoteResult: TodayQuoteResult(null, false),
       isPremium: false,
       todaysQuoteDisplayCount: 0,
+      shouldShowReviewDialog: false,
     );
   }
 
@@ -50,6 +51,7 @@ class HomePageController extends _$HomePageController {
       _fetchTodayQuote(),
       _fetchLastDateUpdatedTodayQuote(),
       _fetchTodaysQuoteDisplayCount(),
+      _saveLaunchCount(),
     ]);
   }
 
@@ -69,7 +71,7 @@ class HomePageController extends _$HomePageController {
 
   Future<void> _fetchTodaysQuoteDisplayCount() async {
     final preferenceManager = ref.read(preferenceManagerProvider);
-    final todaysQuoteDisplayCount = preferenceManager.getValue(
+    final todaysQuoteDisplayCount = await preferenceManager.getValue(
         PreferenceKey.todaysQuoteDisplayCount, 0) as int;
     state = state.copyWith(todaysQuoteDisplayCount: todaysQuoteDisplayCount);
   }
@@ -90,8 +92,10 @@ class HomePageController extends _$HomePageController {
 
   Future<void> _fetchLastDateUpdatedTodayQuote() async {
     final preferenceManager = ref.read(preferenceManagerProvider);
-    final lastDateUpdatedTodayQuoteText =
-        preferenceManager.getValue(PreferenceKey.todayQuotes, '').toString();
+    final lastDateUpdatedTodayQuote =
+        await preferenceManager.getValue(PreferenceKey.todayQuotes, '');
+    final lastDateUpdatedTodayQuoteText = lastDateUpdatedTodayQuote.toString();
+    print('lastDateUpdatedTodayQuoteText: $lastDateUpdatedTodayQuoteText');
     if (lastDateUpdatedTodayQuoteText.isEmpty) return;
     final date = DateTime.parse(lastDateUpdatedTodayQuoteText).date;
     state = state.copyWith(lastDateUpdatedTodayQuote: date);
@@ -138,7 +142,7 @@ class HomePageController extends _$HomePageController {
       // 今日の名言の表示回数を保存
       final preferenceManager = ref.read(preferenceManagerProvider);
       if (state.todaysQuoteDisplayCount <= 2) {
-        preferenceManager.setValue(PreferenceKey.todaysQuoteDisplayCount,
+        await preferenceManager.setValue(PreferenceKey.todaysQuoteDisplayCount,
             state.todaysQuoteDisplayCount + 1);
         final adManager = ref.read(adManagerProvider);
         if (!state.isPremium && state.todaysQuoteDisplayCount == 2) {
@@ -153,6 +157,21 @@ class HomePageController extends _$HomePageController {
       state = state.copyWith(
         todayQuoteResult: TodayQuoteResult(null, false),
       );
+    }
+  }
+
+  Future<void> _saveLaunchCount() async {
+    final preferenceManager = ref.watch(preferenceManagerProvider);
+    final launchCount =
+        await preferenceManager.getValue(PreferenceKey.launchCount, 0) as int;
+    print('launchCount: $launchCount');
+
+    if (launchCount == 3) {
+      state = state.copyWith(shouldShowReviewDialog: true);
+    } else if (launchCount < 3) {
+      print('launchCount + 1 : ${launchCount + 1}');
+      await preferenceManager.setValue(
+          PreferenceKey.launchCount, launchCount + 1);
     }
   }
 }

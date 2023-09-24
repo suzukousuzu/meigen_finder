@@ -35,10 +35,10 @@ class QuoteDetailController extends _$QuoteDetailController {
     );
   }
 
-  void fetchIsPremiumPlan() {
+  Future<void> fetchIsPremiumPlan() async {
     final preferenceManager = ref.read(preferenceManagerProvider);
-    final isPremiumPlan =
-        preferenceManager.getValue(PreferenceKey.premiumPlan, false) as bool;
+    final isPremiumPlan = await preferenceManager.getValue(
+        PreferenceKey.premiumPlan, false) as bool;
 
     state = state.copyWith(isPremium: isPremiumPlan);
   }
