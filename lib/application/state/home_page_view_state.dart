@@ -29,6 +29,7 @@ class HomePageViewState {
   BannerAd? bannerAd;
   bool isPremium;
   int todaysQuoteDisplayCount;
+  bool shouldShowReviewDialog;
 
 //<editor-fold desc="Data Methods">
   HomePageViewState({
@@ -39,6 +40,7 @@ class HomePageViewState {
     this.bannerAd,
     required this.isPremium,
     required this.todaysQuoteDisplayCount,
+    required this.shouldShowReviewDialog,
   });
 
   @override
@@ -52,7 +54,8 @@ class HomePageViewState {
           lastDateUpdatedTodayQuote == other.lastDateUpdatedTodayQuote &&
           bannerAd == other.bannerAd &&
           isPremium == other.isPremium &&
-          todaysQuoteDisplayCount == other.todaysQuoteDisplayCount);
+          todaysQuoteDisplayCount == other.todaysQuoteDisplayCount &&
+          shouldShowReviewDialog == other.shouldShowReviewDialog);
 
   @override
   int get hashCode =>
@@ -62,19 +65,12 @@ class HomePageViewState {
       lastDateUpdatedTodayQuote.hashCode ^
       bannerAd.hashCode ^
       isPremium.hashCode ^
-      todaysQuoteDisplayCount.hashCode;
+      todaysQuoteDisplayCount.hashCode ^
+      shouldShowReviewDialog.hashCode;
 
   @override
   String toString() {
-    return 'HomePageViewState{' +
-        ' emotionalType: $emotionalType,' +
-        ' todayQuoteResult: $todayQuoteResult,' +
-        ' likedQuotes: $likedQuotes,' +
-        ' lastDateUpdatedTodayQuote: $lastDateUpdatedTodayQuote,' +
-        ' bannerAd: $bannerAd,' +
-        ' isPremium: $isPremium,' +
-        ' todaysQuoteDisplayCount: $todaysQuoteDisplayCount,' +
-        '}';
+    return 'HomePageViewState{ emotionalType: $emotionalType, todayQuoteResult: $todayQuoteResult, likedQuotes: $likedQuotes, lastDateUpdatedTodayQuote: $lastDateUpdatedTodayQuote, bannerAd: $bannerAd, isPremium: $isPremium, todaysQuoteDisplayCount: $todaysQuoteDisplayCount, shouldShowReviewDialog: $shouldShowReviewDialog,}';
   }
 
   HomePageViewState copyWith({
@@ -85,6 +81,7 @@ class HomePageViewState {
     BannerAd? bannerAd,
     bool? isPremium,
     int? todaysQuoteDisplayCount,
+    bool? shouldShowReviewDialog,
   }) {
     return HomePageViewState(
       emotionalType: emotionalType ?? this.emotionalType,
@@ -96,6 +93,8 @@ class HomePageViewState {
       isPremium: isPremium ?? this.isPremium,
       todaysQuoteDisplayCount:
           todaysQuoteDisplayCount ?? this.todaysQuoteDisplayCount,
+      shouldShowReviewDialog:
+          shouldShowReviewDialog ?? this.shouldShowReviewDialog,
     );
   }
 
@@ -108,6 +107,7 @@ class HomePageViewState {
       'bannerAd': this.bannerAd,
       'isPremium': this.isPremium,
       'todaysQuoteDisplayCount': this.todaysQuoteDisplayCount,
+      'shouldShowReviewDialog': this.shouldShowReviewDialog,
     };
   }
 
@@ -120,6 +120,7 @@ class HomePageViewState {
       bannerAd: map['bannerAd'] as BannerAd,
       isPremium: map['isPremium'] as bool,
       todaysQuoteDisplayCount: map['todaysQuoteDisplayCount'] as int,
+      shouldShowReviewDialog: map['shouldShowReviewDialog'] as bool,
     );
   }
 

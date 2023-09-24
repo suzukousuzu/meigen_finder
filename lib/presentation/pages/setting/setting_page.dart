@@ -167,7 +167,6 @@ class _Divider extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = MfTheme.of(context);
     final colorScheme = theme.colorScheme;
-    final textTheme = theme.textTheme;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: Divider(

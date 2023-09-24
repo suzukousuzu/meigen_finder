@@ -72,6 +72,7 @@ dependencies:
   app_settings: ^5.0.0
   flutter_app_badger: ^1.5.0
   firebase_analytics: ^10.4.5
+  app_review: ^2.1.1
 
 
 dev_dependencies:

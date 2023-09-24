@@ -1,3 +1,4 @@
+import 'package:app_review/app_review.dart';
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_badger/flutter_app_badger.dart';
@@ -44,6 +45,14 @@ class HomePage extends HookConsumerWidget {
     ref.listen(appLifecycleProvider, (previous, next) {
       if (next == AppLifecycleState.resumed) {
         FlutterAppBadger.removeBadge();
+      }
+    });
+
+    ref.listen(
+        homePageControllerProvider.select(
+            (value) => value.shouldShowReviewDialog), (previous, next) async {
+      if (previous == false && next == true) {
+        await AppReview.requestReview;
       }
     });
 

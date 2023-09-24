@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:meigen_finder/application/init/init_app.dart';
@@ -15,7 +16,8 @@ import 'package:stack_trace/stack_trace.dart' as stack_trace;
 import 'package:timezone/data/latest.dart' as tz;
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   initializeDateFormatting();
   tz.initializeTimeZones();
   FlutterError.demangleStackTrace = (StackTrace stack) {
@@ -59,10 +61,13 @@ class MyApp extends HookConsumerWidget {
     useEffect(() {
       executeWhileLoading(ref, () {
         return ref.watch(initAppProvider).execute();
-      });
+      }).then(
+        (_) => FlutterNativeSplash.remove(),
+      );
 
-      return;
+      return null;
     }, const []);
+
     return MaterialApp.router(
       title: '名言ファインダー',
       debugShowCheckedModeBanner: false,
