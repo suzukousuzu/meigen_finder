@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:launch_review/launch_review.dart';
 import 'package:meigen_finder/presentation/theme/mf_theme.dart';
@@ -66,6 +67,12 @@ class SettingPage extends HookConsumerWidget {
                     trailingWidget: Text(donationPriceString),
                     onTap: () {
                       executeWhileLoading(ref, () {
+                        Fluttertoast.showToast(
+                            msg: '支援していただいてありがとうございます。\n今後とも気分e名言をよろしくお願いします',
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.TOP,
+                            textColor: colorScheme.surface,
+                            fontSize: 16.0);
                         return controller.donate();
                       });
                     },
