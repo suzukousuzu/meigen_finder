@@ -10,6 +10,7 @@ enum PreferenceKey {
   premiumPlan,
   todaysQuoteDisplayCount,
   launchCount,
+  didReviewDialogWatched,
 }
 
 extension StringExtension on PreferenceKey {

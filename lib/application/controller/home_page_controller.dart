@@ -164,12 +164,17 @@ class HomePageController extends _$HomePageController {
     final preferenceManager = ref.watch(preferenceManagerProvider);
     final launchCount =
         await preferenceManager.getValue(PreferenceKey.launchCount, 0) as int;
-    print('launchCount: $launchCount');
 
-    if (launchCount == 3) {
+    final didReviewDialogWatchedFuture = await preferenceManager.getValue(
+        PreferenceKey.didReviewDialogWatched, false);
+
+    final didReviewDialogWatched = didReviewDialogWatchedFuture as bool;
+
+    if (launchCount == 3 && !didReviewDialogWatched) {
       state = state.copyWith(shouldShowReviewDialog: true);
+      await preferenceManager.setValue(
+          PreferenceKey.didReviewDialogWatched, true);
     } else if (launchCount < 3) {
-      print('launchCount + 1 : ${launchCount + 1}');
       await preferenceManager.setValue(
           PreferenceKey.launchCount, launchCount + 1);
     }
