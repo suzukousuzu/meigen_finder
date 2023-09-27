@@ -24,10 +24,12 @@ class PremiumPageController extends _$PremiumPageController {
     state = state.copyWith(premiumPriceString: priceString);
   }
 
-  void _fetchIsPremiumPlan() {
+  void _fetchIsPremiumPlan() async {
     final preferenceManager = ref.read(preferenceManagerProvider);
-    final isPremiumPlan =
-        preferenceManager.getValue(PreferenceKey.premiumPlan, false) as bool;
+    final isPremiumPlanFuture =
+        await preferenceManager.getValue(PreferenceKey.premiumPlan, false);
+
+    final isPremiumPlan = isPremiumPlanFuture as bool;
 
     state = state.copyWith(isPremium: isPremiumPlan);
   }
