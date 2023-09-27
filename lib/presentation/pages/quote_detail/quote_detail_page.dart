@@ -158,7 +158,7 @@ class _ShareAndLike extends StatelessWidget {
         children: [
           IconButton(
             onPressed: () {
-              Share.share(quote.text);
+              Share.share('${quote.text} -${quote.author}');
             },
             icon: Icon(
               FontAwesomeIcons.arrowUpFromBracket,
