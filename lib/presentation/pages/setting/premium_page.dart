@@ -184,6 +184,12 @@ class _BottomButton extends ConsumerWidget {
               onPressed: () {
                 executeWhileLoading(ref, () {
                   return controller.purchasePremium().whenComplete(() {
+                    Fluttertoast.showToast(
+                        msg: 'お買い上げありがとうございます。 \n今後とも気分e名言をよろしくお願いします',
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.TOP,
+                        textColor: colorScheme.surface,
+                        fontSize: 16.0);
                     const HomeRoute().go(context);
                   });
                 });
